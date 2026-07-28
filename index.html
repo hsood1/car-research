@@ -232,9 +232,15 @@ car here with real leather and ventilated seats &mdash; but it is no longer a va
 <!-- CASH VS FINANCE -->
 <div data-view-panel="cash" hidden>
 <h3>Pay cash, or finance and hold the money at 4%?</h3>
-<div class="note"><p><b>The rule:</b> finance only when the loan&rsquo;s effective APR is below your
-<i>after-tax</i> yield. A 4% CD at a 24% federal + 9.3% California marginal rate nets <b>2.67%</b> &mdash;
-and almost nothing on offer is cheaper than that.</p></div>
+<div class="note"><p><b>The rule:</b> finance by default, but only where investing the cash actually offsets
+the loan &mdash; i.e. only when the loan&rsquo;s effective APR is below your <i>after-tax</i> yield. A 4% CD at
+a 24% federal + 9.3% California marginal rate nets <b>2.67%</b>, and almost nothing on offer is cheaper
+than that.</p>
+<p><b>It clears on the CX-50. It does not clear on the RAV4</b> &mdash; and the RAV4 is the recommendation.
+Toyota is running no rebate and no subsidised rate on the redesign, so 4.99% is a real 4.99% against a 2.67%
+yield. No outside lender closes that gap either; credit-union new-car money is still 5%+. Financing it
+anyway costs about <b>$2,121</b> over four years, which is the price of keeping $40k liquid &mdash; a fair
+trade if you want the optionality, but it is not arbitrage.</p></div>
 <div class="scroll">
 <table>
 <thead><tr><th>Offer</th><th class="n">Effective APR</th><th>Verdict</th><th class="n">Gain from financing</th></tr></thead>
@@ -334,8 +340,8 @@ expect to travel, and expect firm pricing.</p></div>
 
 <h2>Buyer 2 &mdash; Memphis, TN &rarr; Michigan year-round</h2>
 <p class="h2note">AWD required &middot; heated + power seats, backup camera, Android Auto &middot; hybrid optional,
-gas acceptable &middot; same trim floor &middot; $15,000 trade-in &middot; 7% TN tax plus $88 of capped local tax,
-credited against the trade &middot; $3.50/gal.</p>
+gas acceptable &middot; same trim floor &middot; Honda Accord worth ~$20,000 traded or paid out &middot; 7% TN tax
+plus $88 of capped local tax, credited against a trade &middot; $3.50/gal.</p>
 
 <!-- BEST CAR -->
 <div data-view-panel="car">
@@ -468,26 +474,49 @@ $120 off each financing gain above. It does not flip any verdict.</p></div>
 <div class="note w"><p><b>Pay cash for the RAV4.</b> Toyota is offering no rebate and no subsidised rate on
 the redesign, so its 4.99% is a real 4.99% &mdash; well above a 3.04% after-tax yield. Financing it costs
 $1,800 over four years.</p></div>
+<div class="note"><p><b>The Accord shrinks the arbitrage.</b> Every gain above is computed with no trade
+applied. A $20,000 Accord cuts each loan roughly in half, and the investment gain falls with it &mdash; the
+Equinox&rsquo;s $1,858 drops to about <b>$622</b>.</p>
+<p>That flips one call outright. Mazda&rsquo;s 0% costs a fixed $1,500 in forfeited rebate no matter how small
+the loan gets, so once the Accord is worth about <b>$9,000 or more, the CX-50&rsquo;s 0% stops paying for
+itself</b> and cash wins. The Equinox&rsquo;s 0% never flips, because it forfeits nothing &mdash; it just earns
+less. Use the slider on the Best-deal tab to see it move.</p></div>
 </div>
 
 <h3>Full cost model &middot; 120,000 miles over 10 years</h3>
+
+<div class="note" style="padding-bottom:18px">
+  <p style="margin-bottom:14px"><b>The Accord.</b> Set what it is worth and how the money arrives &mdash; the
+  table below recomputes live.</p>
+  <label for="tradeAmt" style="display:block;font-weight:700;margin-bottom:6px">
+    Accord value: <span id="tradeOut" style="font-variant-numeric:tabular-nums">$20,000</span>
+  </label>
+  <input id="tradeAmt" type="range" min="0" max="30000" step="500" value="20000"
+         style="width:100%;max-width:520px;display:block;margin-bottom:14px;accent-color:#3d7a5c">
+  <div style="display:flex;gap:20px;flex-wrap:wrap">
+    <label style="display:flex;gap:7px;align-items:center;cursor:pointer">
+      <input type="radio" name="tradeMode" value="trade" checked style="accent-color:#3d7a5c">
+      <span>Trade it in <span class="tag g">tax credit</span></span>
+    </label>
+    <label style="display:flex;gap:7px;align-items:center;cursor:pointer">
+      <input type="radio" name="tradeMode" value="cash" style="accent-color:#3d7a5c">
+      <span>Insurance payout <span class="tag">no credit</span></span>
+    </label>
+  </div>
+  <p style="margin-top:12px;font-size:.92em" id="tradeNote"></p>
+</div>
+
 <div class="scroll">
 <table>
 <thead><tr><th>Option</th><th class="n">Out the door</th><th class="n">Fuel</th><th class="n">Maint.</th>
 <th class="n">Resale</th><th class="n">CD gain</th><th class="n">10-yr net</th><th>Strategy</th></tr></thead>
-<tbody>
-<tr class="best"><td>2025 CX-50 Hyb Premium, ~15k mi <span class="tag">used</span></td><td class="n">$19,348</td><td class="n">$11,053</td><td class="n">$8,500</td><td class="n">$8,722</td><td class="n">&mdash;</td><td class="n">$30,179</td><td>Cash</td></tr>
-<tr><td>RAV4 XLE Premium AWD <span class="tag g">new</span></td><td class="n">$25,714</td><td class="n">$10,244</td><td class="n">$7,000</td><td class="n">$11,685</td><td class="n">&mdash;</td><td class="n">$31,273</td><td>Cash</td></tr>
-<tr><td>2025 Equinox LT AWD, ~30k mi <span class="tag">used</span></td><td class="n">$13,463</td><td class="n">$16,154</td><td class="n">$9,000</td><td class="n">$5,199</td><td class="n">&mdash;</td><td class="n">$33,418</td><td>Cash</td></tr>
-<tr><td>Equinox LT AWD, employee price <span class="tag">est.</span></td><td class="n">$17,850</td><td class="n">$16,154</td><td class="n">$8,500</td><td class="n">$6,969</td><td class="n">$1,858</td><td class="n">$33,677</td><td>Finance 0%/36</td></tr>
-<tr><td>CR-V Sport-L AWD <span class="tag g">new</span></td><td class="n">$27,880</td><td class="n">$11,351</td><td class="n">$7,500</td><td class="n">$11,252</td><td class="n">$320</td><td class="n">$35,159</td><td>Finance 3.49%</td></tr>
-<tr><td>CX-50 Hybrid Premium <span class="tag g">new</span></td><td class="n">$26,458</td><td class="n">$11,053</td><td class="n">$8,000</td><td class="n">$9,515</td><td class="n">$481</td><td class="n">$35,515</td><td>Finance 0%/36</td></tr>
-<tr><td>Equinox LT AWD + Conv. Pkg II <span class="tag g">new</span></td><td class="n">$21,322</td><td class="n">$16,154</td><td class="n">$8,500</td><td class="n">$6,969</td><td class="n">$1,858</td><td class="n">$37,149</td><td>Finance 0%/36</td></tr>
-</tbody></table>
+<tbody id="b2rows"></tbody></table>
 </div>
 <p class="h2note">Net = out-the-door + fuel + estimated maintenance &minus; resale at year&nbsp;10, minus the
-gain from financing where financing beats cash. Out-the-door is shown <b>after</b> the $15,000 trade, which is
-why the figures look low. Tennessee taxes only the difference after trade-in &mdash; worth about $1,050.</p>
+gain from financing where financing beats cash. Out-the-door is shown <b>after</b> the Accord is applied,
+which is why the figures look low. Financing is taken only where it clears a <b>3.04%</b> after-tax yield.
+Note that a larger Accord shrinks every loan, which shrinks the arbitrage &mdash; the CD-gain column falls as
+you raise the slider.</p>
 
 <div class="note w"><p><b>Negotiation targets for this market are not done yet.</b> The San&nbsp;Diego
 figures on the other tab came from a research pass that has not been run for Memphis. The two numbers most
@@ -570,6 +599,61 @@ a search snippet or a secondary article.</p>
   }
   tabs.forEach(function(t){t.addEventListener('click',function(){setTab(t.dataset.tab)})});
   togs.forEach(function(b){b.addEventListener('click',function(){setView(b.dataset.view)})});
+
+  // ---- Buyer 2 cost model, driven by the Accord slider ----
+  var TAX=0.07, FEE=88, MILES=120000, GAS=3.50, YIELD=3.04;
+  var CARS=[
+   {n:'2025 CX-50 Hyb Premium, ~15k mi',tag:'used',price:33000,mpg:38,maint:8500,msrp:39645,resid:.22,apr:5.29,term:60},
+   {n:'RAV4 XLE Premium AWD',tag:'new',price:38950,mpg:41,maint:7000,msrp:38950,resid:.30,apr:4.99,term:48},
+   {n:'2025 Equinox LT AWD, ~30k mi',tag:'used',price:27500,mpg:26,maint:9000,msrp:32495,resid:.16,apr:5.29,term:60},
+   {n:'Equinox LT AWD, employee price',tag:'est.',price:31600,mpg:26,maint:8500,msrp:34845,resid:.20,apr:0,term:36},
+   {n:'CR-V Sport-L AWD',tag:'new',price:41675,mpg:37,maint:7500,msrp:41675,resid:.27,apr:3.49,term:60,bonus:750},
+   {n:'CX-50 Hybrid Premium',tag:'new',price:39645,mpg:38,maint:8000,msrp:39645,resid:.24,apr:0,term:36,rebate:1500},
+   {n:'Equinox LT AWD + Conv. Pkg II',tag:'new',price:34845,mpg:26,maint:8500,msrp:34845,resid:.20,apr:0,term:36}
+  ];
+  var $=function(s){return document.querySelector(s)};
+  var money=function(v){return (v<0?'−$':'$')+Math.round(Math.abs(v)).toLocaleString()};
+  function pmt(P,apr,n){if(P<=0)return 0;if(!apr)return P/n;var r=apr/1200;return P*r/(1-Math.pow(1+r,-n));}
+
+  function render(){
+    var trade=+$('#tradeAmt').value;
+    var isTrade=document.querySelector('input[name=tradeMode]:checked').value==='trade';
+    $('#tradeOut').textContent='$'+trade.toLocaleString();
+    var credit=isTrade?trade*TAX:0;
+    $('#tradeNote').innerHTML=isTrade
+      ? 'Tennessee taxes only the difference after a trade, so this is worth <b>'+money(credit)+'</b> in avoided sales tax.'
+      : 'Insurance cash is not a trade-in, so there is <b>no tax credit</b> — you lose <b>'+money(trade*TAX)+'</b> versus trading the same car in. If the Accord is totalled, that credit is gone.';
+
+    var rows=CARS.map(function(c){
+      var tax=c.price*TAX+FEE;
+      var dueCash=(c.price-(c.rebate||0))+tax-credit-trade;      // pay cash, keep any rebate
+      var dueFin =(c.price-(c.bonus ||0))+tax-credit-trade;      // finance, rebate forfeited
+      var gain=0;
+      if(dueCash>0&&dueFin>0){
+        var p=pmt(dueFin,c.apr,c.term), r=YIELD/1200, bal=dueCash;
+        for(var i=0;i<c.term;i++) bal=bal*(1+r)-p;
+        gain=bal;
+      }
+      var fin=gain>0;
+      var fuel=MILES/c.mpg*GAS, resale=c.msrp*c.resid;
+      return {c:c,due:dueCash,fuel:fuel,resale:resale,gain:fin?gain:0,fin:fin,
+              net:dueCash+fuel+c.maint-resale-(fin?gain:0)};
+    }).sort(function(a,b){return a.net-b.net});
+
+    $('#b2rows').innerHTML=rows.map(function(r,i){
+      var c=r.c, t=c.tag==='new'?'<span class="tag g">new</span>':'<span class="tag">'+c.tag+'</span>';
+      var strat=r.due<=0?'Covered by Accord'
+              :r.fin?('Finance '+(c.apr?c.apr+'%':'0%')+'/'+c.term):'Cash';
+      return '<tr'+(i===0?' class="best"':'')+'><td>'+c.n+' '+t+'</td>'
+        +'<td class="n">'+money(r.due)+'</td><td class="n">'+money(r.fuel)+'</td>'
+        +'<td class="n">'+money(c.maint)+'</td><td class="n">'+money(r.resale)+'</td>'
+        +'<td class="n">'+(r.gain>0?money(r.gain):'&mdash;')+'</td>'
+        +'<td class="n"><b>'+money(r.net)+'</b></td><td>'+strat+'</td></tr>';
+    }).join('');
+  }
+  $('#tradeAmt').addEventListener('input',render);
+  document.querySelectorAll('input[name=tradeMode]').forEach(function(el){el.addEventListener('change',render)});
+  render();
 })();
 </script>
 </body>
