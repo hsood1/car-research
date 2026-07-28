@@ -119,18 +119,6 @@ footer code{font-size:12px;background:var(--panel);padding:1px 5px;border-radius
   <p class="sub">Two buyers, four vehicles, 10-year hold. Prices verified July&nbsp;28,&nbsp;2026 &mdash; all figures include destination.</p>
 </header>
 
-<div class="note w">
-  <p><b>Five corrections since the last draft.</b> The research pass overturned numbers the earlier
-  analysis was built on:</p>
-  <p>1. <b>Mazda&rsquo;s 0% APR is 36 months, not 60</b> &mdash; and it is strictly either/or with the
-  $1,500 customer cash. That is ~$1,190/mo on a CX-50 Premium.<br>
-  2. <b>The Equinox LT has no power driver&rsquo;s seat.</b> It needs Convenience Package&nbsp;II
-  ($2,050), confirmed off a real window sticker. Real price is $34,845, not $32,795.<br>
-  3. <b>CR-V Hybrid FWD gets 40 mpg combined, not 37.</b> 37 is the AWD number.<br>
-  4. <b>Destination pushes the CR-V over $40k</b> for Buyer&nbsp;1 &mdash; $40,175 delivered, not $38,725.<br>
-  5. <b>There is no 2023 CR-V Sport-L.</b> The trim started in 2024, so the used pool is smaller than assumed.</p>
-</div>
-
 <div class="tabs" role="tablist">
   <button class="tab" role="tab" aria-selected="true" data-tab="a">
     <b>Buyer 1 &mdash; San Diego, CA</b>Hybrid required &middot; FWD fine &middot; 80,000 mi over 10 yr
@@ -143,6 +131,7 @@ footer code{font-size:12px;background:var(--panel);padding:1px 5px;border-radius
 <div class="toggle" role="group">
   <button data-view="car" aria-pressed="true">Best car</button>
   <button data-view="deal" aria-pressed="false">Best deal</button>
+  <button data-view="cash" aria-pressed="false">Cash vs finance</button>
 </div>
 
 
@@ -204,12 +193,12 @@ only vehicle in this set &mdash; new or used, at any trim under $42k &mdash; tha
     <div class="num">1</div>
     <div>
       <div class="nm">2024 CR-V Hybrid Sport-L &middot; ~30k mi <span class="tag">used</span></div>
-      <div class="spec">~$29,000 asking &middot; 25% off new &middot; 6th gen, same car as the 2026</div>
+      <div class="spec">~$29,000 asking &middot; target ~$27,500&ndash;29,500 &middot; 25% off new</div>
       <p class="why">The CR-V is unchanged since 2023, so a 2024 is mechanically the current car at a
       quarter off. Honda&rsquo;s CPO premium is about <b>$340 &mdash; the cheapest of any brand</b> &mdash; and
       buys 7yr/100k powertrain plus two extra years of non-powertrain coverage. Take it.</p>
     </div>
-    <div class="fig"><span class="big">$44,219</span><span class="lbl">10-yr net</span></div>
+    <div class="fig"><span class="big">$39,836</span><span class="lbl">10-yr net</span></div>
   </div>
   <div class="card">
     <div class="num">2</div>
@@ -220,45 +209,111 @@ only vehicle in this set &mdash; new or used, at any trim under $42k &mdash; tha
       a heated wheel. Keeps the leather and ventilated seats. The used Premium&nbsp;/&nbsp;Premium&nbsp;Plus
       price gap has collapsed to near zero, so <b>shop on mileage and price, not trim badge</b>.</p>
     </div>
-    <div class="fig"><span class="big">$46,448</span><span class="lbl">10-yr net</span></div>
+    <div class="fig"><span class="big">$41,881</span><span class="lbl">10-yr net</span></div>
   </div>
   <div class="card">
     <div class="num">3</div>
     <div>
       <div class="nm">Toyota RAV4 XLE Premium FWD <span class="tag g">new</span></div>
-      <div class="spec">$37,550 delivered &middot; best-ranked new option</div>
-      <p class="why">Cheapest new car in the set and the strongest residual, which is what carries it here
-      despite no rebate and mid-5% financing. Watch for dealer markup &mdash; on this redesign the fight is
-      getting <i>to</i> MSRP, not below it.</p>
+      <div class="spec">$37,550 MSRP &middot; best new option by a wide margin</div>
+      <p class="why">Cheapest new car in the set and the strongest residual. Paying cash removes its $4,256
+      interest penalty, which is what opens the gap. <b>Watch for dealer markup</b> &mdash; on this redesign
+      the fight is getting <i>to</i> MSRP, not below it.</p>
     </div>
-    <div class="fig"><span class="big">$47,341</span><span class="lbl">10-yr net</span></div>
+    <div class="fig"><span class="big">$43,085</span><span class="lbl">10-yr net</span></div>
   </div>
 </div>
-<div class="note w"><p><b>The new CX-50 lost its financing advantage.</b> The earlier analysis assumed 0% over
-60 months. It is 36 months &mdash; about $1,190/mo &mdash; and taking it forfeits the $1,500 cash. Stretch to
-60 months and the rate is 2.9% <i>and</i> the rebate is still gone. That single correction moves the new
-CX-50 from first to sixth on cost.</p></div>
+<div class="note w"><p><b>The new CX-50 is no longer competitive on cost &mdash; it lands last at $49,443.</b>
+Its case rested on 0% financing that turned out to be 36 months, not 60, and to cost the $1,500 rebate.
+The RAV4 now beats it by <b>$6,358</b>. Buying the CX-50 is a defensible taste decision &mdash; it is the only
+car here with real leather and ventilated seats &mdash; but it is no longer a value decision.</p></div>
+</div>
+
+<!-- CASH VS FINANCE -->
+<div data-view-panel="cash" hidden>
+<h3>Pay cash, or finance and hold the money at 4%?</h3>
+<div class="note"><p><b>The rule:</b> finance only when the loan&rsquo;s effective APR is below your
+<i>after-tax</i> yield. A 4% CD at a 24% federal + 9.3% California marginal rate nets <b>2.67%</b> &mdash;
+and almost nothing on offer is cheaper than that.</p></div>
+<div class="scroll">
+<table>
+<thead><tr><th>Offer</th><th class="n">Effective APR</th><th>Verdict</th><th class="n">Gain from financing</th></tr></thead>
+<tbody>
+<tr class="best"><td>CX-50 &mdash; 0%/36, forfeits $1,500 cash</td><td class="n">2.33%</td><td>Finance, barely</td><td class="n">+$227</td></tr>
+<tr><td>CR-V &mdash; 3.49%/60 + $750 bonus</td><td class="n">2.78%</td><td>Coin flip</td><td class="n">&minus;$138</td></tr>
+<tr><td>CX-50 &mdash; 2.9%/60, forfeits $1,500</td><td class="n">4.35%</td><td><b>Pay cash</b></td><td class="n">&minus;$1,993</td></tr>
+<tr><td>RAV4 &mdash; 4.99%/48</td><td class="n">4.99%</td><td><b>Pay cash</b></td><td class="n">&minus;$2,121</td></tr>
+<tr><td>Any used car &mdash; 5.29%/60</td><td class="n">5.29%</td><td><b>Pay cash</b></td><td class="n">&minus;$2,531</td></tr>
+<tr><td>RAV4 &mdash; 5.99%/72</td><td class="n">5.99%</td><td><b>Pay cash</b></td><td class="n">&minus;$4,802</td></tr>
+</tbody></table>
+</div>
+<div class="note w"><p><b>Mazda&rsquo;s &ldquo;0%&rdquo; is really a 2.33% loan.</b> Taking it forfeits the $1,500
+customer cash, so the choice is $41,217 out the door today versus $1,186.60/mo for 36 months. It still beats
+a 2.67% CD &mdash; but by <b>$227 over three years</b>, which is 0.5% of the purchase price. Finance it if she
+buys it; don&rsquo;t let it pick the car.</p></div>
+<h3>What flips the CX-50 call</h3>
+<div class="scroll">
+<table>
+<thead><tr><th>Scenario</th><th class="n">After-tax yield</th><th class="n">Finance wins by</th></tr></thead>
+<tbody>
+<tr class="best"><td>4% <b>T-bills</b> &mdash; exempt from CA state tax, 24% fed</td><td class="n">3.04%</td><td class="n">+$481</td></tr>
+<tr><td>4% CD, 22% fed + 9.3% CA</td><td class="n">2.75%</td><td class="n">+$282</td></tr>
+<tr><td>4% CD, 24% fed + 9.3% CA <span class="tag g">central</span></td><td class="n">2.67%</td><td class="n">+$227</td></tr>
+<tr><td>4% CD, 32% fed + 10.3% CA</td><td class="n">2.31%</td><td class="n">&minus;$16</td></tr>
+<tr><td>Money-market drifts to 3.25% mid-term</td><td class="n">2.17%</td><td class="n">&minus;$110</td></tr>
+<tr><td>4% CD, 35% fed + 11.3% CA</td><td class="n">1.85%</td><td class="n">&minus;$322</td></tr>
+</tbody></table>
+</div>
+<p class="h2note">Break-even is a <b>2.33% after-tax yield</b> &mdash; at 4% gross, that means a combined
+marginal rate under 41.6%.</p>
+<div class="note"><p><b>Use Treasuries, not a CD.</b> Treasury interest is exempt from state income tax, so
+4% nets 3.04% instead of 2.67% in California. Same risk, same liquidity, and it doubles the financing gain to
+$481. There is no reason to hold a CD in a 9.3% state.</p>
+<p><b>And lock the term.</b> If the 4% is a floating money-market yield rather than a locked CD, a Fed cut
+puts you underwater by month 20. Match the CD or T-bill ladder to the loan term.</p></div>
 </div>
 
 <h3>Full cost model &middot; 80,000 miles over 10 years</h3>
 <div class="scroll">
 <table>
-<thead><tr><th>Option</th><th class="n">Price</th><th class="n">Out the door</th><th class="n">Payment</th>
-<th class="n">Interest</th><th class="n">Fuel</th><th class="n">Resale</th><th class="n">10-yr net</th></tr></thead>
+<thead><tr><th>Option</th><th class="n">Out the door</th><th class="n">Fuel</th><th class="n">Maint.</th>
+<th class="n">Resale</th><th class="n">CD gain</th><th class="n">10-yr net</th><th>Strategy</th></tr></thead>
 <tbody>
-<tr class="best"><td>2024 CR-V Sport-L, ~30k mi <span class="tag">used</span></td><td class="n">$29,000</td><td class="n">$31,248</td><td class="n">$594</td><td class="n">$4,383</td><td class="n">$10,500</td><td class="n">$9,411</td><td class="n">$44,219</td></tr>
-<tr><td>2025 CX-50 Hyb Premium Plus, ~28k mi <span class="tag">used</span></td><td class="n">$30,215</td><td class="n">$32,557</td><td class="n">$619</td><td class="n">$4,566</td><td class="n">$11,053</td><td class="n">$9,228</td><td class="n">$46,448</td></tr>
-<tr><td>2025 CR-V Sport-L, ~25k mi <span class="tag">used</span></td><td class="n">$33,200</td><td class="n">$35,773</td><td class="n">$680</td><td class="n">$5,018</td><td class="n">$10,500</td><td class="n">$11,249</td><td class="n">$47,042</td></tr>
-<tr><td>RAV4 XLE Premium FWD <span class="tag g">new</span></td><td class="n">$37,550</td><td class="n">$40,460</td><td class="n">$932</td><td class="n">$4,256</td><td class="n">$9,767</td><td class="n">$13,142</td><td class="n">$47,341</td></tr>
-<tr><td>2025 CX-50 Hyb Premium, ~8k mi <span class="tag">used</span></td><td class="n">$32,500</td><td class="n">$35,019</td><td class="n">$666</td><td class="n">$4,912</td><td class="n">$11,053</td><td class="n">$9,515</td><td class="n">$48,968</td></tr>
-<tr><td>CX-50 Hybrid Premium, 0%/36mo <span class="tag g">new</span></td><td class="n">$39,645</td><td class="n">$42,717</td><td class="n">$1,187</td><td class="n">$0</td><td class="n">$11,053</td><td class="n">$11,101</td><td class="n">$49,670</td></tr>
-<tr><td>CR-V Sport-L FWD <span class="tag g">new</span></td><td class="n">$40,175</td><td class="n">$42,480</td><td class="n">$773</td><td class="n">$3,876</td><td class="n">$10,500</td><td class="n">$12,856</td><td class="n">$50,500</td></tr>
-<tr><td>CX-50 Hyb Premium, $1.5k cash + CU loan <span class="tag g">new</span></td><td class="n">$39,645</td><td class="n">$41,101</td><td class="n">$768</td><td class="n">$4,986</td><td class="n">$11,053</td><td class="n">$11,101</td><td class="n">$53,039</td></tr>
+<tr class="best"><td>2024 CR-V Sport-L, ~30k mi <span class="tag">used</span></td><td class="n">$31,248</td><td class="n">$10,500</td><td class="n">$7,500</td><td class="n">$9,411</td><td class="n">&mdash;</td><td class="n">$39,836</td><td>Cash</td></tr>
+<tr><td>2025 CX-50 Hyb Premium Plus, ~28k mi <span class="tag">used</span></td><td class="n">$32,557</td><td class="n">$11,053</td><td class="n">$7,500</td><td class="n">$9,228</td><td class="n">&mdash;</td><td class="n">$41,881</td><td>Cash</td></tr>
+<tr><td>RAV4 XLE Premium FWD <span class="tag g">new</span></td><td class="n">$40,460</td><td class="n">$9,767</td><td class="n">$6,000</td><td class="n">$13,142</td><td class="n">&mdash;</td><td class="n">$43,085</td><td>Cash</td></tr>
+<tr><td>2025 CX-50 Hyb Premium, ~8k mi <span class="tag">used</span></td><td class="n">$35,019</td><td class="n">$11,053</td><td class="n">$7,500</td><td class="n">$9,515</td><td class="n">&mdash;</td><td class="n">$44,057</td><td>Cash</td></tr>
+<tr><td>CR-V Sport-L FWD <span class="tag g">new</span></td><td class="n">$42,539</td><td class="n">$10,500</td><td class="n">$6,500</td><td class="n">$12,856</td><td class="n">$320</td><td class="n">$46,363</td><td>Finance 3.49%</td></tr>
+<tr><td>CX-50 Hybrid Premium <span class="tag g">new</span></td><td class="n">$42,717</td><td class="n">$11,053</td><td class="n">$7,000</td><td class="n">$11,101</td><td class="n">$227</td><td class="n">$49,443</td><td>Finance 0%/36</td></tr>
 </tbody></table>
 </div>
-<p class="h2note">Net = out-the-door + interest + fuel + estimated maintenance &minus; resale at year&nbsp;10.
-$0 down, 7.75% CA tax. Used loans modeled at 5.29% (super-prime, 60&nbsp;mo); new at each brand&rsquo;s posted rate.
-Resale values are the softest inputs here &mdash; treat &plusmn;$2,000 as noise.</p>
+<p class="h2note">Net = out-the-door + fuel + estimated maintenance &minus; resale at year&nbsp;10, minus the
+gain from financing where financing beats cash. 7.75% CA tax. Resale is the softest input here &mdash; treat
+&plusmn;$2,000 as noise.</p>
+
+<h3>What to actually pay &middot; negotiation targets</h3>
+<div class="scroll">
+<table>
+<thead><tr><th>Vehicle</th><th class="n">MSRP / asking</th><th class="n">Realistic target</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td>RAV4 XLE Premium FWD <span class="tag g">new</span></td><td class="n">$37,550</td><td class="n">$38,500&ndash;41,000</td><td>Low &mdash; markup data conflicts</td></tr>
+<tr class="best"><td>CX-50 Hybrid Premium <span class="tag g">new</span></td><td class="n">$39,645</td><td class="n">$36,000&ndash;37,200</td><td>High &mdash; invoice + rebate verified</td></tr>
+<tr><td>CR-V Sport-L FWD <span class="tag g">new</span></td><td class="n">$40,175</td><td class="n">$38,300&ndash;39,300</td><td>Medium &mdash; invoice unpublished</td></tr>
+<tr><td>2025 CX-50 Hyb Premium <span class="tag">used</span></td><td class="n">$30,200&ndash;35,100</td><td class="n">$29,500&ndash;32,500</td><td>Medium-high &mdash; KBB direct</td></tr>
+<tr><td>2024 CR-V Sport-L <span class="tag">used</span></td><td class="n">$29,000&ndash;32,500</td><td class="n">$27,500&ndash;29,500</td><td>High &mdash; KBB trim-specific</td></tr>
+<tr><td>2025 CR-V Sport-L <span class="tag">used</span></td><td class="n">$33,200&ndash;35,400</td><td class="n">$31,500&ndash;33,500</td><td>High &mdash; KBB trim-specific</td></tr>
+</tbody></table>
+</div>
+<div class="note w"><p><b>The RAV4 is the one to be skeptical about.</b> San&nbsp;Diego CarGurus inventory
+averages $43,185 with only 36% of listings rated a good or great deal &mdash; the worst share in this set.
+Documented California markups run $3,999&ndash;$5,995, though every confirmed case is Northern California.
+<b>Paying straight MSRP would be a win here.</b> Walk at $39,000+.</p>
+<p>The CX-50 is the opposite: invoice is $38,691 delivered and the factory is putting <b>$2,500</b> on the
+hood, so ~$36,400 is achievable. That rebate <b>expires July&nbsp;31</b>.</p></div>
+<p class="h2note">California caps dealer doc fees at <b>$85</b> by statute (Vehicle Code &sect;11713.1) &mdash;
+a higher doc fee is not compliant. Add ~$620 DMV/registration/VLF and 7.75% tax; multiply the negotiated
+price by roughly <b>1.096</b> for out-the-door. Anything labelled &ldquo;market adjustment&rdquo;, dealer prep,
+nitrogen or VIN etch is negotiable or refusable.</p>
 
 <h3>Used supply is the real constraint</h3>
 <div class="note w"><p><b>Within 150 miles of San Diego there are roughly 4&ndash;6 relevant 2025 CX-50 Hybrids
@@ -339,40 +394,40 @@ credited against the trade &middot; $3.50/gal.</p>
       months &mdash; while keeping hybrid economy over a 120,000-mile hold. <b>Supply is the problem:</b>
       two cars in the Memphis metro, ~25 within 250 miles. This is a Nashville or Birmingham drive.</p>
     </div>
-    <div class="fig"><span class="big">$32,893</span><span class="lbl">10-yr net</span></div>
+    <div class="fig"><span class="big">$30,179</span><span class="lbl">10-yr net</span></div>
   </div>
   <div class="card">
     <div class="num">2</div>
     <div>
       <div class="nm">Toyota RAV4 XLE Premium AWD <span class="tag g">new</span></div>
-      <div class="spec">$38,950 delivered &middot; 41 mpg</div>
+      <div class="spec">$38,950 delivered &middot; 41 mpg &middot; pay cash</div>
       <p class="why">Highest sticker of the realistic options and still second on 10-year cost, because
-      41 mpg over 120,000 miles and class-leading resale both compound. <b>This is the pick</b> &mdash; it
-      wins on the car and nearly wins on the money.</p>
+      41 mpg over 120,000 miles and class-leading resale both compound. It now sits within <b>$1,094</b> of
+      first &mdash; and the car above it is a two-in-the-metro supply problem. <b>This is the pick.</b></p>
     </div>
-    <div class="fig"><span class="big">$33,978</span><span class="lbl">10-yr net</span></div>
+    <div class="fig"><span class="big">$31,273</span><span class="lbl">10-yr net</span></div>
   </div>
   <div class="card">
     <div class="num">3</div>
     <div>
-      <div class="nm">Chevrolet Equinox LT AWD, employee pricing <span class="tag">est.</span></div>
-      <div class="spec">~$31,600 estimated &middot; figure unverified</div>
-      <p class="why">Even at an assumed employee price it only reaches third, and the entire gap rests on a
-      number no public source could confirm. <b>Get the actual authorization quote before this row means
-      anything.</b></p>
+      <div class="nm">Chevrolet Equinox LT AWD <span class="tag">used or employee</span></div>
+      <div class="spec">used ~$27,500 &rarr; $33,418 &middot; employee ~$31,600 &rarr; $33,677</div>
+      <p class="why">Both Equinox paths land in the same place, and neither reaches the RAV4. The employee
+      figure rests on a number <b>no public source could confirm</b>, and any used LT must be VIN-checked for
+      the power seat. <b>Get the authorization quote before this row means anything.</b></p>
     </div>
-    <div class="fig"><span class="big">$35,535</span><span class="lbl">10-yr net</span></div>
+    <div class="fig"><span class="big">$33,418</span><span class="lbl">10-yr net</span></div>
   </div>
   <div class="card">
-    <div class="num">4</div>
+    <div class="num">7</div>
     <div>
       <div class="nm">Chevrolet Equinox LT AWD, at MSRP <span class="tag g">new</span></div>
       <div class="spec">$34,845 with the required $2,050 package</div>
-      <p class="why">Dead last. The power-seat package plus $16,154 of fuel over 120,000 miles wipes out
-      the entire price advantage &mdash; it ends up costing $5,000 more than the RAV4 that beat it on every
-      other axis.</p>
+      <p class="why">Dead last, even after crediting the full $1,858 benefit of GM&rsquo;s 0% financing. The
+      power-seat package plus $16,154 of fuel over 120,000 miles wipes out the entire price advantage &mdash;
+      it ends up <b>$5,876 behind</b> the RAV4 that beat it on every other axis.</p>
     </div>
-    <div class="fig"><span class="big">$39,007</span><span class="lbl">10-yr net</span></div>
+    <div class="fig"><span class="big">$37,149</span><span class="lbl">10-yr net</span></div>
   </div>
 </div>
 <div class="note w"><p><b>This reverses the March analysis.</b> Over five years the Equinox won clearly. At
@@ -380,25 +435,60 @@ credited against the trade &middot; $3.50/gal.</p>
 adds most of the rest. The spreadsheet no longer argues for the Equinox &mdash; so pick on the car.</p></div>
 </div>
 
+<!-- CASH VS FINANCE -->
+<div data-view-panel="cash" hidden>
+<h3>Pay cash, or finance and hold the money at 4%?</h3>
+<div class="note"><p><b>The rule:</b> finance only when the loan&rsquo;s effective APR is below your
+<i>after-tax</i> yield. Tennessee levies no income tax on interest, so a 4% CD nets <b>3.04%</b> at a 24%
+federal rate &mdash; a better hurdle than California&rsquo;s, but still one most loans fail.</p></div>
+<div class="scroll">
+<table>
+<thead><tr><th>Offer</th><th class="n">Effective APR</th><th>Verdict</th><th class="n">Gain from financing</th></tr></thead>
+<tbody>
+<tr class="best"><td>Equinox &mdash; 0%/36, <b>no rebate forfeited</b></td><td class="n">0.00%</td><td><b>Finance</b></td><td class="n">+$1,858</td></tr>
+<tr><td>CX-50 &mdash; 0%/36, forfeits $1,500 cash</td><td class="n">2.33%</td><td>Finance</td><td class="n">+$481</td></tr>
+<tr><td>CR-V &mdash; 3.49%/60 + $750 bonus</td><td class="n">2.78%</td><td>Finance, barely</td><td class="n">+$320</td></tr>
+<tr><td>RAV4 &mdash; 4.99%/48</td><td class="n">4.99%</td><td><b>Pay cash</b></td><td class="n">&minus;$1,800</td></tr>
+<tr><td>Any used car &mdash; 5.29%/60</td><td class="n">5.29%</td><td><b>Pay cash</b></td><td class="n">&minus;$2,200</td></tr>
+<tr><td>RAV4 &mdash; 5.99%/72</td><td class="n">5.99%</td><td><b>Pay cash</b></td><td class="n">&minus;$4,329</td></tr>
+</tbody></table>
+</div>
+<div class="note"><p><b>The Equinox&rsquo;s 0% is the only genuinely free money in this whole analysis.</b> GM is
+running no cash allowance nationally, so unlike Mazda&rsquo;s there is no rebate to give up &mdash; it is a true
+zero. Worth <b>$1,858</b>. Take it if he buys the car. It still isn&rsquo;t enough to move the Equinox off
+last place.</p>
+<p>Note the residency wrinkle: living in Michigan year-round while domiciled in Tennessee changes the state
+tax on that interest. Michigan&rsquo;s 4.25% flat tax would cut the after-tax yield to 2.87% and shave roughly
+$120 off each financing gain above. It does not flip any verdict.</p></div>
+<div class="note w"><p><b>Pay cash for the RAV4.</b> Toyota is offering no rebate and no subsidised rate on
+the redesign, so its 4.99% is a real 4.99% &mdash; well above a 3.04% after-tax yield. Financing it costs
+$1,800 over four years.</p></div>
+</div>
+
 <h3>Full cost model &middot; 120,000 miles over 10 years</h3>
 <div class="scroll">
 <table>
-<thead><tr><th>Option</th><th class="n">Price</th><th class="n">Out the door</th><th class="n">Payment</th>
-<th class="n">Interest</th><th class="n">Fuel</th><th class="n">Resale</th><th class="n">10-yr net</th></tr></thead>
+<thead><tr><th>Option</th><th class="n">Out the door</th><th class="n">Fuel</th><th class="n">Maint.</th>
+<th class="n">Resale</th><th class="n">CD gain</th><th class="n">10-yr net</th><th>Strategy</th></tr></thead>
 <tbody>
-<tr class="best"><td>2025 CX-50 Hyb Premium, ~15k mi <span class="tag">used</span></td><td class="n">$33,000</td><td class="n">$34,348</td><td class="n">$368</td><td class="n">$2,714</td><td class="n">$11,053</td><td class="n">$8,722</td><td class="n">$32,893</td></tr>
-<tr><td>RAV4 XLE Premium AWD <span class="tag g">new</span></td><td class="n">$38,950</td><td class="n">$40,714</td><td class="n">$592</td><td class="n">$2,705</td><td class="n">$10,244</td><td class="n">$11,685</td><td class="n">$33,978</td></tr>
-<tr><td>2025 Equinox LT AWD, ~30k mi <span class="tag">used</span></td><td class="n">$27,500</td><td class="n">$28,463</td><td class="n">$256</td><td class="n">$1,888</td><td class="n">$16,154</td><td class="n">$5,199</td><td class="n">$35,306</td></tr>
-<tr><td>Equinox LT AWD, employee price <span class="tag">est.</span></td><td class="n">~$31,600</td><td class="n">$32,850</td><td class="n">$496</td><td class="n">$0</td><td class="n">$16,154</td><td class="n">$6,969</td><td class="n">$35,535</td></tr>
-<tr><td>CX-50 Hybrid Premium, 0%/36mo <span class="tag g">new</span></td><td class="n">$39,645</td><td class="n">$41,458</td><td class="n">$735</td><td class="n">$0</td><td class="n">$11,053</td><td class="n">$9,515</td><td class="n">$35,996</td></tr>
-<tr><td>2026 CR-V Sport-L AWD, ~3k mi <span class="tag">used</span></td><td class="n">$38,000</td><td class="n">$39,698</td><td class="n">$469</td><td class="n">$3,464</td><td class="n">$11,351</td><td class="n">$10,836</td><td class="n">$36,178</td></tr>
-<tr><td>CR-V Sport-L AWD <span class="tag g">new</span></td><td class="n">$41,675</td><td class="n">$42,828</td><td class="n">$506</td><td class="n">$2,539</td><td class="n">$11,351</td><td class="n">$11,252</td><td class="n">$37,966</td></tr>
-<tr><td>Equinox LT AWD + Conv. Pkg II <span class="tag g">new</span></td><td class="n">$34,845</td><td class="n">$36,322</td><td class="n">$592</td><td class="n">$0</td><td class="n">$16,154</td><td class="n">$6,969</td><td class="n">$39,007</td></tr>
+<tr class="best"><td>2025 CX-50 Hyb Premium, ~15k mi <span class="tag">used</span></td><td class="n">$19,348</td><td class="n">$11,053</td><td class="n">$8,500</td><td class="n">$8,722</td><td class="n">&mdash;</td><td class="n">$30,179</td><td>Cash</td></tr>
+<tr><td>RAV4 XLE Premium AWD <span class="tag g">new</span></td><td class="n">$25,714</td><td class="n">$10,244</td><td class="n">$7,000</td><td class="n">$11,685</td><td class="n">&mdash;</td><td class="n">$31,273</td><td>Cash</td></tr>
+<tr><td>2025 Equinox LT AWD, ~30k mi <span class="tag">used</span></td><td class="n">$13,463</td><td class="n">$16,154</td><td class="n">$9,000</td><td class="n">$5,199</td><td class="n">&mdash;</td><td class="n">$33,418</td><td>Cash</td></tr>
+<tr><td>Equinox LT AWD, employee price <span class="tag">est.</span></td><td class="n">$17,850</td><td class="n">$16,154</td><td class="n">$8,500</td><td class="n">$6,969</td><td class="n">$1,858</td><td class="n">$33,677</td><td>Finance 0%/36</td></tr>
+<tr><td>CR-V Sport-L AWD <span class="tag g">new</span></td><td class="n">$27,880</td><td class="n">$11,351</td><td class="n">$7,500</td><td class="n">$11,252</td><td class="n">$320</td><td class="n">$35,159</td><td>Finance 3.49%</td></tr>
+<tr><td>CX-50 Hybrid Premium <span class="tag g">new</span></td><td class="n">$26,458</td><td class="n">$11,053</td><td class="n">$8,000</td><td class="n">$9,515</td><td class="n">$481</td><td class="n">$35,515</td><td>Finance 0%/36</td></tr>
+<tr><td>Equinox LT AWD + Conv. Pkg II <span class="tag g">new</span></td><td class="n">$21,322</td><td class="n">$16,154</td><td class="n">$8,500</td><td class="n">$6,969</td><td class="n">$1,858</td><td class="n">$37,149</td><td>Finance 0%/36</td></tr>
 </tbody></table>
 </div>
-<p class="h2note">Net = out-the-door + interest + fuel + estimated maintenance &minus; resale at year&nbsp;10,
-after a $15,000 trade. Tennessee taxes only the difference after trade-in &mdash; worth about $1,050.
-Payments reflect the trade applied as down payment, which is why they look low.</p>
+<p class="h2note">Net = out-the-door + fuel + estimated maintenance &minus; resale at year&nbsp;10, minus the
+gain from financing where financing beats cash. Out-the-door is shown <b>after</b> the $15,000 trade, which is
+why the figures look low. Tennessee taxes only the difference after trade-in &mdash; worth about $1,050.</p>
+
+<div class="note w"><p><b>Negotiation targets for this market are not done yet.</b> The San&nbsp;Diego
+figures on the other tab came from a research pass that has not been run for Memphis. The two numbers most
+worth chasing here: the <b>actual GM employee authorization price</b> for a 2026 Equinox LT AWD, and how
+much a <b>leftover 2026</b> discounts now that 2027 stock has landed &mdash; one dealer was already asking
+$3,300 under sticker.</p></div>
 
 <h3>Tires &mdash; still the highest-return decision on the list</h3>
 <div class="note"><p><b>Michelin CrossClimate2, 3PMSF-rated, 225/65R17 &mdash; roughly $900&ndash;1,000 installed.</b>
@@ -452,7 +542,11 @@ observed listings, not transaction prices.</p>
 <p><b>Softest inputs, in order:</b> 10-year resale values, the GM employee price, and maintenance estimates.
 Resale drives the ranking more than any other single assumption &mdash; a $2,000 swing reorders the middle of
 both tables. Sources marked <span class="tag">est.</span> could not be verified against a primary source.</p>
-<p>Model and calculations in <code>tco.py</code>. Not financial advice.</p>
+<p>Negotiation targets are drawn from published invoice data, KBB trim-level used values surfaced via search,
+and dealer inventory aggregates. Edmunds serves a bot-detection wall to automated access, so no Edmunds
+True&nbsp;Market&nbsp;Value figure was retrieved directly &mdash; where an Edmunds number appears it came from
+a search snippet or a secondary article.</p>
+<p>Model and calculations in <code>tco.py</code> and <code>cash-vs-finance.py</code>. Not financial advice.</p>
 </footer>
 
 </div>
