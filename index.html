@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Car Picks 2026</title>
+<style>
+:root{
+  --bg:#fbfbfa; --panel:#fff; --ink:#1a1a18; --muted:#6b6b66; --line:#e4e3df;
+  --accent:#1f5f4f; --accent-soft:#e8f2ef; --warn:#8a4b17; --warn-soft:#fdf1e5;
+  --good:#1f5f4f; --bad:#a03028; --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#131315; --panel:#1c1c1f; --ink:#ececea; --muted:#9a9a96; --line:#2e2e33;
+    --accent:#6fc0a8; --accent-soft:#17302a; --warn:#e0a56a; --warn-soft:#33241480;
+    --good:#6fc0a8; --bad:#e0827a; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.6 ui-sans-serif,-apple-system,"Segoe UI",Inter,system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+header{padding:52px 0 28px;border-bottom:1px solid var(--line);margin-bottom:28px}
+h1{font-size:clamp(28px,5vw,40px);margin:0 0 6px;letter-spacing:-.022em;font-weight:650}
+.sub{color:var(--muted);font-size:15px;margin:0}
+h2{font-size:20px;margin:44px 0 4px;letter-spacing:-.01em;font-weight:640}
+h2:first-of-type{margin-top:8px}
+.h2note{color:var(--muted);font-size:14px;margin:0 0 16px}
+h3{font-size:15px;margin:28px 0 10px;text-transform:uppercase;letter-spacing:.07em;
+  color:var(--muted);font-weight:620}
+
+/* tabs */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+.tab{flex:1 1 220px;padding:13px 16px;border:1px solid var(--line);background:var(--panel);
+  border-radius:11px;cursor:pointer;font:inherit;font-size:14.5px;color:var(--muted);
+  text-align:left;transition:.15s;line-height:1.35}
+.tab b{display:block;color:var(--ink);font-weight:620;font-size:15px;margin-bottom:1px}
+.tab:hover{border-color:var(--muted)}
+.tab[aria-selected=true]{border-color:var(--accent);background:var(--accent-soft);box-shadow:var(--shadow)}
+.tab[aria-selected=true] b{color:var(--accent)}
+
+/* toggle */
+.toggle{display:inline-flex;padding:3px;background:var(--panel);border:1px solid var(--line);
+  border-radius:10px;margin-bottom:6px}
+.toggle button{padding:8px 18px;border:0;background:none;border-radius:7px;cursor:pointer;
+  font:inherit;font-size:14px;color:var(--muted);font-weight:560;transition:.15s}
+.toggle button[aria-pressed=true]{background:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){.toggle button[aria-pressed=true]{color:#0f1f1b}}
+
+/* rank cards */
+.rank{display:grid;gap:11px;margin:16px 0 8px}
+.card{display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:start;
+  background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:17px 19px;
+  box-shadow:var(--shadow)}
+.card.win{border-color:var(--accent)}
+.num{font-size:21px;font-weight:660;color:var(--muted);line-height:1.25;font-variant-numeric:tabular-nums}
+.card.win .num{color:var(--accent)}
+.nm{font-weight:620;font-size:16.5px;letter-spacing:-.01em;margin-bottom:3px}
+.spec{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;margin-bottom:7px}
+.why{font-size:14.5px;margin:0}
+.fig{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.fig .big{font-size:19px;font-weight:640;letter-spacing:-.02em;display:block}
+.fig .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+@media (max-width:640px){
+  .card{grid-template-columns:32px 1fr;gap:12px;padding:15px}
+  .fig{grid-column:2;text-align:left;margin-top:8px}
+  .fig .big{display:inline;margin-right:7px}
+}
+
+/* tables */
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0 6px;
+  border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:660px;font-size:14px}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);
+  font-weight:620;background:var(--bg)}
+tbody tr:last-child td{border-bottom:0}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+th.n{text-align:right}
+tr.best td{background:var(--accent-soft)}
+tr.best td:first-child{font-weight:620}
+.tag{display:inline-block;font-size:10.5px;padding:1.5px 6px;border-radius:5px;
+  background:var(--warn-soft);color:var(--warn);font-weight:620;letter-spacing:.03em;
+  vertical-align:middle;margin-left:5px}
+.tag.g{background:var(--accent-soft);color:var(--accent)}
+
+/* callouts */
+.note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:0 11px 11px 0;padding:15px 19px;margin:16px 0;font-size:14.5px}
+.note.w{border-left-color:var(--warn);background:var(--warn-soft)}
+.note b{font-weight:640}
+.note p{margin:0}.note p+p{margin-top:8px}
+
+ul.chk{list-style:none;padding:0;margin:12px 0}
+ul.chk li{padding:9px 0 9px 26px;border-bottom:1px solid var(--line);font-size:14.5px;position:relative}
+ul.chk li:last-child{border-bottom:0}
+ul.chk li:before{content:"";position:absolute;left:6px;top:17px;width:6px;height:6px;
+  border-radius:2px;background:var(--muted)}
+ul.chk li.hot:before{background:var(--bad)}
+ul.chk li b{font-weight:620}
+.pill{font-size:11px;font-weight:620;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1px 6px;margin-right:7px}
+.pill.hot{color:var(--bad);border-color:var(--bad)}
+
+hr{border:0;border-top:1px solid var(--line);margin:44px 0 0}
+footer{color:var(--muted);font-size:12.5px;padding-top:20px;line-height:1.7}
+footer code{font-size:12px;background:var(--panel);padding:1px 5px;border-radius:4px;border:1px solid var(--line)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Car Picks 2026</h1>
+  <p class="sub">Two buyers, four vehicles, 10-year hold. Prices verified July&nbsp;28,&nbsp;2026 &mdash; all figures include destination.</p>
+</header>
+
+<div class="note w">
+  <p><b>Five corrections since the last draft.</b> The research pass overturned numbers the earlier
+  analysis was built on:</p>
+  <p>1. <b>Mazda&rsquo;s 0% APR is 36 months, not 60</b> &mdash; and it is strictly either/or with the
+  $1,500 customer cash. That is ~$1,190/mo on a CX-50 Premium.<br>
+  2. <b>The Equinox LT has no power driver&rsquo;s seat.</b> It needs Convenience Package&nbsp;II
+  ($2,050), confirmed off a real window sticker. Real price is $34,845, not $32,795.<br>
+  3. <b>CR-V Hybrid FWD gets 40 mpg combined, not 37.</b> 37 is the AWD number.<br>
+  4. <b>Destination pushes the CR-V over $40k</b> for Buyer&nbsp;1 &mdash; $40,175 delivered, not $38,725.<br>
+  5. <b>There is no 2023 CR-V Sport-L.</b> The trim started in 2024, so the used pool is smaller than assumed.</p>
+</div>
+
+<div class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-tab="a">
+    <b>Buyer 1 &mdash; San Diego, CA</b>Hybrid required &middot; FWD fine &middot; 80,000 mi over 10 yr
+  </button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="b">
+    <b>Buyer 2 &mdash; Memphis &rarr; Michigan</b>AWD required &middot; gas OK &middot; 120,000 mi over 10 yr
+  </button>
+</div>
+
+<div class="toggle" role="group">
+  <button data-view="car" aria-pressed="true">Best car</button>
+  <button data-view="deal" aria-pressed="false">Best deal</button>
+</div>
+
+
+<!-- ======================= BUYER 1 ======================= -->
+<section data-panel="a">
+
+<h2>Buyer 1 &mdash; San Diego, CA</h2>
+<p class="h2note">Budget $30&ndash;40k &middot; hybrid non-negotiable &middot; heated + power seats, backup camera,
+CarPlay &middot; Premium / XLE Premium trim floor &middot; ventilated seats preferred &middot; AWD not needed &middot;
+7.75% tax at the registered address &middot; $5.25/gal.</p>
+
+<!-- BEST CAR -->
+<div data-view-panel="car">
+<h3>Ranked on the car itself</h3>
+<div class="rank">
+  <div class="card win">
+    <div class="num">1</div>
+    <div>
+      <div class="nm">Toyota RAV4 XLE Premium FWD <span class="tag g">new only</span></div>
+      <div class="spec">$37,550 &middot; 226 hp &middot; 43 mpg &middot; SofTex</div>
+      <p class="why">Best powertrain and by far the best efficiency, on an all-new 6th-generation platform
+      with the strongest resale in the class. The catch is upholstery: <b>no 2026 RAV4 has genuine leather
+      at any trim or any price</b>, and ventilated seats require stepping up to XSE or Limited.</p>
+    </div>
+    <div class="fig"><span class="big">$37,550</span><span class="lbl">delivered</span></div>
+  </div>
+  <div class="card">
+    <div class="num">2</div>
+    <div>
+      <div class="nm">Mazda CX-50 Hybrid Premium</div>
+      <div class="spec">$39,645 &middot; 219 hp &middot; 38 mpg &middot; real leather</div>
+      <p class="why">The only car here that delivers <b>genuine leather and ventilated seats together</b>,
+      with AWD standard and a 12-speaker Bose system. Toyota&rsquo;s own A25A-FXS hybrid underneath, so the
+      mechanical risk is low. Costs $2,100 more and gives up 5 mpg.</p>
+    </div>
+    <div class="fig"><span class="big">$39,645</span><span class="lbl">delivered</span></div>
+  </div>
+  <div class="card">
+    <div class="num">3</div>
+    <div>
+      <div class="nm">Honda CR-V Hybrid Sport-L FWD</div>
+      <div class="spec">$40,175 &middot; 204 hp &middot; 40 mpg &middot; real leather</div>
+      <p class="why">Roomiest cabin and real leather, and the 40 mpg figure is better than previously
+      credited. But it is the slowest of the three and <b>destination pushes it past the $40k ceiling</b>.
+      No 2026 CR-V offers ventilated seats on any trim.</p>
+    </div>
+    <div class="fig"><span class="big">$40,175</span><span class="lbl">over budget</span></div>
+  </div>
+</div>
+<div class="note"><p><b>If ventilated seats matter, the list is one car long.</b> The CX-50 Premium is the
+only vehicle in this set &mdash; new or used, at any trim under $42k &mdash; that has them.</p></div>
+</div>
+
+<!-- BEST DEAL -->
+<div data-view-panel="deal" hidden>
+<h3>Ranked on 10-year net cost</h3>
+<div class="rank">
+  <div class="card win">
+    <div class="num">1</div>
+    <div>
+      <div class="nm">2024 CR-V Hybrid Sport-L &middot; ~30k mi <span class="tag">used</span></div>
+      <div class="spec">~$29,000 asking &middot; 25% off new &middot; 6th gen, same car as the 2026</div>
+      <p class="why">The CR-V is unchanged since 2023, so a 2024 is mechanically the current car at a
+      quarter off. Honda&rsquo;s CPO premium is about <b>$340 &mdash; the cheapest of any brand</b> &mdash; and
+      buys 7yr/100k powertrain plus two extra years of non-powertrain coverage. Take it.</p>
+    </div>
+    <div class="fig"><span class="big">$44,219</span><span class="lbl">10-yr net</span></div>
+  </div>
+  <div class="card">
+    <div class="num">2</div>
+    <div>
+      <div class="nm">2025 CX-50 Hybrid Premium Plus &middot; ~28k mi <span class="tag">used</span></div>
+      <div class="spec">~$30,215 asking &middot; more equipment than a new Premium</div>
+      <p class="why">Undercuts a new Premium by $9,400 while adding a head-up display, heated rear seats and
+      a heated wheel. Keeps the leather and ventilated seats. The used Premium&nbsp;/&nbsp;Premium&nbsp;Plus
+      price gap has collapsed to near zero, so <b>shop on mileage and price, not trim badge</b>.</p>
+    </div>
+    <div class="fig"><span class="big">$46,448</span><span class="lbl">10-yr net</span></div>
+  </div>
+  <div class="card">
+    <div class="num">3</div>
+    <div>
+      <div class="nm">Toyota RAV4 XLE Premium FWD <span class="tag g">new</span></div>
+      <div class="spec">$37,550 delivered &middot; best-ranked new option</div>
+      <p class="why">Cheapest new car in the set and the strongest residual, which is what carries it here
+      despite no rebate and mid-5% financing. Watch for dealer markup &mdash; on this redesign the fight is
+      getting <i>to</i> MSRP, not below it.</p>
+    </div>
+    <div class="fig"><span class="big">$47,341</span><span class="lbl">10-yr net</span></div>
+  </div>
+</div>
+<div class="note w"><p><b>The new CX-50 lost its financing advantage.</b> The earlier analysis assumed 0% over
+60 months. It is 36 months &mdash; about $1,190/mo &mdash; and taking it forfeits the $1,500 cash. Stretch to
+60 months and the rate is 2.9% <i>and</i> the rebate is still gone. That single correction moves the new
+CX-50 from first to sixth on cost.</p></div>
+</div>
+
+<h3>Full cost model &middot; 80,000 miles over 10 years</h3>
+<div class="scroll">
+<table>
+<thead><tr><th>Option</th><th class="n">Price</th><th class="n">Out the door</th><th class="n">Payment</th>
+<th class="n">Interest</th><th class="n">Fuel</th><th class="n">Resale</th><th class="n">10-yr net</th></tr></thead>
+<tbody>
+<tr class="best"><td>2024 CR-V Sport-L, ~30k mi <span class="tag">used</span></td><td class="n">$29,000</td><td class="n">$31,248</td><td class="n">$594</td><td class="n">$4,383</td><td class="n">$10,500</td><td class="n">$9,411</td><td class="n">$44,219</td></tr>
+<tr><td>2025 CX-50 Hyb Premium Plus, ~28k mi <span class="tag">used</span></td><td class="n">$30,215</td><td class="n">$32,557</td><td class="n">$619</td><td class="n">$4,566</td><td class="n">$11,053</td><td class="n">$9,228</td><td class="n">$46,448</td></tr>
+<tr><td>2025 CR-V Sport-L, ~25k mi <span class="tag">used</span></td><td class="n">$33,200</td><td class="n">$35,773</td><td class="n">$680</td><td class="n">$5,018</td><td class="n">$10,500</td><td class="n">$11,249</td><td class="n">$47,042</td></tr>
+<tr><td>RAV4 XLE Premium FWD <span class="tag g">new</span></td><td class="n">$37,550</td><td class="n">$40,460</td><td class="n">$932</td><td class="n">$4,256</td><td class="n">$9,767</td><td class="n">$13,142</td><td class="n">$47,341</td></tr>
+<tr><td>2025 CX-50 Hyb Premium, ~8k mi <span class="tag">used</span></td><td class="n">$32,500</td><td class="n">$35,019</td><td class="n">$666</td><td class="n">$4,912</td><td class="n">$11,053</td><td class="n">$9,515</td><td class="n">$48,968</td></tr>
+<tr><td>CX-50 Hybrid Premium, 0%/36mo <span class="tag g">new</span></td><td class="n">$39,645</td><td class="n">$42,717</td><td class="n">$1,187</td><td class="n">$0</td><td class="n">$11,053</td><td class="n">$11,101</td><td class="n">$49,670</td></tr>
+<tr><td>CR-V Sport-L FWD <span class="tag g">new</span></td><td class="n">$40,175</td><td class="n">$42,480</td><td class="n">$773</td><td class="n">$3,876</td><td class="n">$10,500</td><td class="n">$12,856</td><td class="n">$50,500</td></tr>
+<tr><td>CX-50 Hyb Premium, $1.5k cash + CU loan <span class="tag g">new</span></td><td class="n">$39,645</td><td class="n">$41,101</td><td class="n">$768</td><td class="n">$4,986</td><td class="n">$11,053</td><td class="n">$11,101</td><td class="n">$53,039</td></tr>
+</tbody></table>
+</div>
+<p class="h2note">Net = out-the-door + interest + fuel + estimated maintenance &minus; resale at year&nbsp;10.
+$0 down, 7.75% CA tax. Used loans modeled at 5.29% (super-prime, 60&nbsp;mo); new at each brand&rsquo;s posted rate.
+Resale values are the softest inputs here &mdash; treat &plusmn;$2,000 as noise.</p>
+
+<h3>Used supply is the real constraint</h3>
+<div class="note w"><p><b>Within 150 miles of San Diego there are roughly 4&ndash;6 relevant 2025 CX-50 Hybrids
+and 3 CR-V Sport-Ls.</b> Most sit 60&ndash;140 miles out in LA, Orange and Riverside counties, and exactly one
+CPO CX-50 Hybrid exists in the entire radius. There is no local negotiating leverage on either car &mdash;
+expect to travel, and expect firm pricing.</p></div>
+
+</section>
+
+
+<!-- ======================= BUYER 2 ======================= -->
+<section data-panel="b" hidden>
+
+<h2>Buyer 2 &mdash; Memphis, TN &rarr; Michigan year-round</h2>
+<p class="h2note">AWD required &middot; heated + power seats, backup camera, Android Auto &middot; hybrid optional,
+gas acceptable &middot; same trim floor &middot; $15,000 trade-in &middot; 7% TN tax plus $88 of capped local tax,
+credited against the trade &middot; $3.50/gal.</p>
+
+<!-- BEST CAR -->
+<div data-view-panel="car">
+<h3>Ranked on the car itself</h3>
+<div class="rank">
+  <div class="card win">
+    <div class="num">1</div>
+    <div>
+      <div class="nm">Toyota RAV4 XLE Premium AWD <span class="tag g">new only</span></div>
+      <div class="spec">$38,950 &middot; 236 hp &middot; 41 mpg &middot; electronic on-demand AWD</div>
+      <p class="why">Most power, best efficiency, best resale. The AWD system uses a rear electric motor
+      with no driveshaft &mdash; instant torque split, which is genuinely useful on ice. Note local dealers
+      are asking ~$41,000 against a $38,950 sticker.</p>
+    </div>
+    <div class="fig"><span class="big">$38,950</span><span class="lbl">delivered</span></div>
+  </div>
+  <div class="card">
+    <div class="num">2</div>
+    <div>
+      <div class="nm">Mazda CX-50 Hybrid Premium</div>
+      <div class="spec">$39,645 &middot; 219 hp &middot; 38 mpg &middot; AWD standard</div>
+      <p class="why">Best interior in the group and 17-inch wheels on 225/65 tires &mdash; a taller sidewall
+      is the right call for Michigan potholes and snow. Real leather and ventilated seats.</p>
+    </div>
+    <div class="fig"><span class="big">$39,645</span><span class="lbl">delivered</span></div>
+  </div>
+  <div class="card">
+    <div class="num">3</div>
+    <div>
+      <div class="nm">Honda CR-V Hybrid Sport-L AWD</div>
+      <div class="spec">$41,675 &middot; 204 hp &middot; 37 mpg &middot; real leather</div>
+      <p class="why">Roomiest and well-built, but the priciest and least powerful. Destination has risen to
+      $1,450 on current stickers, so budget $41,675 &mdash; not the $40,225 base figure.</p>
+    </div>
+    <div class="fig"><span class="big">$41,675</span><span class="lbl">delivered</span></div>
+  </div>
+  <div class="card">
+    <div class="num">4</div>
+    <div>
+      <div class="nm">Chevrolet Equinox LT AWD <span class="tag">gas only</span></div>
+      <div class="spec">$34,845 as required &middot; 175 hp &middot; 26 mpg</div>
+      <p class="why">Sixty horsepower down and fifteen mpg down on the field, and GM has no hybrid in this
+      class until a PHEV around 2028. It does have wireless Android Auto standard, plus blind-spot,
+      rear cross-traffic braking and reverse automatic braking &mdash; all standard on LT.</p>
+    </div>
+    <div class="fig"><span class="big">$34,845</span><span class="lbl">with req. package</span></div>
+  </div>
+</div>
+</div>
+
+<!-- BEST DEAL -->
+<div data-view-panel="deal" hidden>
+<h3>Ranked on 10-year net cost</h3>
+<div class="rank">
+  <div class="card win">
+    <div class="num">1</div>
+    <div>
+      <div class="nm">2025 CX-50 Hybrid Premium &middot; ~15k mi <span class="tag">used</span></div>
+      <div class="spec">~$33,000 asking &middot; AWD standard &middot; 38 mpg</div>
+      <p class="why">Steepest first-year depreciation of any car here &mdash; $8,000 to $11,000 off in twelve
+      months &mdash; while keeping hybrid economy over a 120,000-mile hold. <b>Supply is the problem:</b>
+      two cars in the Memphis metro, ~25 within 250 miles. This is a Nashville or Birmingham drive.</p>
+    </div>
+    <div class="fig"><span class="big">$32,893</span><span class="lbl">10-yr net</span></div>
+  </div>
+  <div class="card">
+    <div class="num">2</div>
+    <div>
+      <div class="nm">Toyota RAV4 XLE Premium AWD <span class="tag g">new</span></div>
+      <div class="spec">$38,950 delivered &middot; 41 mpg</div>
+      <p class="why">Highest sticker of the realistic options and still second on 10-year cost, because
+      41 mpg over 120,000 miles and class-leading resale both compound. <b>This is the pick</b> &mdash; it
+      wins on the car and nearly wins on the money.</p>
+    </div>
+    <div class="fig"><span class="big">$33,978</span><span class="lbl">10-yr net</span></div>
+  </div>
+  <div class="card">
+    <div class="num">3</div>
+    <div>
+      <div class="nm">Chevrolet Equinox LT AWD, employee pricing <span class="tag">est.</span></div>
+      <div class="spec">~$31,600 estimated &middot; figure unverified</div>
+      <p class="why">Even at an assumed employee price it only reaches third, and the entire gap rests on a
+      number no public source could confirm. <b>Get the actual authorization quote before this row means
+      anything.</b></p>
+    </div>
+    <div class="fig"><span class="big">$35,535</span><span class="lbl">10-yr net</span></div>
+  </div>
+  <div class="card">
+    <div class="num">4</div>
+    <div>
+      <div class="nm">Chevrolet Equinox LT AWD, at MSRP <span class="tag g">new</span></div>
+      <div class="spec">$34,845 with the required $2,050 package</div>
+      <p class="why">Dead last. The power-seat package plus $16,154 of fuel over 120,000 miles wipes out
+      the entire price advantage &mdash; it ends up costing $5,000 more than the RAV4 that beat it on every
+      other axis.</p>
+    </div>
+    <div class="fig"><span class="big">$39,007</span><span class="lbl">10-yr net</span></div>
+  </div>
+</div>
+<div class="note w"><p><b>This reverses the March analysis.</b> Over five years the Equinox won clearly. At
+12,000 miles a year over ten years, the fuel gap alone is <b>$5,900</b>, and the $2,050 power-seat package
+adds most of the rest. The spreadsheet no longer argues for the Equinox &mdash; so pick on the car.</p></div>
+</div>
+
+<h3>Full cost model &middot; 120,000 miles over 10 years</h3>
+<div class="scroll">
+<table>
+<thead><tr><th>Option</th><th class="n">Price</th><th class="n">Out the door</th><th class="n">Payment</th>
+<th class="n">Interest</th><th class="n">Fuel</th><th class="n">Resale</th><th class="n">10-yr net</th></tr></thead>
+<tbody>
+<tr class="best"><td>2025 CX-50 Hyb Premium, ~15k mi <span class="tag">used</span></td><td class="n">$33,000</td><td class="n">$34,348</td><td class="n">$368</td><td class="n">$2,714</td><td class="n">$11,053</td><td class="n">$8,722</td><td class="n">$32,893</td></tr>
+<tr><td>RAV4 XLE Premium AWD <span class="tag g">new</span></td><td class="n">$38,950</td><td class="n">$40,714</td><td class="n">$592</td><td class="n">$2,705</td><td class="n">$10,244</td><td class="n">$11,685</td><td class="n">$33,978</td></tr>
+<tr><td>2025 Equinox LT AWD, ~30k mi <span class="tag">used</span></td><td class="n">$27,500</td><td class="n">$28,463</td><td class="n">$256</td><td class="n">$1,888</td><td class="n">$16,154</td><td class="n">$5,199</td><td class="n">$35,306</td></tr>
+<tr><td>Equinox LT AWD, employee price <span class="tag">est.</span></td><td class="n">~$31,600</td><td class="n">$32,850</td><td class="n">$496</td><td class="n">$0</td><td class="n">$16,154</td><td class="n">$6,969</td><td class="n">$35,535</td></tr>
+<tr><td>CX-50 Hybrid Premium, 0%/36mo <span class="tag g">new</span></td><td class="n">$39,645</td><td class="n">$41,458</td><td class="n">$735</td><td class="n">$0</td><td class="n">$11,053</td><td class="n">$9,515</td><td class="n">$35,996</td></tr>
+<tr><td>2026 CR-V Sport-L AWD, ~3k mi <span class="tag">used</span></td><td class="n">$38,000</td><td class="n">$39,698</td><td class="n">$469</td><td class="n">$3,464</td><td class="n">$11,351</td><td class="n">$10,836</td><td class="n">$36,178</td></tr>
+<tr><td>CR-V Sport-L AWD <span class="tag g">new</span></td><td class="n">$41,675</td><td class="n">$42,828</td><td class="n">$506</td><td class="n">$2,539</td><td class="n">$11,351</td><td class="n">$11,252</td><td class="n">$37,966</td></tr>
+<tr><td>Equinox LT AWD + Conv. Pkg II <span class="tag g">new</span></td><td class="n">$34,845</td><td class="n">$36,322</td><td class="n">$592</td><td class="n">$0</td><td class="n">$16,154</td><td class="n">$6,969</td><td class="n">$39,007</td></tr>
+</tbody></table>
+</div>
+<p class="h2note">Net = out-the-door + interest + fuel + estimated maintenance &minus; resale at year&nbsp;10,
+after a $15,000 trade. Tennessee taxes only the difference after trade-in &mdash; worth about $1,050.
+Payments reflect the trade applied as down payment, which is why they look low.</p>
+
+<h3>Tires &mdash; still the highest-return decision on the list</h3>
+<div class="note"><p><b>Michelin CrossClimate2, 3PMSF-rated, 225/65R17 &mdash; roughly $900&ndash;1,000 installed.</b>
+One set, year-round. Conventional all-seasons lose grip below about 45&deg;F no matter how many wheels are
+driven; a front-drive car on winter-rated rubber beats an AWD car on all-seasons. Negotiate a tire credit at
+delivery or sell the factory takeoffs for $400&ndash;600. Avoid the Equinox ACTIV &mdash; its all-terrain
+tires are worse on ice and noisier.</p></div>
+
+</section>
+
+
+<!-- ======================= SHARED ======================= -->
+<h2>Verify before signing</h2>
+<p class="h2note">Every item below is either unconfirmed or time-sensitive.</p>
+<ul class="chk">
+<li class="hot"><span class="pill hot">expires</span><b>Mazda&rsquo;s 0% APR and $1,500 cash both expire July&nbsp;31, 2026</b> &mdash; three days out. Sources conflict on whether the cash runs to August&nbsp;31. Confirm the current program before planning around either.</li>
+<li class="hot"><span class="pill hot">blocker</span><b>Any used Equinox must be VIN-checked for Convenience Package&nbsp;II.</b> Without it the driver&rsquo;s seat is a 6-way manual, which fails a hard requirement. Most used LT stock is ex-rental and will not have it.</li>
+<li class="hot"><span class="pill hot">unverified</span><b>The GM employee price for a 2026 Equinox LT AWD could not be confirmed by any public source.</b> The ~$31,600 figure is an assumption. So is whether it stacks with the current 0%/36mo offer, which requires delivery by August&nbsp;3.</li>
+<li><span class="pill">confirm</span>Mazda&rsquo;s longer-term rates are set regionally &mdash; 1.9%, 2.9% and 3.9% at 60 months all appear in different markets. Call a San Diego dealer for the actual ladder.</li>
+<li><span class="pill">confirm</span>The $500 loyalty and $500 military rebates are reported to stack with special APR, but this is not confirmed in Mazda&rsquo;s written terms.</li>
+<li><span class="pill">note</span>The Equinox&rsquo;s $945 Safety &amp; Technology package is <b>optional</b> &mdash; blind-spot, rear cross-traffic braking and reverse automatic braking are already standard on LT. The package buys surround-view cameras, a camera mirror and fog lamps.</li>
+<li><span class="pill">note</span>2027 Equinox stock has arrived, so any 2026 on a lot is leftover inventory. One dealer was asking $3,300 under sticker.</li>
+<li><span class="pill">note</span>Any CX-50 Premium quote above $39,645 means premium paint ($595) or dealer add-ons. Demand itemization.</li>
+<li><span class="pill">note</span>Buy GAP coverage from an insurer or credit union, never from the finance office.</li>
+<li><span class="pill">note</span>Sit in the car 20+ minutes before deciding &mdash; Consumer Reports flagged the CR-V&rsquo;s front seats as firm.</li>
+</ul>
+
+<h2>What got eliminated</h2>
+<div class="scroll">
+<table>
+<thead><tr><th>Vehicle</th><th>Reason</th></tr></thead>
+<tbody>
+<tr><td>Hyundai Tucson</td><td>No trim between SEL Convenience and Limited; Limited at $43,320 is over budget</td></tr>
+<tr><td>Kia Sportage</td><td>Declined by both buyers; SX-Prestige ~$41k regardless</td></tr>
+<tr><td>Jeep Cherokee</td><td>Consumer Reports last of 31 brands; unproven new hybrid; $43k+</td></tr>
+<tr><td>Subaru Forester / Crosstrek</td><td>Removed by buyer; weakest hybrid in class at 194 hp / 35 mpg</td></tr>
+<tr><td>Ford Escape</td><td>Production ended Dec 17, 2025; not CARB certified, cannot be sold in California</td></tr>
+<tr><td>Nissan Rogue</td><td>No true hybrid until 2027 e-POWER; PHEV is $47,485+ and 26 mpg once depleted</td></tr>
+<tr><td>GMC Terrain</td><td>GMC in the Consumer Reports bottom five for reliability</td></tr>
+<tr><td>Equinox EV</td><td>Drops Android Auto entirely for Google Built-In &mdash; disqualified on a hard requirement</td></tr>
+<tr><td>Used RAV4</td><td>2026 is an all-new 6th generation; anything used is a 5th-gen, a different and less efficient car</td></tr>
+</tbody></table>
+</div>
+
+<hr>
+<footer>
+<p>Prices verified July&nbsp;28, 2026 against manufacturer press releases, Monroney window stickers via GM&rsquo;s
+VIN service, CDTFA and Tennessee Department of Revenue rate tables, Experian&rsquo;s Q1&nbsp;2026 State of the
+Automotive Finance Market, and live dealer inventory on cars.com and CarGurus. Used asking prices are
+observed listings, not transaction prices.</p>
+<p><b>Softest inputs, in order:</b> 10-year resale values, the GM employee price, and maintenance estimates.
+Resale drives the ranking more than any other single assumption &mdash; a $2,000 swing reorders the middle of
+both tables. Sources marked <span class="tag">est.</span> could not be verified against a primary source.</p>
+<p>Model and calculations in <code>tco.py</code>. Not financial advice.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var tabs=document.querySelectorAll('.tab'), panels=document.querySelectorAll('[data-panel]');
+  var togs=document.querySelectorAll('.toggle button'), views=document.querySelectorAll('[data-view-panel]');
+  function setTab(k){
+    tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.tab===k)});
+    panels.forEach(function(p){p.hidden=p.dataset.panel!==k});
+  }
+  function setView(v){
+    togs.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.view===v)});
+    views.forEach(function(p){p.hidden=p.dataset.viewPanel!==v});
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){setTab(t.dataset.tab)})});
+  togs.forEach(function(b){b.addEventListener('click',function(){setView(b.dataset.view)})});
+})();
+</script>
+</body>
+</html>
