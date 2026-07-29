@@ -96,8 +96,13 @@ header{padding:34px 0 20px;border-bottom:1px solid var(--line);margin-bottom:22p
 .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;z-index:3}
 .stage img.fill{object-fit:cover}
 .stage[data-k="rav4"] img:not(.fill){transform:scale(1.00)}
-.stage[data-k="crv"]  img:not(.fill){transform:scale(1.30)}
-.stage[data-k="eqx"]  img:not(.fill){transform:scale(.94)}
+.stage[data-k="crv"]  img:not(.fill){transform:scale(1.55)}
+.stage[data-k="eqx"]  img:not(.fill){transform:scale(.92)}
+/* Mazda ships no cutout beyond one hero colour, so its photo keeps its own
+   background — this feathers the edges into the scene so it reads as one set. */
+.stage .blend{position:absolute;inset:0;z-index:4;pointer-events:none;
+  background:radial-gradient(ellipse 72% 68% at 50% 50%,transparent 26%,
+    rgba(20,33,58,.55) 64%,rgba(20,33,58,.97) 100%)}
  .stage .ph{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:8px;text-align:center;padding:20px}
 .ph .chip{width:74px;height:74px;border-radius:50%;border:2px solid rgba(255,255,255,.5);
@@ -172,18 +177,71 @@ footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);
   color:var(--faint);font-size:.8rem}
 footer p+p{margin-top:7px}
 
-.mbanner{display:none}
+/* ---------- mobile: a real layout, not a stripped one ---------- */
 @media (max-width:759px){
-  .mbanner{display:block;background:var(--warm);color:#1a1000;font-size:.78rem;font-weight:700;
-    text-align:center;padding:9px 14px;line-height:1.4}
-  .stage,.vid,.swatches,.swname,.vtabs{display:none!important}
-  .veh{margin-bottom:10px}
+  .wrap{padding:0 13px}
+  header{padding:22px 0 14px;margin-bottom:16px}
+  .eyebrow{font-size:.64rem;letter-spacing:.13em}
+
+  /* buyer tabs sit side by side and stay thumb-sized */
+  .tabs{gap:7px;margin-bottom:13px}
+  .tabs button{flex:1 1 0;padding:11px 10px;border-radius:12px;min-height:52px}
+  .tabs button b{font-size:.94rem}
+  .tabs button span{font-size:.7rem;display:block;line-height:1.25}
+
+  /* the 5 views scroll horizontally inside their own rail — the page never does */
+  .seg{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;
+       -webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;
+       position:sticky;top:0;z-index:60;margin:0 -13px 16px;padding:6px 13px;
+       border-radius:0;border-left:0;border-right:0;
+       background:rgba(11,15,24,.93);backdrop-filter:blur(10px)}
+  .seg::-webkit-scrollbar{display:none}
+  .seg button{flex:0 0 auto;scroll-snap-align:start;font-size:.82rem;padding:9px 13px;min-height:40px}
+
+  h2{font-size:1.32rem;margin:20px 0 4px}
+  h3{font-size:1.02rem;margin:20px 0 8px}
+
+  /* vehicle card: photo on top, full-bleed to the card edge */
+  .veh{margin-bottom:13px;border-radius:14px}
+  .stage{aspect-ratio:4/3}
   .vbody{padding:14px}
+  .vhead{gap:8px}
+  .vname{font-size:1.04rem}
+  .vprice b{font-size:1.16rem}
+
+  /* angle + interior buttons scroll rather than wrap into a tall block */
+  .vtabs{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;margin:12px -14px 0;padding:0 14px}
+  .vtabs::-webkit-scrollbar{display:none}
+  .vtabs button{flex:0 0 auto;min-height:38px;padding:8px 13px}
+
+  .swatches{gap:11px;margin:12px 0 2px}
+  .sw{width:38px;height:38px}         /* 38px keeps them comfortably tappable */
+
+  .specs{grid-template-columns:repeat(3,1fr);gap:7px}
+  .spec{padding:8px 9px}
+  .spec b{font-size:.9rem}
+  .spec span{font-size:.6rem;letter-spacing:.04em}
+
+  .note{font-size:.87rem;padding:12px 13px;border-radius:11px}
+  .card{padding:15px}
+
+  /* cost waterfall stacks label over amount so nothing is squeezed */
+  .fall .row{font-size:.87rem;gap:10px}
+  .fall .lbl small{font-size:.73rem}
+
+  .dl .it{padding:11px 12px}
+  .dl .it h4{font-size:.9rem}
+  .kv{grid-template-columns:repeat(2,1fr);gap:7px}
+  .kv b{font-size:.86rem}
+  .kv span{font-size:.6rem}
+
+  ul.chk li{padding:11px 12px;font-size:.86rem}
+  .vid{margin-top:12px}
+  footer{font-size:.75rem}
+}
+@media (max-width:380px){
   .specs{grid-template-columns:repeat(2,1fr)}
-  .note{font-size:.86rem;padding:12px 13px}
-  h1{font-size:1.55rem}
-  .tabs button{flex:1 1 100%}
-  .seg{gap:4px}.seg button{flex:1 1 44%;font-size:.8rem;padding:9px 6px}
+  .tabs button b{font-size:.88rem}
 }
 @media (min-width:760px){
   .veh.wide{display:grid;grid-template-columns:1.02fr 1fr;align-items:start;gap:0}
@@ -194,7 +252,6 @@ footer p+p{margin-top:7px}
 </style>
 </head>
 <body>
-<div class="mbanner">Best viewed on desktop &mdash; this is the simplified mobile view.</div>
 <div class="wrap">
 
 <header>
@@ -203,8 +260,8 @@ footer p+p{margin-top:7px}
 </header>
 
 <div class="tabs" role="tablist">
-  <button data-tab="a" aria-selected="true"><b>Buyer K</b><span>San Diego &middot; 100k mi &middot; FWD ok</span></button>
-  <button data-tab="b" aria-selected="false"><b>Buyer U</b><span>Memphis &middot; 100k mi &middot; AWD</span></button>
+  <button data-tab="a" aria-selected="true"><b>Buyer K</b><span>San Diego</span></button>
+  <button data-tab="b" aria-selected="false"><b>Buyer U</b><span>Memphis &rarr; Michigan</span></button>
 </div>
 
 <div class="seg" role="group">
@@ -248,30 +305,36 @@ var CFG={
 };
 
 var COLORS={
- rav4:[["Blueprint","#1E2548","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/8x8/1.png?fmt=png-alpha&wid=1400"],
-       ["Storm Cloud","#3D4A59","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/1l6/1.png?fmt=png-alpha&wid=1400"],
-       ["Ice Cap","#FFFFFF","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/040/1.png?fmt=png-alpha&wid=1400"],
-       ["Meteor Shower","#A1A1A1","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/4v8/1.png?fmt=png-alpha&wid=1400"],
-       ["Ruby Flare Pearl","#740000","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/3t3/1.png?fmt=png-alpha&wid=1400"],
-       ["Midnight Black","#00031E","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/218/1.png?fmt=png-alpha&wid=1400"]],
- cx50:[["Soul Red Crystal","#971B2D","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/soul-red-46v/e360-my25-cx50-hybrid-premium-soulred-000.jpg"],
-       ["Machine Gray","#757678","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/machine-gray-46g/e360-my25-cx50-hybrid-premium-machinegray-000.jpg"],
-       ["Polymetal Gray","#878D9A","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/polymetal-gray-47c/e360-my25-cx50-hybrid-premium-polymetalgray-000.jpg"],
-       ["Ingot Blue","#516B84","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/ingot-blue-48b/e360-my25-cx50-hybrid-premium-ingotblue-000.jpg"],
-       ["Wind Chill Pearl","#E0E0E0","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/wind-chill-48k/e360-my25-cx50-hybrid-premium-windchill-000.jpg"],
-       ["Jet Black Mica","#3B3B3B","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/jet-black-41w/e360-my25-cx50-hybrid-premium-jetblack-000.jpg"]],
- crv :[["Canyon River Blue","#00132A","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/B-640M_Canyon_River_Blue_Metallic/Large/Honda_2026_CRV_360_Exterior_Canyon_River_Blue_Metallic_0001.png"],
-       ["Meteorite Gray","#37424C","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-904M_Meteorite_Gray_Metallic/Large/Honda_2026_CRV_360_Exterior_Meteorite_Gray_Metallic_0001.png"],
-       ["Platinum White Pearl","#E5E5E5","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-883P_Platinum_White_Pearl/Large/Honda_2026_CRV_360_Exterior_Platinum_White_Pearl_0001.png"],
-       ["Solar Silver","#CCD0D3","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-932M_Solar_Silver_Metallic/Large/Honda_2026_CRV_360_Exterior_Solar_Silver_Metallic_0001.png"],
-       ["Radiant Red","#910D17","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/R-569M_Radiant_Red_Metallic/Large/Honda_2026_CRV_360_Exterior_Radiant_Red_Metallic_0001.png"],
-       ["Crystal Black Pearl","#000000","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-731P_Crystal_Black_Pearl/Large/Honda_2026_CRV_360_Exterior_Crystal_Black_Pearl_0001.png"]],
- eqx :[["Reef Blue","#275AB8","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gal/my26-equinox-activ-gal-ext.008.png"],
-       ["Sterling Gray","#8D9192","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gxd/my26-equinox-activ-gxd-ext.008.png"],
-       ["Cacti Green","#A1B8A2","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gvr/my26-equinox-activ-gvr-ext.008.png"],
-       ["Radiant Red Tintcoat","#A81D20","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gnt/my26-equinox-activ-gnt-ext.008.png"],
-       ["Polar White","#ECEDF1","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/g4j/my26-equinox-activ-g4j-ext.008.png"],
-       ["Mosaic Black","#1A1A1C","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gb8/my26-equinox-activ-gb8-ext.008.png"]]
+ rav4:[["Blueprint","#1E2548","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/8x8/{V}.png?fmt=png-alpha&wid=1400"],
+       ["Storm Cloud","#3D4A59","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/1l6/{V}.png?fmt=png-alpha&wid=1400"],
+       ["Ice Cap","#FFFFFF","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/040/{V}.png?fmt=png-alpha&wid=1400"],
+       ["Meteor Shower","#A1A1A1","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/4v8/{V}.png?fmt=png-alpha&wid=1400"],
+       ["Ruby Flare Pearl","#740000","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/3t3/{V}.png?fmt=png-alpha&wid=1400"],
+       ["Midnight Black","#00031E","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/218/{V}.png?fmt=png-alpha&wid=1400"]],
+ cx50:[["Soul Red Crystal","#971B2D","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/soul-red-46v/e360-my25-cx50-hybrid-premium-soulred-{V}.jpg"],
+       ["Machine Gray","#757678","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/machine-gray-46g/e360-my25-cx50-hybrid-premium-machinegray-{V}.jpg"],
+       ["Polymetal Gray","#878D9A","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/polymetal-gray-47c/e360-my25-cx50-hybrid-premium-polymetalgray-{V}.jpg"],
+       ["Ingot Blue","#516B84","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/ingot-blue-48b/e360-my25-cx50-hybrid-premium-ingotblue-{V}.jpg"],
+       ["Wind Chill Pearl","#E0E0E0","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/wind-chill-48k/e360-my25-cx50-hybrid-premium-windchill-{V}.jpg"],
+       ["Jet Black Mica","#3B3B3B","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/jet-black-41w/e360-my25-cx50-hybrid-premium-jetblack-{V}.jpg"]],
+ crv:[["Canyon River Blue","#00132A","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/B-640M_Canyon_River_Blue_Metallic/Large/Honda_2026_CRV_360_Exterior_Canyon_River_Blue_Metallic_{V}.png"],
+       ["Meteorite Gray","#37424C","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-904M_Meteorite_Gray_Metallic/Large/Honda_2026_CRV_360_Exterior_Meteorite_Gray_Metallic_{V}.png"],
+       ["Platinum White Pearl","#E5E5E5","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-883P_Platinum_White_Pearl/Large/Honda_2026_CRV_360_Exterior_Platinum_White_Pearl_{V}.png"],
+       ["Solar Silver","#CCD0D3","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-932M_Solar_Silver_Metallic/Large/Honda_2026_CRV_360_Exterior_Solar_Silver_Metallic_{V}.png"],
+       ["Radiant Red","#910D17","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/R-569M_Radiant_Red_Metallic/Large/Honda_2026_CRV_360_Exterior_Radiant_Red_Metallic_{V}.png"],
+       ["Crystal Black Pearl","#000000","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-731P_Crystal_Black_Pearl/Large/Honda_2026_CRV_360_Exterior_Crystal_Black_Pearl_{V}.png"]],
+ eqx:[["Reef Blue","#275AB8","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gal/my26-equinox-activ-gal-ext.{V}.png"],
+       ["Sterling Gray","#8D9192","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gxd/my26-equinox-activ-gxd-ext.{V}.png"],
+       ["Cacti Green","#A1B8A2","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gvr/my26-equinox-activ-gvr-ext.{V}.png"],
+       ["Radiant Red Tintcoat","#A81D20","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gnt/my26-equinox-activ-gnt-ext.{V}.png"],
+       ["Polar White","#ECEDF1","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/g4j/my26-equinox-activ-g4j-ext.{V}.png"],
+       ["Mosaic Black","#1A1A1C","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gb8/my26-equinox-activ-gb8-ext.{V}.png"]]
+};
+var VIEWS={
+ rav4:[["Front \u00be","1"],["Rear \u00be","2"],["Rear","3"]],
+ cx50:[["Front \u00be","000"],["Side","003"],["Rear \u00be","006"]],
+ crv :[["Front \u00be","0032"],["Side","0020"],["Rear \u00be","0015"]],
+ eqx :[["Front \u00be","002"],["Side","005"],["Rear \u00be","010"]]
 };
 var INTERIORS={
  rav4:[["Black SofTex","#1f2023","#34363b","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/vehicles/2026/rav4/galleries/RHV_MY26_0015_V001.png:tcom_gallery_16x9?fmt=jpg&wid=1600"],
@@ -424,7 +487,7 @@ function calc(car,key){
 }
 
 /* ============================ RENDER ============================ */
-var state={tab:"a",view:"car",mode:"loApr",color:{},icolor:{},shot:{}};
+var state={tab:"a",view:"car",mode:"loApr",color:{},icolor:{},shot:{},vi:{}};
 
 function svgCar(hex,dark){
   return '<svg class="art" viewBox="0 0 400 190" preserveAspectRatio="xMidYMid meet" role="img">'
@@ -462,22 +525,27 @@ function palette(car){
   return (state.shot[car.k]||"ext")==="int" ? INTERIORS[car.k] : COLORS[car.k];
 }
 function idx(car){
-  var s=(state.shot[car.k]||"ext");
-  var i=(s==="int"?state.icolor:state.color)[car.k]||0;
+  var sh=(state.shot[car.k]||"ext");
+  var i=(sh==="int"?state.icolor:state.color)[car.k]||0;
   return Math.min(i,palette(car).length-1);
 }
+function viewIdx(car){ return Math.min(state.vi[car.k]||0, VIEWS[car.k].length-1); }
+
 function stage(car){
   var k=car.k, shot=state.shot[k]||"ext", pal=palette(car), ci=idx(car), col=pal[ci];
-  var url=(col.length>3?col[3]:col[2]), art=shot==="int"?svgInt(col[1],col[2]):svgCar(col[1],col[1]);
+  var url=(col.length>3?col[3]:col[2]);
+  if(shot==="ext") url=url.replace("{V}",VIEWS[k][viewIdx(car)][1]);
+  var art=shot==="int"?svgInt(col[1],col[2]):svgCar(col[1],col[1]);
   var isUrl=typeof url==="string"&&url.indexOf("http")===0;
-  // Mazda exteriors and every interior are real photographs with their own
-  // background, so they fill the frame. Cutouts sit on the built scene.
+  // Mazda publishes no cutout beyond one hero colour, so its exteriors and every
+  // interior are photographs that fill the frame; the rest are cutouts on the scene.
   var fill = shot==="int" || k==="cx50";
   return '<div class="stage" data-k="'+k+'">'
     +'<div class="ph">'+art+'</div><div class="haze"></div><div class="shadow"></div>'
     +(isUrl?'<img class="'+(fill?"fill":"")+'" src="'+url+'" alt="'+car.n+' '+col[0]+'" '
       +'loading="lazy" onerror="this.remove()" '
       +'onload="var p=this.parentNode.querySelector(\'.ph\');if(p)p.style.display=\'none\'">':'')
+    +(fill&&k==="cx50"&&shot==="ext"?'<div class="blend"></div>':'')
     +'<span class="cname">'+col[0]+'</span></div>';
 }
 
@@ -491,7 +559,9 @@ function vehCard(car,key,i){
        +'<div class="vsub">'+car.dr+' &middot; '+car.seats+'</div></div>'
        +'<div class="vprice"><b>'+money(car.msrp)+'</b><span>MSRP</span></div></div>'
      +'<div class="vtabs">'
-       +'<button data-shot="'+car.k+':ext" aria-pressed="'+(shot==="ext")+'">Exterior</button>'
+       + VIEWS[car.k].map(function(v,j){
+           return '<button data-vw="'+car.k+':'+j+'" aria-pressed="'
+             +(shot==="ext"&&viewIdx(car)===j)+'">'+v[0]+'</button>';}).join("")
        +'<button data-shot="'+car.k+':int" aria-pressed="'+(shot==="int")+'">Interior</button></div>'
      +'<div class="swatches">'+pal.map(function(x,j){
          return '<button class="sw" style="background:'+x[1]+'" data-col="'+car.k+':'+j+'" '
@@ -681,6 +751,8 @@ document.addEventListener("click",function(e){
   else if(t.dataset.col){ var p=t.dataset.col.split(":");
     ((state.shot[p[0]]||"ext")==="int"?state.icolor:state.color)[p[0]]=+p[1]; render(); }
   else if(t.dataset.shot){ var q=t.dataset.shot.split(":"); state.shot[q[0]]=q[1]; render(); }
+  else if(t.dataset.vw){ var v=t.dataset.vw.split(":");
+    state.vi[v[0]]=+v[1]; state.shot[v[0]]="ext"; render(); }
 });
 
 document.getElementById("chk").innerHTML=CHK.map(function(x){
