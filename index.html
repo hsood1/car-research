@@ -82,10 +82,23 @@ header{padding:34px 0 20px;border-bottom:1px solid var(--line);margin-bottom:22p
 .pill.b{background:rgba(251,113,133,.13);color:var(--bad);border-color:rgba(251,113,133,.3)}
 
 /* ---- tiles ---- */
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:11px;margin-bottom:18px}
-.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+/* Horizontal rail. Wide screens fit everything so it never scrolls; narrow ones
+   swipe. Either way the page itself never scrolls sideways. */
+.tiles{display:flex;gap:11px;margin-bottom:18px;overflow-x:auto;padding:2px 2px 8px;
+  scroll-snap-type:x mandatory;scrollbar-width:thin;-webkit-overflow-scrolling:touch;
+  scroll-padding-left:2px}
+.tiles::-webkit-scrollbar{height:6px}
+.tiles::-webkit-scrollbar-thumb{background:var(--line2);border-radius:99px}
+.tiles::-webkit-scrollbar-track{background:transparent}
+.tile{flex:0 0 auto;width:184px;scroll-snap-align:start;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;
   cursor:pointer;padding:0;text-align:left;font:inherit;color:inherit;transition:.16s;min-width:0}
 .tile:hover{border-color:var(--line2);transform:translateY(-2px)}
+.railwrap{position:relative}
+.railwrap::after{content:"";position:absolute;right:0;top:0;bottom:12px;width:34px;
+  pointer-events:none;background:linear-gradient(90deg,transparent,var(--bg));opacity:0;transition:.2s}
+.railwrap.more::after{opacity:1}
+.swipehint{display:none;font-size:.72rem;color:var(--faint);margin:-8px 0 12px}
 .tile[aria-pressed=true]{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
 .tile .tstage{display:block;position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;
   background:linear-gradient(180deg,#14213a 0%,#24405f 30%,#48708c 47%,#7fa0b4 51.2%,
@@ -239,6 +252,12 @@ footer p+p{margin-top:7px}
   .vtabs::-webkit-scrollbar{display:none}
   .vtabs button{flex:0 0 auto;min-height:38px;padding:8px 13px}
 
+  .tiles{margin:0 -13px 14px;padding:2px 13px 8px;scroll-padding-left:13px}
+  .tile{width:152px}
+  .tile .tn{font-size:.84rem}
+  .tile .td{font-size:.68rem}
+  .tile .tp{font-size:.96rem}
+  .swipehint{display:block}
   .swatches{gap:11px;margin:12px 0 2px}
   .sw{width:38px;height:38px}         /* 38px keeps them comfortably tappable */
 
@@ -294,14 +313,11 @@ footer p+p{margin-top:7px}
   <button data-view="car" aria-pressed="true">Cars</button>
   <button data-view="fin" aria-pressed="false">Finances</button>
   <button data-view="life" aria-pressed="false">Lifestyle</button>
+  <button data-view="chk" aria-pressed="false">Verify</button>
 </div>
 
 <section data-panel="a"></section>
 <section data-panel="b" hidden></section>
-
-<h2>Verify before signing</h2>
-<p class="h2note">Everything here is time-sensitive or unconfirmed.</p>
-<ul class="chk" id="chk"></ul>
 
 <footer>
   <ul class="tight" style="margin:0">
@@ -663,17 +679,27 @@ function carsView(key){
    +'<p class="h2note">'+(key==="a"
       ?"Hybrid &middot; heated + power seats &middot; CarPlay &middot; 100,000 miles over 10 years"
       :"AWD &middot; heated + power seats &middot; Android Auto &middot; 100,000 miles over 10 years")+'</p>'
-   +'<div class="tiles">'+cars.map(function(c){return tile(c,key,c.k===selK);}).join("")+'</div>'
+   +'<div class="railwrap"><div class="tiles" data-rail="1">'
+     +cars.map(function(c){return tile(c,key,c.k===selK);}).join("")+'</div></div>'
+   +'<p class="swipehint">Swipe to see all '+cars.length+' &middot; tap to open</p>'
    +vehCard(car,key);
 }
 
 function finView(key){
   return dealView(key)+moneyView(key)+dealsView(key);
 }
+function chkView(key){
+  return '<h3>Verify before signing</h3>'
+   +'<p class="h2note">Everything below is time-sensitive or unconfirmed. Check each one before you commit.</p>'
+   +'<ul class="chk">'+CHK.map(function(x){
+      return '<li class="'+x[0]+'"><span class="pill '+(x[0]==="hot"?"b":"")+'">'+x[1]+'</span> '+x[2]+'</li>';
+     }).join("")+'</ul>';
+}
+
 function lifeView(key){
   var cars=CARS[key];
-  var h=svcView(key)+'<h3>What people love and hate</h3>'
-   +'<p class="h2note">The subjective stuff &mdash; the things that split opinion rather than show up in a spreadsheet.</p>'
+  var h=svcView(key)+'<h3>Draws and drawbacks</h3>'
+   +'<p class="h2note">The subjective things that split opinion rather than show up in a spreadsheet.</p>'
    +'<div class="dl">';
   cars.forEach(function(c){
     var p=POLAR[c.k];
@@ -688,13 +714,15 @@ function lifeView(key){
 
 function dealView(key){
   var cars=CARS[key], c=CFG[key];
-  var h='<h3>Price breakdown</h3>'
+  var h='<h3>What to pay</h3>'
+   +'<p class="h2note">MSRP, then every discount itemised. Fair value is the negotiated price before rebates.</p>'
    +'<div class="note"><span class="notehead">Fair value is a pre-rebate number.</span>'
    +'<ul class="tight" style="margin-top:7px">'
    +'<li>Edmunds and KBB quote the <b>negotiated price</b> and exclude rebates</li>'
    +'<li>TrueCar and CR Build &amp; Buy already <b>net incentives out</b></li>'
    +'<li>Negotiate first, <b>then</b> apply the rebate</li>'
-   +'<li>A dealer calling the rebate &ldquo;already included&rdquo; is pocketing it</li></ul></div>';
+   +'<li>A dealer calling the rebate &ldquo;already included&rdquo; is pocketing it</li></ul></div>'
+   +'<div class="dl">';
   cars.forEach(function(car){
     var r=calc(car,key), lines=[];
     lines.push(['MSRP as configured','',car.msrp,'']);
@@ -704,8 +732,8 @@ function dealView(key){
     if(car.grad) lines.push(['College graduate rebate','2026 graduate, within the two-year window — stacks with the subsidised APR',-car.grad,'sub']);
     lines.push(['Loyalty / conquest','the Accord earns nothing here',0,'']);
     var net=(car.emp||car.fair)-car.cash-(car.grad||0);
-    h+='<div class="card"><div class="vname" style="margin-bottom:4px">'+car.n+'</div>'
-      +'<div class="vsub" style="margin-bottom:10px">'+car.dr+'</div><div class="fall">'
+    h+='<div class="it"><h4 style="margin-bottom:2px">'+car.n+'</h4>'
+      +'<div class="vsub" style="margin-bottom:8px">'+car.dr+'</div><div class="fall">'
       +lines.map(function(l){
         return '<div class="row '+l[3]+'"><div class="lbl">'+l[0]+(l[1]?'<small>'+l[1]+'</small>':'')
           +'</div><div class="amt">'+(l[2]===0?'—':(l[3]==='sub'?money(l[2]):money(l[2])))+'</div></div>';}).join("")
@@ -716,16 +744,16 @@ function dealView(key){
         +(c.trade?'<div><span>− Accord</span><b>'+money(c.trade)+'</b></div>':'')
         +'<div><span>out the door</span><b>'+money(r.dueCash)+'</b></div></div></div>';
   });
-  return h;
+  return h+'</div>';
 }
 
 
 function dealsView(key){
   var badge={ok:["",""],win:["pill","take it"],no:["pill w","not eligible"],
               none:["pill w","none offered"],ask:["pill w","ask"]};
-  var h='<h3>Every offer found &middot; '+(key==="a"?"California":"Tennessee")+'</h3>'
-   +'<p class="h2note">Manufacturer programmes only, read 29 July 2026. &ldquo;Not eligible&rdquo; means '
-   +'this buyer fails the stated qualification &mdash; the offer itself exists.</p><div class="dl">';
+  var h='<h3>Deals</h3>'
+   +'<p class="h2note">Every manufacturer programme found in '+(key==="a"?"California":"Tennessee")+', read 29 July 2026. '
+   +'&ldquo;Not eligible&rdquo; means this buyer fails the qualification &mdash; the offer itself exists.</p><div class="dl">';
   var brand="";
   DEALS[key].forEach(function(d){
     if(d[0]!==brand){ brand=d[0]; h+='<h4 style="margin:16px 0 2px;font-size:.8rem;letter-spacing:.12em;'
@@ -753,8 +781,8 @@ function svcView(key){
       ["Toyota",7,["A dealer <b>1.9 miles</b> away covers the everyday case","But only two inside 30 miles &mdash; next is 23 miles out","Offset by best-in-class reliability and cheapest upkeep"]],
       ["Honda",6,["<b>One dealer</b>; next is roughly 35 miles","CR-V is Michigan&rsquo;s #12 seller, so parts move","Single point of failure for warranty work"]],
       ["Mazda",3,["<b>Zero Mazda dealers in Genesee County</b>","Nearest is a 65-mile round trip, for ten years","Not in Michigan&rsquo;s top 25 sellers &mdash; negligible local expertise"]]]};
-  var h='<h3>Serviceability in '+d.place+'</h3>'
-   +'<p class="h2note">Odds you can get it diagnosed and repaired competently, quickly and locally &mdash; over ten years.</p><div class="dl">';
+  var h='<h3>Serviceability</h3>'
+   +'<p class="h2note">Odds of a competent, quick, local repair over ten years in '+d.place+'.</p><div class="dl">';
   d.rows.forEach(function(r){
     var w=r[1]*10, col=r[1]>=9?"var(--good)":r[1]>=6?"var(--warm)":"var(--bad)";
     h+='<div class="it"><h4 style="margin-bottom:6px">'+r[0]+' <em style="color:'+col+'">'+r[1]+'<span style="font-size:.7em;opacity:.6">/10</span></em></h4>'
@@ -778,7 +806,8 @@ function svcView(key){
 
 function moneyView(key){
   var cars=CARS[key], c=CFG[key], y=YIELD[key], mode=state.mode;
-  var h='<h3>Pay cash, or finance and invest?</h3>'
+  var h='<h3>Cash or finance</h3>'
+   +'<p class="h2note">Financing only wins when the loan rate is below what your cash would earn after tax.</p>'
    +'<div class="note"><span class="notehead">Rule: finance only if the loan rate beats your after-tax yield.</span>'
    +'<ul class="tight" style="margin-top:7px">'
    +'<li>Your best rate: <b>'+y.toFixed(2)+'% after tax</b> \u2014 '+c.yieldNote+'</li>'
@@ -827,7 +856,8 @@ function render(){
     var h="";
     if(state.view==="car"){ h=carsView(key); }
     else if(state.view==="fin"){ h=finView(key); }
-    else { h=lifeView(key); }
+    else if(state.view==="life"){ h=lifeView(key); }
+    else { h=chkView(key); }
     el.innerHTML=h;
   });
 }
@@ -851,9 +881,17 @@ document.addEventListener("click",function(e){
     state.vi[v[0]]=+v[1]; state.shot[v[0]]="ext"; render(); }
 });
 
-document.getElementById("chk").innerHTML=CHK.map(function(x){
-  return '<li class="'+x[0]+'"><span class="pill '+(x[0]==="hot"?"b":"")+'">'+x[1]+'</span> '+x[2]+'</li>';
-}).join("");
+  function railFade(){
+    document.querySelectorAll('[data-rail]').forEach(function(r){
+      r.parentNode.classList.toggle("more", r.scrollWidth-r.clientWidth-r.scrollLeft>8);
+    });
+  }
+  document.addEventListener("scroll",function(ev){
+    if(ev.target&&ev.target.dataset&&ev.target.dataset.rail) railFade();
+  },true);
+  window.addEventListener("resize",railFade);
+  var _render=render;
+  render=function(){ _render(); requestAnimationFrame(railFade); };
 
 render();
 })();
