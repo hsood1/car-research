@@ -98,11 +98,7 @@ header{padding:34px 0 20px;border-bottom:1px solid var(--line);margin-bottom:22p
 .stage[data-k="rav4"] img:not(.fill){transform:scale(1.00)}
 .stage[data-k="crv"]  img:not(.fill){transform:scale(1.55)}
 .stage[data-k="eqx"]  img:not(.fill){transform:scale(.92)}
-/* Mazda ships no cutout beyond one hero colour, so its photo keeps its own
-   background — this feathers the edges into the scene so it reads as one set. */
-.stage .blend{position:absolute;inset:0;z-index:4;pointer-events:none;
-  background:radial-gradient(ellipse 72% 68% at 50% 50%,transparent 26%,
-    rgba(20,33,58,.55) 64%,rgba(20,33,58,.97) 100%)}
+
  .stage .ph{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:8px;text-align:center;padding:20px}
 .ph .chip{width:74px;height:74px;border-radius:50%;border:2px solid rgba(255,255,255,.5);
@@ -331,10 +327,10 @@ var COLORS={
        ["Mosaic Black","#1A1A1C","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gb8/my26-equinox-activ-gb8-ext.{V}.png"]]
 };
 var VIEWS={
- rav4:[["Front \u00be","1"],["Rear \u00be","2"],["Rear","3"]],
- cx50:[["Front \u00be","000"],["Side","003"],["Rear \u00be","006"]],
- crv :[["Front \u00be","0032"],["Side","0020"],["Rear \u00be","0015"]],
- eqx :[["Front \u00be","002"],["Side","005"],["Rear \u00be","010"]]
+ rav4:[["Exterior","1"]],
+ cx50:[["Exterior","000"]],
+ crv :[["Exterior","0032"]],
+ eqx :[["Exterior","002"]]
 };
 var INTERIORS={
  rav4:[["Black SofTex","#1f2023","#34363b","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/vehicles/2026/rav4/galleries/RHV_MY26_0015_V001.png:tcom_gallery_16x9?fmt=jpg&wid=1600"],
@@ -355,7 +351,7 @@ var CARS={
    hp:226,mpg:43,range:624,svc:10,seats:"SofTex, heated + ventilated",maint:6004,resid:.32,hyb:0,
    apr:[[4.99,48],[5.99,60],[6.99,72]],
    why:"Cheapest of the three, best economy, strongest resale. No rebate and no subsidised rate exist on the redesign, so the entire fight is getting <b>to</b> MSRP rather than below it.",
-   flag:["Toyota is the only one of these four offering <b>nothing at all</b> — no customer cash, no conquest, no loyalty. The $500 college and military rebates are the sole exceptions, and the RAV4 is on their eligible list."]},
+   flag:["Toyota is the only one of these three offering <b>nothing at all</b> — no customer cash, no conquest, no loyalty. The $500 college and military rebates are the sole exceptions, and the RAV4 is on their eligible list."]},
   {k:"cx50",n:"Mazda CX-50 Hybrid Premium",dr:"AWD",msrp:39645,fair:38600,cash:1500,
    hp:219,mpg:38,range:551,svc:7,seats:"Real leather, heated + ventilated",maint:7906,resid:.26,hyb:0,
    apr:[[0,36],[2.9,60],[3.9,72]],
@@ -451,7 +447,7 @@ var CHK=[
  ["hot","3 days","<b>Chevrolet's 0% APR requires delivery by August 3, 2026.</b> It is the only incentive Buyer U actually qualifies for. Miss it and the ladder starts at 2.9%/48."],
  ["hot","3 days","<b>Toyota's entire RAV4 APR ladder expires August 3, 2026</b> in both regions. There is no cash back and no 36-month tier at all."],
  ["","timing","<b>Mazda's $1,500 runs to August 31; the 0%/36 was dated July 31.</b> No August program has been published yet. Re-check on August 1 before planning around either rate — but the cash is the more durable figure."],
- ["hot","assumption","<b>The Accord earns nothing on three of the four cars.</b> Loyalty needs the same brand; conquest needs a rival brand <i>and</i> an active offer. Mazda's loyalty requires owning a Mazda, Toyota runs neither, and GM's conquest is lease-only and needs a current lease. Only Honda's program would include a Honda owner — and the CR-V is not on its eligible list."],
+ ["hot","assumption","<b>The Accord earns nothing on any of these cars.</b> Loyalty needs the same brand; conquest needs a rival brand <i>and</i> an active offer. Mazda's loyalty requires owning a Mazda, Toyota runs neither, and GM's conquest is lease-only and needs a current lease. Only Honda's program would include a Honda owner — and the CR-V is not on its eligible list."],
  ["","confirm","<b>Get the RAV4 addendum itemised.</b> Port accessories negotiate; a flat “market adjustment” does not. In Memphis the fight is the $499–$1,978 accessory pack, not a markup."],
  ["","confirm","Ask whether the anti-theft/alarm is removable at no cost. Dalton National City states in writing that it is; most San Diego stores do not price it at all."],
  ["","confirm","Only gmfamilyfirst.com can produce Buyer U's actual VIN-specific authorisation price. Invoice-minus-4% is a cross-checked estimate, not his number."],
@@ -545,7 +541,6 @@ function stage(car){
     +(isUrl?'<img class="'+(fill?"fill":"")+'" src="'+url+'" alt="'+car.n+' '+col[0]+'" '
       +'loading="lazy" onerror="this.remove()" '
       +'onload="var p=this.parentNode.querySelector(\'.ph\');if(p)p.style.display=\'none\'">':'')
-    +(fill&&k==="cx50"&&shot==="ext"?'<div class="blend"></div>':'')
     +'<span class="cname">'+col[0]+'</span></div>';
 }
 
@@ -643,7 +638,6 @@ function svcView(key){
    ? {place:"San Diego",rows:[
       ["Toyota",10,"~7&ndash;8 dealers within 30 miles, three inside 6.4. Densest independent and hybrid-specialist network of any brand, cheapest parts, best availability. Consumer Reports&rsquo; #1 brand, zero recalls on the 2026 RAV4, and the lowest 10-year maintenance bill in the set at <b>$6,004</b>."],
       ["Honda",9,"About six dealers within 30 miles and strong independent support. RepairPal rates the CR-V best in class at 4.5/5. Marked down only for a J.D. Power dependability score below the industry average."],
-      ["Chevrolet",8,"Seven dealers within 30 miles and ubiquitous parts. Best J.D. Power dependability of the four. Marked down for CR #16, RepairPal #23 of 26 compact SUVs, and the highest 10-year maintenance cost at <b>$9,197</b>."],
       ["Mazda",7,"Three dealers within 30 miles is genuinely adequate, and San Diego&rsquo;s import trade means independent options exist. The powertrain-orphan problem is an inconvenience here rather than a risk."]]}
    : {place:"Grand Blanc / Flint",rows:[
       ["Chevrolet",10,"<b>Nineteen dealers within 30 miles, six inside twelve</b>, one 1.3 miles from Grand Blanc. The Equinox is the best-selling vehicle in Michigan. Every independent shop and parts counter in Genesee County knows GM. Its mediocre reliability scores barely matter when anything that breaks gets fixed the same week, nearby and cheap."],
@@ -669,7 +663,7 @@ function svcView(key){
     +'<p>The 2025 CX-50 also drew four recalls, two safety-critical and both touching the Hybrid. The 2026 '
     +'cars are clean so far &mdash; all four have zero meaningful recalls this model year.</p></div>';
   else h+='<div class="note"><p><b>Serviceability is not a property of the brand &mdash; it is a property of '
-    +'the brand <i>and</i> the place.</b> The same four cars score very differently in Michigan, where '
+    +'the brand <i>and</i> the place.</b> The same cars score very differently in Michigan, where '
     +'Chevrolet rises to 10 and Mazda falls to 3.</p></div>';
   return h;
 }
