@@ -345,7 +345,12 @@ var INTERIORS={
        ["Cabin overview","#24262a","#3a3d43","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/Feature-Blades/Interior/Overview/Interior_01_L.jpg"]],
  eqx :[["Jet Black Cloth","#1e1f22","#333539","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/gallery/01-images/2026-equinox-gallerypreview-01.jpg"]]
 };
-var MEDIA={rav4:{video:"qZzqdygb-5I"},crv:{video:"txVL9-Fxbv0"},cx50:{},eqx:{}};
+var MEDIA={
+ rav4:{video:"qZzqdygb-5I",vcap:"Toyota USA &middot; 6:58 &middot; official reveal and walkaround"},
+ crv :{video:"txVL9-Fxbv0",vcap:"Honda &middot; 5:31 &middot; official 2026 CR-V walkaround"},
+ cx50:{video:"r1viHE4-D-Q",vcap:"Mazda USA &middot; 1:37 &middot; brand film, not a walkaround &mdash; Mazda has published no CX-50 Hybrid walkaround; its long-form series ended in 2013"},
+ eqx :{video:"THVk6p-piHc",vcap:"Chevrolet &middot; 0:34 &middot; ad spot for the same generation &mdash; Chevrolet\'s walkaround series ended after 2023, and its only long-form Equinox content is for the EV"}
+};
 var IMGNOTE={eqx:"Chevrolet publishes no per-colour imagery for the LT — these are ACTIV bodies in the same paint.",
              crv:"Honda's interior shots are generic CR-V, not Sport-L specifically."};
 
@@ -579,7 +584,8 @@ function vehCard(car,key,i){
      +car.flag.map(function(f){return '<div class="note w" style="font-size:.87rem">'+f+'</div>';}).join("")
      +(vid?'<div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/'+vid
         +'" title="'+car.n+'" loading="lazy" allowfullscreen '
-        +'referrerpolicy="strict-origin-when-cross-origin"></iframe></div>':'')
+        +'referrerpolicy="strict-origin-when-cross-origin"></iframe></div>'
+        +'<p style="font-size:.72rem;color:var(--faint);margin-top:7px">'+(MEDIA[car.k].vcap||'')+'</p>':'')
    +'</div></article>';
 }
 
