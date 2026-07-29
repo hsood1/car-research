@@ -81,6 +81,22 @@ header{padding:34px 0 20px;border-bottom:1px solid var(--line);margin-bottom:22p
 .pill.w{background:rgba(251,191,36,.13);color:var(--warm);border-color:rgba(251,191,36,.3)}
 .pill.b{background:rgba(251,113,133,.13);color:var(--bad);border-color:rgba(251,113,133,.3)}
 
+/* ---- tiles ---- */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:11px;margin-bottom:18px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  cursor:pointer;padding:0;text-align:left;font:inherit;color:inherit;transition:.16s;min-width:0}
+.tile:hover{border-color:var(--line2);transform:translateY(-2px)}
+.tile[aria-pressed=true]{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.tile .tstage{display:block;position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;
+  background:linear-gradient(180deg,#14213a 0%,#24405f 30%,#48708c 47%,#7fa0b4 51.2%,
+    #5a636d 52%,#3c444e 70%,#232931 100%)}
+.tile .tstage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.tile .tstage img.fill{object-fit:cover}
+.tile .tb{display:block;padding:10px 12px 12px}
+.tile .tn{display:block;font-size:.9rem;font-weight:750;line-height:1.25}
+.tile .td{display:block;font-size:.72rem;color:var(--faint);margin-top:3px}
+.tile .tp{display:block;font-size:1.02rem;font-weight:800;margin-top:7px;letter-spacing:-.02em}
+
 /* ---- vehicle showcase ---- */
 .veh{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   overflow:hidden;margin-bottom:18px}
@@ -275,11 +291,9 @@ footer p+p{margin-top:7px}
 </div>
 
 <div class="seg" role="group">
-  <button data-view="car" aria-pressed="true">The cars</button>
-  <button data-view="deal" aria-pressed="false">What to pay</button>
-  <button data-view="money" aria-pressed="false">Cash vs finance</button>
-  <button data-view="svc" aria-pressed="false">Living with it</button>
-  <button data-view="deals" aria-pressed="false">Deals</button>
+  <button data-view="car" aria-pressed="true">Cars</button>
+  <button data-view="fin" aria-pressed="false">Finances</button>
+  <button data-view="life" aria-pressed="false">Lifestyle</button>
 </div>
 
 <section data-panel="a"></section>
@@ -477,6 +491,17 @@ var DEALS={
  ]
 };
 
+var POLAR={
+ rav4:{love:["Best fuel economy and resale in the class","Toyota's reliability record and dealer density","Hybrid is standard on every trim"],
+       hate:["<b>No genuine leather at any trim</b> &mdash; SofTex only","Brand-new 6th-gen design, so no long-term record yet","Dealers mark it up; getting MSRP is the whole fight","Styling is a sharp departure and splits opinion"]},
+ cx50:{love:["The only one with real leather <b>and</b> ventilated seats","Best-driving car here by common consent","Toyota hybrid hardware in a nicer cabin"],
+       hate:["<b>Smallest cargo hold</b> of the four","Firmest ride &mdash; sporty or harsh depending on taste","Infotainment uses a rotary dial, not touch, while moving","Thinnest dealer network, and parts backorders are documented"]},
+ crv :{love:["Roomiest cabin and cargo area","Real leather at this trim","Honda's strong repair record &mdash; RepairPal 4.5/5"],
+       hate:["<b>Consumer Reports flagged the front seats as firm</b>","Least powerful at 204 hp","No ventilated seats unless you jump to Sport Touring","Conservative styling; black leather is the only choice"]},
+ eqx :{love:["Cheapest to buy by a wide margin","Employee price plus genuinely free 0% financing","Best dealer coverage in Michigan by far"],
+       hate:["<b>26 mpg</b> &mdash; 15 behind the hybrids","175 hp, and a CVT the 2027 replaces with an 8-speed","Cloth only at LT; power seat costs $2,050 extra","Worst predicted reliability of the four"]}
+};
+
 var CHK=[
  ["hot","3 days","<b>Chevrolet 0% APR needs delivery by Aug 3.</b> The only incentive Buyer U qualifies for."],
  ["hot","3 days","<b>Toyota&rsquo;s whole RAV4 rate ladder expires Aug 3.</b> No cash back, no 36-month tier."],
@@ -519,7 +544,7 @@ function calc(car,key){
 }
 
 /* ============================ RENDER ============================ */
-var state={tab:"a",view:"car",mode:"loApr",color:{},icolor:{},shot:{},vi:{},iv:{}};
+var state={tab:"a",view:"car",mode:"loApr",color:{},icolor:{},shot:{},vi:{},iv:{},sel:{}};
 
 function svgCar(hex,dark){
   return '<svg class="art" viewBox="0 0 400 190" preserveAspectRatio="xMidYMid meet" role="img">'
@@ -581,11 +606,11 @@ function stage(car){
     +'<span class="cname">'+col[0]+'</span></div>';
 }
 
-function vehCard(car,key,i){
+function vehCard(car,key){
   var r=calc(car,key), pal=palette(car), ci=idx(car), shot=state.shot[car.k]||"ext";
   var vid=MEDIA[car.k]&&MEDIA[car.k].video;
-  return '<article class="veh wide'+(i===0?" hl":"")+'">'
-   +'<div class="media" style="position:relative">'+(i===0?'<div class="rank">'+(i+1)+'</div>':'')+stage(car)+'</div>'
+  return '<article class="veh wide">'
+   +'<div class="media" style="position:relative">'+stage(car)+'</div>'
    +'<div class="vbody">'
      +'<div class="vhead"><div><div class="vname">'+car.n+'</div>'
        +'<div class="vsub">'+car.dr+' &middot; '+car.seats+'</div></div>'
@@ -621,9 +646,49 @@ function vehCard(car,key,i){
    +'</div></article>';
 }
 
+function tile(car,key,sel){
+  var pal=COLORS[car.k], col=pal[Math.min(state.color[car.k]||0,pal.length-1)];
+  var url=col[2].replace("{V}",VIEWS[car.k][0][1]);
+  return '<button class="tile" data-sel="'+key+':'+car.k+'" aria-pressed="'+sel+'">'
+    +'<span class="tstage"><img class="'+(car.k==="cx50"?"fill":"")+'" src="'+url+'" alt="'+car.n+'" loading="lazy"></span>'
+    +'<span class="tb"><span class="tn">'+car.n+'</span>'
+    +'<span class="td">'+car.dr+' &middot; '+car.hp+' hp &middot; '+car.mpg+' mpg</span>'
+    +'<span class="tp">'+money(car.msrp)+'</span></span></button>';
+}
+
+function carsView(key){
+  var cars=CARS[key], selK=state.sel[key]||cars[0].k;
+  var car=cars.filter(function(c){return c.k===selK;})[0]||cars[0];
+  return '<h2>'+(key==="a"?"Buyer K &mdash; San Diego":"Buyer U &mdash; Memphis to Michigan")+'</h2>'
+   +'<p class="h2note">'+(key==="a"
+      ?"Hybrid &middot; heated + power seats &middot; CarPlay &middot; 100,000 miles over 10 years"
+      :"AWD &middot; heated + power seats &middot; Android Auto &middot; 100,000 miles over 10 years")+'</p>'
+   +'<div class="tiles">'+cars.map(function(c){return tile(c,key,c.k===selK);}).join("")+'</div>'
+   +vehCard(car,key);
+}
+
+function finView(key){
+  return dealView(key)+moneyView(key)+dealsView(key);
+}
+function lifeView(key){
+  var cars=CARS[key];
+  var h=svcView(key)+'<h3>What people love and hate</h3>'
+   +'<p class="h2note">The subjective stuff &mdash; the things that split opinion rather than show up in a spreadsheet.</p>'
+   +'<div class="dl">';
+  cars.forEach(function(c){
+    var p=POLAR[c.k];
+    h+='<div class="it"><h4 style="margin-bottom:8px">'+c.n+'</h4>'
+      +'<div style="font-size:.7rem;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:var(--good)">Draws</div>'
+      +'<ul class="tight" style="margin-top:4px">'+p.love.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul>'
+      +'<div style="font-size:.7rem;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:var(--bad);margin-top:11px">Drawbacks</div>'
+      +'<ul class="tight" style="margin-top:4px">'+p.hate.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div>';
+  });
+  return h+'</div>';
+}
+
 function dealView(key){
   var cars=CARS[key], c=CFG[key];
-  var h='<h3>What each car actually costs</h3>'
+  var h='<h3>Price breakdown</h3>'
    +'<div class="note"><span class="notehead">Fair value is a pre-rebate number.</span>'
    +'<ul class="tight" style="margin-top:7px">'
    +'<li>Edmunds and KBB quote the <b>negotiated price</b> and exclude rebates</li>'
@@ -688,7 +753,7 @@ function svcView(key){
       ["Toyota",7,["A dealer <b>1.9 miles</b> away covers the everyday case","But only two inside 30 miles &mdash; next is 23 miles out","Offset by best-in-class reliability and cheapest upkeep"]],
       ["Honda",6,["<b>One dealer</b>; next is roughly 35 miles","CR-V is Michigan&rsquo;s #12 seller, so parts move","Single point of failure for warranty work"]],
       ["Mazda",3,["<b>Zero Mazda dealers in Genesee County</b>","Nearest is a 65-mile round trip, for ten years","Not in Michigan&rsquo;s top 25 sellers &mdash; negligible local expertise"]]]};
-  var h='<h3>Living with it in '+d.place+'</h3>'
+  var h='<h3>Serviceability in '+d.place+'</h3>'
    +'<p class="h2note">Odds you can get it diagnosed and repaired competently, quickly and locally &mdash; over ten years.</p><div class="dl">';
   d.rows.forEach(function(r){
     var w=r[1]*10, col=r[1]>=9?"var(--good)":r[1]>=6?"var(--warm)":"var(--bad)";
@@ -723,7 +788,7 @@ function moneyView(key){
    +'<button data-mode="loApr" aria-pressed="'+(mode==="loApr")+'">Lowest APR</button>'
    +'<button data-mode="loPay" aria-pressed="'+(mode==="loPay")+'">Lowest payment</button></div>'
    +'<div class="dl">';
-  cars.slice().sort(function(x,z){return calc(x,key).net10-calc(z,key).net10;}).forEach(function(car){
+  cars.forEach(function(car){
     var r=calc(car,key), o=r[mode], win=o.net>0;
     h+='<div class="it"><h4>'+car.n+' <em>'+(win?'<span class="pill">finance</span>':'<span class="pill w">pay cash</span>')+'</em></h4>'
       +'<div class="kv">'
@@ -760,17 +825,9 @@ function render(){
     el.hidden = key!==state.tab;
     if(el.hidden) return;
     var h="";
-    if(state.view==="car"){
-      var sorted=CARS[key].slice().sort(function(x,z){return calc(x,key).net10-calc(z,key).net10;});
-      h='<h2>'+(key==="a"?"Buyer K &mdash; San Diego":"Buyer U &mdash; Memphis to Michigan")+'</h2>'
-       +'<p class="h2note">'+(key==="a"
-          ?"Hybrid required &middot; heated + power seats &middot; CarPlay &middot; Premium/XLE Premium floor &middot; 100,000 miles over 10 years"
-          :"AWD required &middot; heated + power seats &middot; Android Auto &middot; gas acceptable &middot; 100,000 miles over 10 years")+'</p>'
-       +sorted.map(function(v,i){return vehCard(v,key,i);}).join("");
-    } else if(state.view==="deal"){ h=dealView(key); }
-    else if(state.view==="svc"){ h=svcView(key); }
-    else if(state.view==="deals"){ h=dealsView(key); }
-    else { h=moneyView(key); }
+    if(state.view==="car"){ h=carsView(key); }
+    else if(state.view==="fin"){ h=finView(key); }
+    else { h=lifeView(key); }
     el.innerHTML=h;
   });
 }
@@ -788,6 +845,7 @@ document.addEventListener("click",function(e){
   else if(t.dataset.col){ var p=t.dataset.col.split(":");
     ((state.shot[p[0]]||"ext")==="int"?state.icolor:state.color)[p[0]]=+p[1]; render(); }
   else if(t.dataset.shot){ var q=t.dataset.shot.split(":"); state.shot[q[0]]=q[1]; render(); }
+  else if(t.dataset.sel){ var q2=t.dataset.sel.split(":"); state.sel[q2[0]]=q2[1]; render(); }
   else if(t.dataset.iv){ var w=t.dataset.iv.split(":"); state.iv[w[0]]=+w[1]; render(); }
   else if(t.dataset.vw){ var v=t.dataset.vw.split(":");
     state.vi[v[0]]=+v[1]; state.shot[v[0]]="ext"; render(); }
