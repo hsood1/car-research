@@ -82,9 +82,22 @@ header{padding:34px 0 20px;border-bottom:1px solid var(--line);margin-bottom:22p
 .veh{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   overflow:hidden;margin-bottom:18px}
 .veh.hl{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
-.stage{position:relative;width:100%;aspect-ratio:16/9;background:var(--card2);
-  display:flex;align-items:center;justify-content:center;overflow:hidden}
-.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1;background:var(--card2)}
+.stage{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(120% 55% at 50% 116%, rgba(0,0,0,.5), transparent 62%),
+    radial-gradient(60% 42% at 68% 22%, rgba(255,231,190,.34), transparent 72%),
+    linear-gradient(180deg,#14213a 0%,#24405f 30%,#48708c 47%,#7fa0b4 51.2%,
+      #5a636d 52%,#3c444e 70%,#232931 100%)}
+.stage .haze{position:absolute;left:0;right:0;top:47%;height:8%;z-index:1;
+  background:linear-gradient(180deg,transparent,rgba(200,220,235,.30),transparent);filter:blur(4px)}
+.stage .shadow{position:absolute;left:16%;right:16%;bottom:13%;height:8%;z-index:1;
+  background:radial-gradient(ellipse at center,rgba(0,0,0,.66),transparent 72%);filter:blur(4px)}
+.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;z-index:3}
+.stage img.fill{object-fit:cover}
+.stage[data-k="rav4"] img:not(.fill){transform:scale(1.00)}
+.stage[data-k="crv"]  img:not(.fill){transform:scale(1.30)}
+.stage[data-k="eqx"]  img:not(.fill){transform:scale(.94)}
  .stage .ph{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:8px;text-align:center;padding:20px}
 .ph .chip{width:74px;height:74px;border-radius:50%;border:2px solid rgba(255,255,255,.5);
@@ -235,12 +248,12 @@ var CFG={
 };
 
 var COLORS={
- rav4:[["Blueprint","#1E2548","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/8x8/1.png?bg=fff&fmt=jpeg&qlt=90&wid=1200"],
-       ["Storm Cloud","#3D4A59","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/1l6/1.png?bg=fff&fmt=jpeg&qlt=90&wid=1200"],
-       ["Ice Cap","#FFFFFF","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/040/1.png?bg=fff&fmt=jpeg&qlt=90&wid=1200"],
-       ["Meteor Shower","#A1A1A1","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/4v8/1.png?bg=fff&fmt=jpeg&qlt=90&wid=1200"],
-       ["Ruby Flare Pearl","#740000","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/3t3/1.png?bg=fff&fmt=jpeg&qlt=90&wid=1200"],
-       ["Midnight Black","#00031E","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/218/1.png?bg=fff&fmt=jpeg&qlt=90&wid=1200"]],
+ rav4:[["Blueprint","#1E2548","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/8x8/1.png?fmt=png-alpha&wid=1400"],
+       ["Storm Cloud","#3D4A59","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/1l6/1.png?fmt=png-alpha&wid=1400"],
+       ["Ice Cap","#FFFFFF","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/040/1.png?fmt=png-alpha&wid=1400"],
+       ["Meteor Shower","#A1A1A1","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/4v8/1.png?fmt=png-alpha&wid=1400"],
+       ["Ruby Flare Pearl","#740000","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/3t3/1.png?fmt=png-alpha&wid=1400"],
+       ["Midnight Black","#00031E","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/218/1.png?fmt=png-alpha&wid=1400"]],
  cx50:[["Soul Red Crystal","#971B2D","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/soul-red-46v/e360-my25-cx50-hybrid-premium-soulred-000.jpg"],
        ["Machine Gray","#757678","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/machine-gray-46g/e360-my25-cx50-hybrid-premium-machinegray-000.jpg"],
        ["Polymetal Gray","#878D9A","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/polymetal-gray-47c/e360-my25-cx50-hybrid-premium-polymetalgray-000.jpg"],
@@ -455,12 +468,17 @@ function idx(car){
 }
 function stage(car){
   var k=car.k, shot=state.shot[k]||"ext", pal=palette(car), ci=idx(car), col=pal[ci];
-  var url=col[3]||col[2], art=shot==="int"?svgInt(col[1],col[2]):svgCar(col[1],col[1]);
+  var url=(col.length>3?col[3]:col[2]), art=shot==="int"?svgInt(col[1],col[2]):svgCar(col[1],col[1]);
   var isUrl=typeof url==="string"&&url.indexOf("http")===0;
-  var inner='<div class="ph">'+art+'</div>'
-    +(isUrl?'<img src="'+url+'" alt="'+car.n+' '+col[0]+'" loading="lazy" '
-      +'onerror="this.remove()">':'');
-  return '<div class="stage">'+inner+'<span class="cname">'+col[0]+'</span></div>';
+  // Mazda exteriors and every interior are real photographs with their own
+  // background, so they fill the frame. Cutouts sit on the built scene.
+  var fill = shot==="int" || k==="cx50";
+  return '<div class="stage" data-k="'+k+'">'
+    +'<div class="ph">'+art+'</div><div class="haze"></div><div class="shadow"></div>'
+    +(isUrl?'<img class="'+(fill?"fill":"")+'" src="'+url+'" alt="'+car.n+' '+col[0]+'" '
+      +'loading="lazy" onerror="this.remove()" '
+      +'onload="var p=this.parentNode.querySelector(\'.ph\');if(p)p.style.display=\'none\'">':'')
+    +'<span class="cname">'+col[0]+'</span></div>';
 }
 
 function vehCard(car,key,i){
