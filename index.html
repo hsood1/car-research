@@ -330,6 +330,8 @@ footer p+p{margin-top:7px}
     <li>MSRP, incentives and APR ladders read from manufacturer offer pages and dealer feeds, 29 Jul 2026</li>
     <li>Yields from the US Treasury curve and Fed H.15, 28 Jul 2026</li>
     <li>Edmunds and KBB block automated access &mdash; nothing here was read from either directly</li>
+    <li>Every MSRP re-verified against the manufacturer&rsquo;s own Build &amp; Price configurator</li>
+    <li>Toyota&rsquo;s configurator says $1,595 destination; one Toyota press release says $1,095. The configurator is used here.</li>
     <li>Resale is the softest input; treat &plusmn;$2,000 as noise</li>
     <li>Model in <code>model.py</code>. Not financial advice.</li>
   </ul>
@@ -799,7 +801,13 @@ function svcView(key){
     +'<li>Parts, warranty and software are all Mazda &mdash; and owners report backorders with no ETA</li>'
     +'<li>No local Mazda dealer and no local Mazda-hybrid independent</li>'
     +'<li>A routine problem can become a multi-week ordeal</li></ul></div>';
-  else h+='<div class="note"><span class="notehead">Serviceability is about the place, not just the brand.</span>'
+  if(key==="b") h+='<div class="note w"><span class="notehead">Not all AWD here is the same kind.</span>'
+    +'<ul class="tight" style="margin-top:7px">'
+    +'<li><b>RAV4 and CX-50</b> use <b>electronic</b> AWD &mdash; a rear electric motor, no driveshaft</li>'
+    +'<li><b>CR-V and Equinox</b> use <b>mechanical</b> AWD driving the rear axle</li>'
+    +'<li>Both work in snow; the electronic systems are quicker to react, the mechanical ones more consistent at sustained speed</li>'
+    +'<li>Worth a winter test drive rather than a spec-sheet decision</li></ul></div>';
+  if(key==="a") h+='<div class="note"><span class="notehead">Serviceability is about the place, not just the brand.</span>'
     +'<ul class="tight" style="margin-top:7px">'
     +'<li>The same cars score very differently in Michigan</li>'
     +'<li>There, Chevrolet rises to 10 and Mazda falls to 3</li></ul></div>';
