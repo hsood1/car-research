@@ -1,702 +1,675 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Car Picks 2026</title>
 <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#fbfbfa; --panel:#fff; --ink:#1a1a18; --muted:#6b6b66; --line:#e4e3df;
-  --accent:#1f5f4f; --accent-soft:#e8f2ef; --warn:#8a4b17; --warn-soft:#fdf1e5;
-  --good:#1f5f4f; --bad:#a03028; --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.04);
+  --bg:#0b0f18; --bg2:#111828; --card:#151d2e; --card2:#1b2437;
+  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
+  --tx:#e8edf7; --dim:#96a3bd; --faint:#6b7a96;
+  --acc:#5eead4; --acc2:#38bdf8; --warm:#fbbf24; --bad:#fb7185; --good:#4ade80;
+  --r:16px;
 }
-@media (prefers-color-scheme:dark){
-  :root{
-    --bg:#131315; --panel:#1c1c1f; --ink:#ececea; --muted:#9a9a96; --line:#2e2e33;
-    --accent:#6fc0a8; --accent-soft:#17302a; --warn:#e0a56a; --warn-soft:#33241480;
-    --good:#6fc0a8; --bad:#e0827a; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);
-  }
+@media (prefers-color-scheme:light){
+  :root{--bg:#f6f8fc;--bg2:#eef2f9;--card:#fff;--card2:#f4f7fc;
+    --line:rgba(10,20,40,.10);--line2:rgba(10,20,40,.18);
+    --tx:#0f1729;--dim:#4a5872;--faint:#6b7a96;
+    --acc:#0d9488;--acc2:#0284c7;--warm:#b45309;--bad:#be123c;--good:#15803d}
 }
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);
-  font:16px/1.6 ui-sans-serif,-apple-system,"Segoe UI",Inter,system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased}
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
-header{padding:52px 0 28px;border-bottom:1px solid var(--line);margin-bottom:28px}
-h1{font-size:clamp(28px,5vw,40px);margin:0 0 6px;letter-spacing:-.022em;font-weight:650}
-.sub{color:var(--muted);font-size:15px;margin:0}
-h2{font-size:20px;margin:44px 0 4px;letter-spacing:-.01em;font-weight:640}
-h2:first-of-type{margin-top:8px}
-.h2note{color:var(--muted);font-size:14px;margin:0 0 16px}
-h3{font-size:15px;margin:28px 0 10px;text-transform:uppercase;letter-spacing:.07em;
-  color:var(--muted);font-weight:620}
-
-/* tabs */
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
-.tab{flex:1 1 220px;padding:13px 16px;border:1px solid var(--line);background:var(--panel);
-  border-radius:11px;cursor:pointer;font:inherit;font-size:14.5px;color:var(--muted);
-  text-align:left;transition:.15s;line-height:1.35}
-.tab b{display:block;color:var(--ink);font-weight:620;font-size:15px;margin-bottom:1px}
-.tab:hover{border-color:var(--muted)}
-.tab[aria-selected=true]{border-color:var(--accent);background:var(--accent-soft);box-shadow:var(--shadow)}
-.tab[aria-selected=true] b{color:var(--accent)}
-
-/* toggle */
-.toggle{display:inline-flex;padding:3px;background:var(--panel);border:1px solid var(--line);
-  border-radius:10px;margin-bottom:6px}
-.toggle button{padding:8px 18px;border:0;background:none;border-radius:7px;cursor:pointer;
-  font:inherit;font-size:14px;color:var(--muted);font-weight:560;transition:.15s}
-.toggle button[aria-pressed=true]{background:var(--accent);color:#fff}
-@media (prefers-color-scheme:dark){.toggle button[aria-pressed=true]{color:#0f1f1b}}
-
-/* rank cards */
-.rank{display:grid;gap:11px;margin:16px 0 8px}
-.card{display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:start;
-  background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:17px 19px;
-  box-shadow:var(--shadow)}
-.card.win{border-color:var(--accent)}
-.num{font-size:21px;font-weight:660;color:var(--muted);line-height:1.25;font-variant-numeric:tabular-nums}
-.card.win .num{color:var(--accent)}
-.nm{font-weight:620;font-size:16.5px;letter-spacing:-.01em;margin-bottom:3px}
-.spec{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;margin-bottom:7px}
-.why{font-size:14.5px;margin:0}
-.fig{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.fig .big{font-size:19px;font-weight:640;letter-spacing:-.02em;display:block}
-.fig .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-@media (max-width:640px){
-  .card{grid-template-columns:32px 1fr;gap:12px;padding:15px}
-  .fig{grid-column:2;text-align:left;margin-top:8px}
-  .fig .big{display:inline;margin-right:7px}
+html{background:var(--bg);-webkit-text-size-adjust:100%}
+html,body{max-width:100%;overflow-x:hidden}
+body{
+  font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color:var(--tx);
+  background:
+    radial-gradient(1100px 520px at 12% -8%,rgba(56,189,248,.13),transparent 60%),
+    radial-gradient(900px 460px at 92% 4%,rgba(94,234,212,.10),transparent 62%),
+    var(--bg);
+  padding:0 0 72px;
 }
+.wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 16px}
+h1,h2,h3{line-height:1.2;letter-spacing:-.02em;overflow-wrap:break-word}
+h1{font-size:clamp(1.7rem,6vw,2.6rem);font-weight:800}
+h2{font-size:clamp(1.25rem,4.4vw,1.7rem);font-weight:750;margin:34px 0 6px}
+h3{font-size:clamp(1.02rem,3.4vw,1.2rem);font-weight:700;margin:26px 0 10px}
+p{overflow-wrap:break-word}
+a{color:var(--acc2)}
 
-/* tables */
-.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0 6px;
-  border:1px solid var(--line);border-radius:12px;background:var(--panel)}
-table{border-collapse:collapse;width:100%;min-width:660px;font-size:14px}
-th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
-th{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);
-  font-weight:620;background:var(--bg)}
-tbody tr:last-child td{border-bottom:0}
-td.n{text-align:right;font-variant-numeric:tabular-nums}
-th.n{text-align:right}
-tr.best td{background:var(--accent-soft)}
-tr.best td:first-child{font-weight:620}
-.tag{display:inline-block;font-size:10.5px;padding:1.5px 6px;border-radius:5px;
-  background:var(--warn-soft);color:var(--warn);font-weight:620;letter-spacing:.03em;
-  vertical-align:middle;margin-left:5px}
-.tag.g{background:var(--accent-soft);color:var(--accent)}
+header{padding:34px 0 20px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.eyebrow{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);font-weight:700;margin-bottom:8px}
 
-/* callouts */
-.note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);
-  border-radius:0 11px 11px 0;padding:15px 19px;margin:16px 0;font-size:14.5px}
-.note.w{border-left-color:var(--warn);background:var(--warn-soft)}
-.note b{font-weight:640}
-.note p{margin:0}.note p+p{margin-top:8px}
+/* ---- tabs ---- */
+.tabs{display:flex;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.tabs button{
+  flex:1 1 160px;min-width:0;padding:13px 12px;border-radius:13px;cursor:pointer;
+  background:var(--card);border:1px solid var(--line);color:var(--dim);
+  font:inherit;font-weight:700;font-size:.94rem;text-align:left;transition:.16s;
+}
+.tabs button b{display:block;font-size:1.02rem;color:var(--tx)}
+.tabs button span{font-weight:500;font-size:.78rem}
+.tabs button[aria-selected=true]{border-color:var(--acc);background:var(--card2);
+  box-shadow:0 0 0 1px var(--acc),0 8px 26px rgba(0,0,0,.25)}
 
-ul.chk{list-style:none;padding:0;margin:12px 0}
-ul.chk li{padding:9px 0 9px 26px;border-bottom:1px solid var(--line);font-size:14.5px;position:relative}
-ul.chk li:last-child{border-bottom:0}
-ul.chk li:before{content:"";position:absolute;left:6px;top:17px;width:6px;height:6px;
-  border-radius:2px;background:var(--muted)}
-ul.chk li.hot:before{background:var(--bad)}
-ul.chk li b{font-weight:620}
-.pill{font-size:11px;font-weight:620;letter-spacing:.05em;text-transform:uppercase;
-  color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1px 6px;margin-right:7px}
-.pill.hot{color:var(--bad);border-color:var(--bad)}
+.seg{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);
+  border-radius:13px;padding:5px;margin:0 0 22px;flex-wrap:wrap}
+.seg button{flex:1 1 auto;min-width:0;padding:10px 8px;border:0;border-radius:9px;cursor:pointer;
+  background:transparent;color:var(--dim);font:inherit;font-weight:650;font-size:.86rem;
+  white-space:nowrap;transition:.16s}
+.seg button[aria-pressed=true]{background:var(--acc);color:#04121a}
 
-hr{border:0;border-top:1px solid var(--line);margin:44px 0 0}
-footer{color:var(--muted);font-size:12.5px;padding-top:20px;line-height:1.7}
-footer code{font-size:12px;background:var(--panel);padding:1px 5px;border-radius:4px;border:1px solid var(--line)}
-[hidden]{display:none!important}
+/* ---- cards ---- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:18px;margin-bottom:14px}
+.card.hl{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.note{background:var(--card2);border:1px solid var(--line);border-left:3px solid var(--acc2);
+  border-radius:12px;padding:14px 16px;margin:14px 0;font-size:.92rem}
+.note.w{border-left-color:var(--warm)}
+.note.b{border-left-color:var(--bad)}
+.note p+p{margin-top:9px}
+.h2note{color:var(--dim);font-size:.88rem;margin:-2px 0 14px}
+
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.68rem;
+  font-weight:750;letter-spacing:.04em;text-transform:uppercase;
+  background:rgba(94,234,212,.14);color:var(--acc);border:1px solid rgba(94,234,212,.3);
+  vertical-align:middle}
+.pill.w{background:rgba(251,191,36,.13);color:var(--warm);border-color:rgba(251,191,36,.3)}
+.pill.b{background:rgba(251,113,133,.13);color:var(--bad);border-color:rgba(251,113,133,.3)}
+
+/* ---- vehicle showcase ---- */
+.veh{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;margin-bottom:18px}
+.veh.hl{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.stage{position:relative;width:100%;aspect-ratio:16/9;background:var(--card2);
+  display:flex;align-items:center;justify-content:center;overflow:hidden}
+.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1;background:var(--card2)}
+ .stage .ph{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;text-align:center;padding:20px}
+.ph .chip{width:74px;height:74px;border-radius:50%;border:2px solid rgba(255,255,255,.5);
+  box-shadow:inset 0 -14px 26px rgba(0,0,0,.35),0 8px 22px rgba(0,0,0,.3)}
+.ph small{color:var(--dim);font-size:.8rem;max-width:30ch}
+.stage .ph{padding:0}
+.art{width:100%;height:100%;display:block;padding:6% 5%}
+.cname{position:absolute;left:12px;bottom:10px;z-index:2;font-size:.7rem;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;color:#fff;background:rgba(4,10,18,.6);
+  padding:4px 9px;border-radius:999px;backdrop-filter:blur(6px)}
+.rank{position:absolute;top:12px;left:12px;z-index:3;width:34px;height:34px;border-radius:10px;
+  background:rgba(4,18,26,.82);color:var(--acc);display:flex;align-items:center;
+  justify-content:center;font-weight:800;backdrop-filter:blur(6px);border:1px solid var(--line2)}
+.vbody{padding:16px 18px 18px}
+.vhead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.vname{font-size:1.12rem;font-weight:750;line-height:1.3}
+.vsub{color:var(--dim);font-size:.83rem;margin-top:2px}
+.vprice{text-align:right;flex:0 0 auto}
+.vprice b{display:block;font-size:1.34rem;font-weight:800;letter-spacing:-.02em}
+.vprice span{font-size:.7rem;color:var(--faint);text-transform:uppercase;letter-spacing:.08em}
+
+.swatches{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0 4px}
+.sw{width:34px;height:34px;border-radius:50%;cursor:pointer;border:2px solid transparent;
+  outline:1px solid var(--line2);outline-offset:-1px;transition:.15s;flex:0 0 auto;padding:0}
+.sw[aria-pressed=true]{border-color:var(--acc);transform:scale(1.13)}
+.swname{font-size:.78rem;color:var(--dim);margin-top:8px;min-height:1.2em}
+
+.vtabs{display:flex;gap:6px;margin:14px 0 0;flex-wrap:wrap}
+.vtabs button{padding:7px 12px;border-radius:8px;border:1px solid var(--line);
+  background:transparent;color:var(--dim);font:inherit;font-size:.79rem;font-weight:650;cursor:pointer}
+.vtabs button[aria-pressed=true]{background:var(--card2);color:var(--tx);border-color:var(--line2)}
+
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:10px;margin-top:15px}
+.spec{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:9px 10px;min-width:0}
+.spec b{display:block;font-size:.98rem;font-weight:750;letter-spacing:-.01em}
+.spec span{font-size:.67rem;color:var(--faint);text-transform:uppercase;letter-spacing:.07em}
+
+.vid{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;
+  margin-top:15px;background:var(--card2);border:1px solid var(--line)}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* ---- waterfall ---- */
+.fall{margin:12px 0}
+.fall .row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;
+  border-bottom:1px dashed var(--line);font-size:.91rem}
+.fall .row:last-child{border-bottom:0}
+.fall .row.tot{border-top:2px solid var(--line2);border-bottom:0;margin-top:4px;
+  padding-top:12px;font-weight:800;font-size:1.02rem}
+.fall .row.sub{color:var(--good)}
+.fall .lbl{min-width:0;flex:1 1 auto}
+.fall .lbl small{display:block;color:var(--faint);font-size:.76rem;font-weight:400;line-height:1.35}
+.fall .amt{flex:0 0 auto;font-variant-numeric:tabular-nums;font-weight:700}
+
+/* ---- responsive data list (replaces wide tables on mobile) ---- */
+.dl{display:grid;gap:10px}
+.dl .it{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.dl .it h4{font-size:.95rem;font-weight:750;margin-bottom:8px;display:flex;
+  justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.dl .it h4 em{font-style:normal;font-variant-numeric:tabular-nums;font-weight:800}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px}
+.kv div{min-width:0}
+.kv span{display:block;font-size:.66rem;color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
+.kv b{font-size:.9rem;font-weight:700;font-variant-numeric:tabular-nums;overflow-wrap:break-word}
+.pos{color:var(--good)} .neg{color:var(--bad)}
+
+ul.chk{list-style:none;display:grid;gap:9px;margin-top:10px}
+ul.chk li{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:12px 14px;font-size:.9rem}
+ul.chk li.hot{border-left:3px solid var(--bad)}
+
+footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:.8rem}
+footer p+p{margin-top:7px}
+
+.mbanner{display:none}
+@media (max-width:759px){
+  .mbanner{display:block;background:var(--warm);color:#1a1000;font-size:.78rem;font-weight:700;
+    text-align:center;padding:9px 14px;line-height:1.4}
+  .stage,.vid,.swatches,.swname,.vtabs{display:none!important}
+  .veh{margin-bottom:10px}
+  .vbody{padding:14px}
+  .specs{grid-template-columns:repeat(2,1fr)}
+  .note{font-size:.86rem;padding:12px 13px}
+  h1{font-size:1.55rem}
+  .tabs button{flex:1 1 100%}
+  .seg{gap:4px}.seg button{flex:1 1 44%;font-size:.8rem;padding:9px 6px}
+}
+@media (min-width:760px){
+  .veh.wide{display:grid;grid-template-columns:1.02fr 1fr;align-items:start;gap:0}
+  .veh.wide>.media{position:sticky;top:14px;align-self:start}
+  .veh.wide .stage{aspect-ratio:16/10}
+  .veh.wide .vbody{padding:20px 22px 22px}
+}
 </style>
 </head>
 <body>
+<div class="mbanner">Best viewed on desktop &mdash; this is the simplified mobile view.</div>
 <div class="wrap">
 
 <header>
+  <div class="eyebrow">New vehicles only &middot; 10-year hold</div>
   <h1>Car Picks 2026</h1>
 </header>
 
 <div class="tabs" role="tablist">
-  <button class="tab" role="tab" aria-selected="true" data-tab="a">
-    <b>Buyer 1 &mdash; San Diego, CA</b>Hybrid required &middot; FWD fine &middot; 80,000 mi over 10 yr
-  </button>
-  <button class="tab" role="tab" aria-selected="false" data-tab="b">
-    <b>Buyer 2 &mdash; Memphis &rarr; Michigan</b>AWD required &middot; gas OK &middot; 120,000 mi over 10 yr
-  </button>
+  <button data-tab="a" aria-selected="true"><b>Buyer K</b><span>San Diego &middot; 100k mi &middot; FWD ok</span></button>
+  <button data-tab="b" aria-selected="false"><b>Buyer U</b><span>Memphis &middot; 100k mi &middot; AWD</span></button>
 </div>
 
-<div class="toggle" role="group">
-  <button data-view="car" aria-pressed="true">Best car</button>
-  <button data-view="deal" aria-pressed="false">Best deal</button>
-  <button data-view="cash" aria-pressed="false">Cash vs finance</button>
+<div class="seg" role="group">
+  <button data-view="car" aria-pressed="true">The cars</button>
+  <button data-view="deal" aria-pressed="false">What to pay</button>
+  <button data-view="money" aria-pressed="false">Cash vs finance</button>
+  <button data-view="svc" aria-pressed="false">Living with it</button>
+  <button data-view="deals" aria-pressed="false">Deals</button>
 </div>
 
+<section data-panel="a"></section>
+<section data-panel="b" hidden></section>
 
-<!-- ======================= BUYER 1 ======================= -->
-<section data-panel="a">
-
-<h2>Buyer 1 &mdash; San Diego, CA</h2>
-<p class="h2note">Budget $30&ndash;40k &middot; hybrid non-negotiable &middot; heated + power seats, backup camera,
-CarPlay &middot; Premium / XLE Premium trim floor &middot; ventilated seats preferred &middot; AWD not needed &middot;
-7.75% tax at the registered address &middot; $5.25/gal.</p>
-
-<!-- BEST CAR -->
-<div data-view-panel="car">
-<h3>Ranked on the car itself</h3>
-<div class="rank">
-  <div class="card win">
-    <div class="num">1</div>
-    <div>
-      <div class="nm">Toyota RAV4 XLE Premium FWD <span class="tag g">new only</span></div>
-      <div class="spec">$37,550 &middot; 226 hp &middot; 43 mpg &middot; SofTex</div>
-      <p class="why">Best powertrain and by far the best efficiency, on an all-new 6th-generation platform
-      with the strongest resale in the class. The catch is upholstery: <b>no 2026 RAV4 has genuine leather
-      at any trim or any price</b>, and ventilated seats require stepping up to XSE or Limited.</p>
-    </div>
-    <div class="fig"><span class="big">$37,550</span><span class="lbl">delivered</span></div>
-  </div>
-  <div class="card">
-    <div class="num">2</div>
-    <div>
-      <div class="nm">Mazda CX-50 Hybrid Premium</div>
-      <div class="spec">$39,645 &middot; 219 hp &middot; 38 mpg &middot; real leather</div>
-      <p class="why">The only car here that delivers <b>genuine leather and ventilated seats together</b>,
-      with AWD standard and a 12-speaker Bose system. Toyota&rsquo;s own A25A-FXS hybrid underneath, so the
-      mechanical risk is low. Costs $2,100 more and gives up 5 mpg.</p>
-    </div>
-    <div class="fig"><span class="big">$39,645</span><span class="lbl">delivered</span></div>
-  </div>
-  <div class="card">
-    <div class="num">3</div>
-    <div>
-      <div class="nm">Honda CR-V Hybrid Sport-L FWD</div>
-      <div class="spec">$40,175 &middot; 204 hp &middot; 40 mpg &middot; real leather</div>
-      <p class="why">Roomiest cabin and real leather, and the 40 mpg figure is better than previously
-      credited. But it is the slowest of the three and <b>destination pushes it past the $40k ceiling</b>.
-      No 2026 CR-V offers ventilated seats on any trim.</p>
-    </div>
-    <div class="fig"><span class="big">$40,175</span><span class="lbl">over budget</span></div>
-  </div>
-</div>
-<div class="note"><p><b>If ventilated seats matter, the list is one car long.</b> The CX-50 Premium is the
-only vehicle in this set &mdash; new or used, at any trim under $42k &mdash; that has them.</p></div>
-</div>
-
-<!-- BEST DEAL -->
-<div data-view-panel="deal" hidden>
-<h3>Ranked on 10-year net cost</h3>
-<div class="rank">
-  <div class="card win">
-    <div class="num">1</div>
-    <div>
-      <div class="nm">2024 CR-V Hybrid Sport-L &middot; ~30k mi <span class="tag">used</span></div>
-      <div class="spec">~$29,000 asking &middot; target ~$27,500&ndash;29,500 &middot; 25% off new</div>
-      <p class="why">The CR-V is unchanged since 2023, so a 2024 is mechanically the current car at a
-      quarter off. Honda&rsquo;s CPO premium is about <b>$340 &mdash; the cheapest of any brand</b> &mdash; and
-      buys 7yr/100k powertrain plus two extra years of non-powertrain coverage. Take it.</p>
-    </div>
-    <div class="fig"><span class="big">$39,836</span><span class="lbl">10-yr net</span></div>
-  </div>
-  <div class="card">
-    <div class="num">2</div>
-    <div>
-      <div class="nm">2025 CX-50 Hybrid Premium Plus &middot; ~28k mi <span class="tag">used</span></div>
-      <div class="spec">~$30,215 asking &middot; more equipment than a new Premium</div>
-      <p class="why">Undercuts a new Premium by $9,400 while adding a head-up display, heated rear seats and
-      a heated wheel. Keeps the leather and ventilated seats. The used Premium&nbsp;/&nbsp;Premium&nbsp;Plus
-      price gap has collapsed to near zero, so <b>shop on mileage and price, not trim badge</b>.</p>
-    </div>
-    <div class="fig"><span class="big">$41,881</span><span class="lbl">10-yr net</span></div>
-  </div>
-  <div class="card">
-    <div class="num">3</div>
-    <div>
-      <div class="nm">Toyota RAV4 XLE Premium FWD <span class="tag g">new</span></div>
-      <div class="spec">$37,550 MSRP &middot; best new option by a wide margin</div>
-      <p class="why">Cheapest new car in the set and the strongest residual. Paying cash removes its $4,256
-      interest penalty, which is what opens the gap. <b>Watch for dealer markup</b> &mdash; on this redesign
-      the fight is getting <i>to</i> MSRP, not below it.</p>
-    </div>
-    <div class="fig"><span class="big">$43,085</span><span class="lbl">10-yr net</span></div>
-  </div>
-</div>
-<div class="note w"><p><b>The new CX-50 is no longer competitive on cost &mdash; it lands last at $49,443.</b>
-Its case rested on 0% financing that turned out to be 36 months, not 60, and to cost the $1,500 rebate.
-The RAV4 now beats it by <b>$6,358</b>. Buying the CX-50 is a defensible taste decision &mdash; it is the only
-car here with real leather and ventilated seats &mdash; but it is no longer a value decision.</p></div>
-</div>
-
-<!-- CASH VS FINANCE -->
-<div data-view-panel="cash" hidden>
-<h3>Pay cash, or finance and hold the money at 4%?</h3>
-<div class="note"><p><b>The rule:</b> finance by default, but only where investing the cash actually offsets
-the loan &mdash; i.e. only when the loan&rsquo;s effective APR is below your <i>after-tax</i> yield. A 4% CD at
-a 24% federal + 9.3% California marginal rate nets <b>2.67%</b>, and almost nothing on offer is cheaper
-than that.</p>
-<p><b>It clears on the CX-50. It does not clear on the RAV4</b> &mdash; and the RAV4 is the recommendation.
-Toyota is running no rebate and no subsidised rate on the redesign, so 4.99% is a real 4.99% against a 2.67%
-yield. No outside lender closes that gap either; credit-union new-car money is still 5%+. Financing it
-anyway costs about <b>$2,121</b> over four years, which is the price of keeping $40k liquid &mdash; a fair
-trade if you want the optionality, but it is not arbitrage.</p></div>
-<div class="scroll">
-<table>
-<thead><tr><th>Offer</th><th class="n">Effective APR</th><th>Verdict</th><th class="n">Gain from financing</th></tr></thead>
-<tbody>
-<tr class="best"><td>CX-50 &mdash; 0%/36, forfeits $1,500 cash</td><td class="n">2.33%</td><td>Finance, barely</td><td class="n">+$227</td></tr>
-<tr><td>CR-V &mdash; 3.49%/60 + $750 bonus</td><td class="n">2.78%</td><td>Coin flip</td><td class="n">&minus;$138</td></tr>
-<tr><td>CX-50 &mdash; 2.9%/60, forfeits $1,500</td><td class="n">4.35%</td><td><b>Pay cash</b></td><td class="n">&minus;$1,993</td></tr>
-<tr><td>RAV4 &mdash; 4.99%/48</td><td class="n">4.99%</td><td><b>Pay cash</b></td><td class="n">&minus;$2,121</td></tr>
-<tr><td>Any used car &mdash; 5.29%/60</td><td class="n">5.29%</td><td><b>Pay cash</b></td><td class="n">&minus;$2,531</td></tr>
-<tr><td>RAV4 &mdash; 5.99%/72</td><td class="n">5.99%</td><td><b>Pay cash</b></td><td class="n">&minus;$4,802</td></tr>
-</tbody></table>
-</div>
-<div class="note w"><p><b>Mazda&rsquo;s &ldquo;0%&rdquo; is really a 2.33% loan.</b> Taking it forfeits the $1,500
-customer cash, so the choice is $41,217 out the door today versus $1,186.60/mo for 36 months. It still beats
-a 2.67% CD &mdash; but by <b>$227 over three years</b>, which is 0.5% of the purchase price. Finance it if she
-buys it; don&rsquo;t let it pick the car.</p></div>
-<h3>What flips the CX-50 call</h3>
-<div class="scroll">
-<table>
-<thead><tr><th>Scenario</th><th class="n">After-tax yield</th><th class="n">Finance wins by</th></tr></thead>
-<tbody>
-<tr class="best"><td>4% <b>T-bills</b> &mdash; exempt from CA state tax, 24% fed</td><td class="n">3.04%</td><td class="n">+$481</td></tr>
-<tr><td>4% CD, 22% fed + 9.3% CA</td><td class="n">2.75%</td><td class="n">+$282</td></tr>
-<tr><td>4% CD, 24% fed + 9.3% CA <span class="tag g">central</span></td><td class="n">2.67%</td><td class="n">+$227</td></tr>
-<tr><td>4% CD, 32% fed + 10.3% CA</td><td class="n">2.31%</td><td class="n">&minus;$16</td></tr>
-<tr><td>Money-market drifts to 3.25% mid-term</td><td class="n">2.17%</td><td class="n">&minus;$110</td></tr>
-<tr><td>4% CD, 35% fed + 11.3% CA</td><td class="n">1.85%</td><td class="n">&minus;$322</td></tr>
-</tbody></table>
-</div>
-<p class="h2note">Break-even is a <b>2.33% after-tax yield</b> &mdash; at 4% gross, that means a combined
-marginal rate under 41.6%.</p>
-<div class="note"><p><b>Use Treasuries, not a CD.</b> Treasury interest is exempt from state income tax, so
-4% nets 3.04% instead of 2.67% in California. Same risk, same liquidity, and it doubles the financing gain to
-$481. There is no reason to hold a CD in a 9.3% state.</p>
-<p><b>And lock the term.</b> If the 4% is a floating money-market yield rather than a locked CD, a Fed cut
-puts you underwater by month 20. Match the CD or T-bill ladder to the loan term.</p></div>
-</div>
-
-<h3>Full cost model &middot; 80,000 miles over 10 years</h3>
-<div class="scroll">
-<table>
-<thead><tr><th>Option</th><th class="n">Out the door</th><th class="n">Fuel</th><th class="n">Maint.</th>
-<th class="n">Resale</th><th class="n">CD gain</th><th class="n">10-yr net</th><th>Strategy</th></tr></thead>
-<tbody>
-<tr class="best"><td>2024 CR-V Sport-L, ~30k mi <span class="tag">used</span></td><td class="n">$31,248</td><td class="n">$10,500</td><td class="n">$7,500</td><td class="n">$9,411</td><td class="n">&mdash;</td><td class="n">$39,836</td><td>Cash</td></tr>
-<tr><td>2025 CX-50 Hyb Premium Plus, ~28k mi <span class="tag">used</span></td><td class="n">$32,557</td><td class="n">$11,053</td><td class="n">$7,500</td><td class="n">$9,228</td><td class="n">&mdash;</td><td class="n">$41,881</td><td>Cash</td></tr>
-<tr><td>RAV4 XLE Premium FWD <span class="tag g">new</span></td><td class="n">$40,460</td><td class="n">$9,767</td><td class="n">$6,000</td><td class="n">$13,142</td><td class="n">&mdash;</td><td class="n">$43,085</td><td>Cash</td></tr>
-<tr><td>2025 CX-50 Hyb Premium, ~8k mi <span class="tag">used</span></td><td class="n">$35,019</td><td class="n">$11,053</td><td class="n">$7,500</td><td class="n">$9,515</td><td class="n">&mdash;</td><td class="n">$44,057</td><td>Cash</td></tr>
-<tr><td>CR-V Sport-L FWD <span class="tag g">new</span></td><td class="n">$42,539</td><td class="n">$10,500</td><td class="n">$6,500</td><td class="n">$12,856</td><td class="n">$320</td><td class="n">$46,363</td><td>Finance 3.49%</td></tr>
-<tr><td>CX-50 Hybrid Premium <span class="tag g">new</span></td><td class="n">$42,717</td><td class="n">$11,053</td><td class="n">$7,000</td><td class="n">$11,101</td><td class="n">$227</td><td class="n">$49,443</td><td>Finance 0%/36</td></tr>
-</tbody></table>
-</div>
-<p class="h2note">Net = out-the-door + fuel + estimated maintenance &minus; resale at year&nbsp;10, minus the
-gain from financing where financing beats cash. 7.75% CA tax. Resale is the softest input here &mdash; treat
-&plusmn;$2,000 as noise.</p>
-
-<h3>What to actually pay &middot; negotiation targets</h3>
-<div class="scroll">
-<table>
-<thead><tr><th>Vehicle</th><th class="n">MSRP / asking</th><th class="n">Realistic target</th><th>Confidence</th></tr></thead>
-<tbody>
-<tr><td>RAV4 XLE Premium FWD <span class="tag g">new</span></td><td class="n">$37,550</td><td class="n">$38,500&ndash;41,000</td><td>Low &mdash; markup data conflicts</td></tr>
-<tr class="best"><td>CX-50 Hybrid Premium <span class="tag g">new</span></td><td class="n">$39,645</td><td class="n">$36,900&ndash;37,650</td><td>High &mdash; invoice verified</td></tr>
-<tr><td>CR-V Sport-L FWD <span class="tag g">new</span></td><td class="n">$40,175</td><td class="n">$38,300&ndash;39,300</td><td>Medium &mdash; invoice unpublished</td></tr>
-<tr><td>2025 CX-50 Hyb Premium <span class="tag">used</span></td><td class="n">$30,200&ndash;35,100</td><td class="n">$29,500&ndash;32,500</td><td>Medium-high &mdash; KBB direct</td></tr>
-<tr><td>2024 CR-V Sport-L <span class="tag">used</span></td><td class="n">$29,000&ndash;32,500</td><td class="n">$27,500&ndash;29,500</td><td>High &mdash; KBB trim-specific</td></tr>
-<tr><td>2025 CR-V Sport-L <span class="tag">used</span></td><td class="n">$33,200&ndash;35,400</td><td class="n">$31,500&ndash;33,500</td><td>High &mdash; KBB trim-specific</td></tr>
-</tbody></table>
-</div>
-<div class="note w"><p><b>The RAV4 is the one to be skeptical about.</b> San&nbsp;Diego CarGurus inventory
-averages $43,185 with only 36% of listings rated a good or great deal &mdash; the worst share in this set.
-Documented California markups run $3,999&ndash;$5,995, though every confirmed case is Northern California.
-<b>Paying straight MSRP would be a win here.</b> Walk at $39,000+.</p>
-<p>The CX-50 is the opposite &mdash; but its margin is thinner than it looks. Invoice is <b>$38,691</b>
-delivered, only $954 under MSRP, plus 2&ndash;3% holdback. That is roughly $1,700&ndash;2,100 of total dealer
-room, so a discount past ~$1,250 is a real fight. With the $1,500 cash on top, <b>$37,000 is a good
-outcome</b>.</p>
-<p>Mazda runs customer cash on the CX-50 most months. If the July program lapses, <b>wait for the August
-one</b> rather than paying to beat a deadline &mdash; the rebate is worth more than any urgency premium a
-dealer will extract in the last three days of a month.</p></div>
-<p class="h2note">California caps dealer doc fees at <b>$85</b> by statute (Vehicle Code &sect;11713.1) &mdash;
-a higher doc fee is not compliant. Add ~$620 DMV/registration/VLF and 7.75% tax; multiply the negotiated
-price by roughly <b>1.096</b> for out-the-door. Anything labelled &ldquo;market adjustment&rdquo;, dealer prep,
-nitrogen or VIN etch is negotiable or refusable.</p>
-
-<h3>Used supply is the real constraint</h3>
-<div class="note w"><p><b>Within 150 miles of San Diego there are roughly 4&ndash;6 relevant 2025 CX-50 Hybrids
-and 3 CR-V Sport-Ls.</b> Most sit 60&ndash;140 miles out in LA, Orange and Riverside counties, and exactly one
-CPO CX-50 Hybrid exists in the entire radius. There is no local negotiating leverage on either car &mdash;
-expect to travel, and expect firm pricing.</p></div>
-
-</section>
-
-
-<!-- ======================= BUYER 2 ======================= -->
-<section data-panel="b" hidden>
-
-<h2>Buyer 2 &mdash; Memphis, TN &rarr; Michigan year-round</h2>
-<p class="h2note">AWD required &middot; heated + power seats, backup camera, Android Auto &middot; hybrid optional,
-gas acceptable &middot; same trim floor &middot; Honda Accord worth ~$20,000 traded or paid out &middot; 7% TN tax
-plus $88 of capped local tax, credited against a trade &middot; $3.50/gal.</p>
-
-<!-- BEST CAR -->
-<div data-view-panel="car">
-<h3>Ranked on the car itself</h3>
-<div class="rank">
-  <div class="card win">
-    <div class="num">1</div>
-    <div>
-      <div class="nm">Toyota RAV4 XLE Premium AWD <span class="tag g">new only</span></div>
-      <div class="spec">$38,950 &middot; 236 hp &middot; 41 mpg &middot; electronic on-demand AWD</div>
-      <p class="why">Most power, best efficiency, best resale. The AWD system uses a rear electric motor
-      with no driveshaft &mdash; instant torque split, which is genuinely useful on ice. Note local dealers
-      are asking ~$41,000 against a $38,950 sticker.</p>
-    </div>
-    <div class="fig"><span class="big">$38,950</span><span class="lbl">delivered</span></div>
-  </div>
-  <div class="card">
-    <div class="num">2</div>
-    <div>
-      <div class="nm">Mazda CX-50 Hybrid Premium</div>
-      <div class="spec">$39,645 &middot; 219 hp &middot; 38 mpg &middot; AWD standard</div>
-      <p class="why">Best interior in the group and 17-inch wheels on 225/65 tires &mdash; a taller sidewall
-      is the right call for Michigan potholes and snow. Real leather and ventilated seats.</p>
-    </div>
-    <div class="fig"><span class="big">$39,645</span><span class="lbl">delivered</span></div>
-  </div>
-  <div class="card">
-    <div class="num">3</div>
-    <div>
-      <div class="nm">Honda CR-V Hybrid Sport-L AWD</div>
-      <div class="spec">$41,675 &middot; 204 hp &middot; 37 mpg &middot; real leather</div>
-      <p class="why">Roomiest and well-built, but the priciest and least powerful. Destination has risen to
-      $1,450 on current stickers, so budget $41,675 &mdash; not the $40,225 base figure.</p>
-    </div>
-    <div class="fig"><span class="big">$41,675</span><span class="lbl">delivered</span></div>
-  </div>
-  <div class="card">
-    <div class="num">4</div>
-    <div>
-      <div class="nm">Chevrolet Equinox LT AWD <span class="tag">gas only</span></div>
-      <div class="spec">$34,845 as required &middot; 175 hp &middot; 26 mpg</div>
-      <p class="why">Sixty horsepower down and fifteen mpg down on the field, and GM has no hybrid in this
-      class until a PHEV around 2028. It does have wireless Android Auto standard, plus blind-spot,
-      rear cross-traffic braking and reverse automatic braking &mdash; all standard on LT.</p>
-    </div>
-    <div class="fig"><span class="big">$34,845</span><span class="lbl">with req. package</span></div>
-  </div>
-</div>
-</div>
-
-<!-- BEST DEAL -->
-<div data-view-panel="deal" hidden>
-<h3>Ranked on 10-year net cost</h3>
-<p class="h2note">Figures below assume the default <b>$20,000 Accord traded in</b>. Move the slider under the
-cost model to see them shift.</p>
-<div class="rank">
-  <div class="card win">
-    <div class="num">1</div>
-    <div>
-      <div class="nm">2025 CX-50 Hybrid Premium &middot; ~20k mi <span class="tag">used</span></div>
-      <div class="spec">target ~$29,000 &middot; AWD standard &middot; 38 mpg</div>
-      <p class="why">Steepest first-year depreciation of any car here &mdash; verified comps at $28,696 and
-      $29,794 &mdash; while keeping hybrid economy over 120,000 miles. <b>Two problems:</b> supply is a
-      Nashville or Birmingham drive, and three different CX-50s carry the &ldquo;Premium&rdquo; badge across a
-      $7,300 span. <b>Check the window sticker says Hybrid.</b></p>
-    </div>
-    <div class="fig"><span class="big">$21,549</span><span class="lbl">10-yr net</span></div>
-  </div>
-  <div class="card">
-    <div class="num">2</div>
-    <div>
-      <div class="nm">2025 Equinox LT AWD &middot; ~30k mi <span class="tag">used</span></div>
-      <div class="spec">target ~$25,200 &middot; KBB resale $21,800</div>
-      <p class="why">Cheapest way into an AWD SUV by a wide margin, and the $5,000 gap between KBB resale and
-      dealer asking is negotiating ammunition. <b>But VIN-check for Convenience Package&nbsp;II</b> &mdash;
-      without it the driver&rsquo;s seat is a 6-way manual, which fails a hard requirement outright.</p>
-    </div>
-    <div class="fig"><span class="big">$25,607</span><span class="lbl">10-yr net</span></div>
-  </div>
-  <div class="card">
-    <div class="num">3</div>
-    <div>
-      <div class="nm">Toyota RAV4 XLE Premium AWD <span class="tag g">new</span></div>
-      <div class="spec">$38,950 &middot; 41 mpg &middot; pay cash</div>
-      <p class="why">Third on cost and first on merit. It carries no rebate, no subsidised rate and now a
-      $1,000 hybrid surcharge, yet 41 mpg and class-leading resale still keep it within $1,300 of a used
-      Equinox. <b>This is still the pick</b> &mdash; both cars above it carry real execution risk.</p>
-    </div>
-    <div class="fig"><span class="big">$26,923</span><span class="lbl">10-yr net</span></div>
-  </div>
-  <div class="card">
-    <div class="num">6</div>
-    <div>
-      <div class="nm">Equinox LT AWD, employee price <span class="tag g">new</span></div>
-      <div class="spec">$32,250 &middot; invoice &minus;4% &middot; stacks with 0%/36</div>
-      <p class="why">Now a verified number rather than a guess &mdash; and it still lands sixth of seven.
-      $16,154 of fuel over 120,000 miles is what buries it: the employee discount and the 0% financing
-      together recover less than the RAV4 saves at the pump.</p>
-    </div>
-    <div class="fig"><span class="big">$30,224</span><span class="lbl">10-yr net</span></div>
-  </div>
-</div>
-<div class="note w"><p><b>This reverses the March analysis.</b> Over five years the Equinox won clearly. At
-12,000 miles a year over ten years the fuel gap alone is <b>$5,900</b>, the required power-seat package adds
-$2,050, and the Equinox lands sixth even at a confirmed employee price with free financing. The spreadsheet
-no longer argues for it &mdash; so pick on the car.</p></div>
-</div>
-
-<!-- CASH VS FINANCE -->
-<div data-view-panel="cash" hidden>
-<h3>Pay cash, or finance and hold the money at 4%?</h3>
-<div class="note"><p><b>The rule:</b> finance only when the loan&rsquo;s effective APR is below your
-<i>after-tax</i> yield. Tennessee levies no income tax on interest, so a 4% CD nets <b>3.04%</b> at a 24%
-federal rate &mdash; a better hurdle than California&rsquo;s, but still one most loans fail.</p></div>
-<div class="scroll">
-<table>
-<thead><tr><th>Offer</th><th class="n">Effective APR</th><th>Verdict</th><th class="n">Gain from financing</th></tr></thead>
-<tbody>
-<tr class="best"><td>Equinox &mdash; 0%/36, <b>no rebate forfeited</b></td><td class="n">0.00%</td><td><b>Finance</b></td><td class="n">+$1,858</td></tr>
-<tr><td>CX-50 &mdash; 0%/36, forfeits $1,500 cash</td><td class="n">2.33%</td><td>Finance</td><td class="n">+$481</td></tr>
-<tr><td>CR-V &mdash; 3.49%/60 + $750 bonus</td><td class="n">2.78%</td><td>Finance, barely</td><td class="n">+$320</td></tr>
-<tr><td>RAV4 &mdash; 4.99%/48</td><td class="n">4.99%</td><td><b>Pay cash</b></td><td class="n">&minus;$1,800</td></tr>
-<tr><td>Any used car &mdash; 5.29%/60</td><td class="n">5.29%</td><td><b>Pay cash</b></td><td class="n">&minus;$2,200</td></tr>
-<tr><td>RAV4 &mdash; 5.99%/72</td><td class="n">5.99%</td><td><b>Pay cash</b></td><td class="n">&minus;$4,329</td></tr>
-</tbody></table>
-</div>
-<div class="note"><p><b>The Equinox&rsquo;s 0% is the only genuinely free money in this whole analysis.</b> GM is
-running no cash allowance nationally, so unlike Mazda&rsquo;s there is no rebate to give up &mdash; it is a true
-zero. Worth <b>$1,858</b>. Take it if he buys the car. It still isn&rsquo;t enough to move the Equinox off
-last place.</p>
-<p>Note the residency wrinkle: living in Michigan year-round while domiciled in Tennessee changes the state
-tax on that interest. Michigan&rsquo;s 4.25% flat tax would cut the after-tax yield to 2.87% and shave roughly
-$120 off each financing gain above. It does not flip any verdict.</p></div>
-<div class="note w"><p><b>Pay cash for the RAV4.</b> Toyota is offering no rebate and no subsidised rate on
-the redesign, so its 4.99% is a real 4.99% &mdash; well above a 3.04% after-tax yield. Financing it costs
-$1,800 over four years.</p></div>
-<div class="note"><p><b>The Accord shrinks the arbitrage.</b> Every gain above is computed with no trade
-applied. A $20,000 Accord cuts each loan roughly in half, and the investment gain falls with it &mdash; the
-Equinox&rsquo;s $1,858 drops to about <b>$622</b>.</p>
-<p>That flips one call outright. Mazda&rsquo;s 0% costs a fixed $1,500 in forfeited rebate no matter how small
-the loan gets, so once the Accord is worth about <b>$9,000 or more, the CX-50&rsquo;s 0% stops paying for
-itself</b> and cash wins. The Equinox&rsquo;s 0% never flips, because it forfeits nothing &mdash; it just earns
-less. Use the slider on the Best-deal tab to see it move.</p></div>
-</div>
-
-<h3>Full cost model &middot; 120,000 miles over 10 years</h3>
-
-<div class="note" style="padding-bottom:18px">
-  <p style="margin-bottom:14px"><b>The Accord.</b> Set what it is worth and how the money arrives &mdash; the
-  table below recomputes live.</p>
-  <label for="tradeAmt" style="display:block;font-weight:700;margin-bottom:6px">
-    Accord value: <span id="tradeOut" style="font-variant-numeric:tabular-nums">$20,000</span>
-  </label>
-  <input id="tradeAmt" type="range" min="0" max="30000" step="500" value="20000"
-         style="width:100%;max-width:520px;display:block;margin-bottom:14px;accent-color:#3d7a5c">
-  <div style="display:flex;gap:20px;flex-wrap:wrap">
-    <label style="display:flex;gap:7px;align-items:center;cursor:pointer">
-      <input type="radio" name="tradeMode" value="trade" checked style="accent-color:#3d7a5c">
-      <span>Trade it in <span class="tag g">tax credit</span></span>
-    </label>
-    <label style="display:flex;gap:7px;align-items:center;cursor:pointer">
-      <input type="radio" name="tradeMode" value="cash" style="accent-color:#3d7a5c">
-      <span>Insurance payout <span class="tag">no credit</span></span>
-    </label>
-  </div>
-  <p style="margin-top:12px;font-size:.92em" id="tradeNote"></p>
-</div>
-
-<div class="scroll">
-<table>
-<thead><tr><th>Option</th><th class="n">Out the door</th><th class="n">Fuel</th><th class="n">Upkeep</th>
-<th class="n">Resale</th><th class="n">CD gain</th><th class="n">10-yr net</th><th>Strategy</th></tr></thead>
-<tbody id="b2rows"></tbody></table>
-</div>
-<p class="h2note">Net = out-the-door + fuel + estimated maintenance &minus; resale at year&nbsp;10, minus the
-gain from financing where financing beats cash. Out-the-door is shown <b>after</b> the Accord is applied,
-which is why the figures look low. Financing is taken only where it clears a <b>3.04%</b> after-tax yield.
-Note that a larger Accord shrinks every loan, which shrinks the arbitrage &mdash; the CD-gain column falls as
-you raise the slider.</p>
-
-<h3>What to actually pay &middot; Memphis targets</h3>
-<div class="scroll">
-<table>
-<thead><tr><th>Vehicle</th><th class="n">MSRP / asking</th><th class="n">Realistic target</th><th>Leverage</th></tr></thead>
-<tbody>
-<tr><td>RAV4 XLE Premium AWD <span class="tag g">new</span></td><td class="n">$38,950</td><td class="n">$38,950&ndash;40,000</td><td>Almost none &mdash; MSRP is the ceiling</td></tr>
-<tr class="best"><td>CX-50 Hybrid Premium <span class="tag g">new</span></td><td class="n">$39,645</td><td class="n">$36,600&ndash;37,200</td><td>Best &mdash; $1,500 cash to 8/31</td></tr>
-<tr><td>CR-V Sport-L AWD <span class="tag g">new</span></td><td class="n">$41,675</td><td class="n">$39,500&ndash;40,250</td><td>Real &mdash; Wolfchase pre-discounts $2,121</td></tr>
-<tr><td>Equinox LT AWD + Pkg II <span class="tag g">new</span></td><td class="n">$34,845</td><td class="n">$32,000&ndash;32,400</td><td>Employee price &asymp; invoice &minus;4%</td></tr>
-<tr><td>2025 CX-50 Hyb Premium <span class="tag">used</span></td><td class="n">$30,500&ndash;36,000</td><td class="n">$28,800&ndash;29,300</td><td>Verify it is actually a hybrid</td></tr>
-<tr><td>2025 Equinox LT AWD <span class="tag">used</span></td><td class="n">$25,200&ndash;28,500</td><td class="n">$24,800&ndash;25,400</td><td>KBB resale $21,800 is your ammunition</td></tr>
-<tr><td>2026 CR-V Sport-L AWD <span class="tag">used</span></td><td class="n">$37,900&ndash;40,100</td><td class="n">$37,500&ndash;38,300</td><td>Thin &mdash; loses subvented APR</td></tr>
-</tbody></table>
-</div>
-
-<div class="note"><p><b>The employee-price question is answered.</b> GM Family First is not a percentage off
-sticker &mdash; it is a fixed price printed on the dealer invoice, computed at roughly <b>invoice minus
-4%</b>. On this car that is <b>$32,000&ndash;32,400</b>, about 7&ndash;8% off the $34,845 sticker. A real
-dealer employee-pricing ad (2026 Equinox LT, $32,340 &rarr; $30,000) works out to 7.2%, which lands within
-$250 of the invoice-minus-4% calculation &mdash; two independent methods agreeing.</p>
-<p><b>And it stacks with the 0% APR.</b> That was an open either/or; it is not one. GM is running no cash
-allowance on the 2026 Equinox, so there is no rebate to forfeit &mdash; take employee price <i>and</i> 0%.
-Ask about 0%/60 rather than 0%/36; at least one dealer advertises the longer term.</p></div>
-
-<div class="note w"><p><b>Two things to check before anything else.</b></p>
-<p>1. Chevrolet is running <b>Employee Pricing for Everyone</b> &mdash; no GM connection needed, 2026 Equinox
-included &mdash; but I could not confirm any Memphis store is participating. One phone call to Jim&nbsp;Keras
-or Chuck&nbsp;Hutton settles whether Family First matters at all here.</p>
-<p>2. Your <b>$3,300-under-sticker quote beats every discount I could verify</b> locally (best confirmed:
-$2,380) and beats the employee price. If it is real and itemised &mdash; not a lease-termination or loyalty
-rebate he does not qualify for &mdash; <b>take it and skip Family First entirely</b>.</p></div>
-
-<div class="note w"><p><b>Tennessee charges $100/yr on hybrids</b> &mdash; $1,000 over the hold, and it lands
-on the RAV4, CX-50 and CR-V but not the Equinox. It is folded into the Upkeep column above, tagged
-<span class="tag">+TN</span>. The statute&rsquo;s wording is ambiguous for non-plug-in hybrids but TN owners
-are documented paying it, so assume it applies.</p>
-<p><b>Memphis doc fees are far worse than the state average.</b> Chuck&nbsp;Hutton charges $958, Jim&nbsp;Keras
-and Wolfchase $899, against a $686 state average &mdash; and TN <b>taxes the doc fee</b>, so each $100 really
-costs $107. It is the only negotiable line in the fee stack. Budget roughly <b>10.5%</b> on top of the
-negotiated price for tax, doc, title and the Shelby County wheel tax.</p></div>
-
-<h3>Tires &mdash; still the highest-return decision on the list</h3>
-<div class="note"><p><b>Michelin CrossClimate2, 3PMSF-rated, 225/65R17 &mdash; roughly $900&ndash;1,000 installed.</b>
-One set, year-round. Conventional all-seasons lose grip below about 45&deg;F no matter how many wheels are
-driven; a front-drive car on winter-rated rubber beats an AWD car on all-seasons. Negotiate a tire credit at
-delivery or sell the factory takeoffs for $400&ndash;600. Avoid the Equinox ACTIV &mdash; its all-terrain
-tires are worse on ice and noisier.</p></div>
-
-</section>
-
-
-<!-- ======================= SHARED ======================= -->
 <h2>Verify before signing</h2>
-<p class="h2note">Every item below is either unconfirmed or time-sensitive.</p>
-<ul class="chk">
-<li><span class="pill">timing</span><b>Mazda&rsquo;s 0% APR and $1,500 cash are posted through July&nbsp;31, 2026.</b> Mazda runs some version of both most months, so a lapse is not a reason to rush &mdash; <b>wait for the August program</b> rather than paying an end-of-month premium to beat a deadline. Confirm the current terms before planning around either. They remain strictly either/or.</li>
-<li class="hot"><span class="pill hot">blocker</span><b>Any used Equinox must be VIN-checked for Convenience Package&nbsp;II.</b> Without it the driver&rsquo;s seat is a 6-way manual, which fails a hard requirement. Most used LT stock is ex-rental and will not have it.</li>
-<li class="hot"><span class="pill hot">3 days</span><b>Chevrolet&rsquo;s &ldquo;Employee Pricing for Everyone&rdquo; runs to July&nbsp;31 and includes the 2026 Equinox &mdash; no GM connection required.</b> Whether Memphis stores are participating is a per-dealer opt-in I could not confirm. Call Jim&nbsp;Keras and Chuck&nbsp;Hutton today; if they are in, Family First is irrelevant this week.</li>
-<li><span class="pill">resolved</span><b>GM employee price is invoice minus ~4%</b> &mdash; a fixed figure printed on the invoice, not a percentage off sticker. That is <b>$32,000&ndash;32,400</b> here, cross-checked two ways. <b>It stacks with the 0% APR</b>, and there is no cash allowance to forfeit. The 0%/36 offer requires delivery by August&nbsp;3. Only gmfamilyfirst.com can produce his exact VIN-specific number.</li>
-<li class="hot"><span class="pill hot">cost</span><b>Tennessee charges $100/yr on hybrids</b> &mdash; about $1,000 over the hold, applying to the RAV4, CX-50 and CR-V but not the Equinox. The statute is ambiguous for non-plug-in hybrids; confirm with the Shelby County Clerk (901-222-3000).</li>
-<li><span class="pill">confirm</span><b>Verify any used &ldquo;CX-50 Premium&rdquo; is actually the hybrid.</b> Three different CX-50s carry the Premium name across a $7,300 MSRP span &mdash; 2.5&nbsp;S Premium, Hybrid Premium, Turbo Premium. That trap explains the entire $30,500&ndash;36,000 asking spread.</li>
-<li><span class="pill">note</span>Memphis doc fees run $899&ndash;958 against a $686 state average, and TN taxes the doc fee. It is the only negotiable line in the fee stack.</li>
-<li><span class="pill">confirm</span>Mazda&rsquo;s longer-term rates are set regionally &mdash; 1.9%, 2.9% and 3.9% at 60 months all appear in different markets. Call a San Diego dealer for the actual ladder.</li>
-<li><span class="pill">confirm</span>The $500 loyalty and $500 military rebates are reported to stack with special APR, but this is not confirmed in Mazda&rsquo;s written terms.</li>
-<li><span class="pill">note</span>The Equinox&rsquo;s $945 Safety &amp; Technology package is <b>optional</b> &mdash; blind-spot, rear cross-traffic braking and reverse automatic braking are already standard on LT. The package buys surround-view cameras, a camera mirror and fog lamps.</li>
-<li><span class="pill">note</span>2027 Equinox stock has arrived, so any 2026 on a lot is leftover inventory. One dealer was asking $3,300 under sticker.</li>
-<li><span class="pill">note</span>Any CX-50 Premium quote above $39,645 means premium paint ($595) or dealer add-ons. Demand itemization.</li>
-<li><span class="pill">note</span>Buy GAP coverage from an insurer or credit union, never from the finance office.</li>
-<li><span class="pill">note</span>Sit in the car 20+ minutes before deciding &mdash; Consumer Reports flagged the CR-V&rsquo;s front seats as firm.</li>
-</ul>
+<p class="h2note">Everything here is time-sensitive or unconfirmed.</p>
+<ul class="chk" id="chk"></ul>
 
-<h2>What got eliminated</h2>
-<div class="scroll">
-<table>
-<thead><tr><th>Vehicle</th><th>Reason</th></tr></thead>
-<tbody>
-<tr><td>Hyundai Tucson</td><td>No trim between SEL Convenience and Limited; Limited at $43,320 is over budget</td></tr>
-<tr><td>Kia Sportage</td><td>Declined by both buyers; SX-Prestige ~$41k regardless</td></tr>
-<tr><td>Jeep Cherokee</td><td>Consumer Reports last of 31 brands; unproven new hybrid; $43k+</td></tr>
-<tr><td>Subaru Forester / Crosstrek</td><td>Removed by buyer; weakest hybrid in class at 194 hp / 35 mpg</td></tr>
-<tr><td>Ford Escape</td><td>Production ended Dec 17, 2025; not CARB certified, cannot be sold in California</td></tr>
-<tr><td>Nissan Rogue</td><td>No true hybrid until 2027 e-POWER; PHEV is $47,485+ and 26 mpg once depleted</td></tr>
-<tr><td>GMC Terrain</td><td>GMC in the Consumer Reports bottom five for reliability</td></tr>
-<tr><td>Equinox EV</td><td>Drops Android Auto entirely for Google Built-In &mdash; disqualified on a hard requirement</td></tr>
-<tr><td>Used RAV4</td><td>2026 is an all-new 6th generation; anything used is a 5th-gen, a different and less efficient car</td></tr>
-</tbody></table>
-</div>
-
-<hr>
 <footer>
-<p>Prices verified July&nbsp;28, 2026 against manufacturer press releases, Monroney window stickers via GM&rsquo;s
-VIN service, CDTFA and Tennessee Department of Revenue rate tables, Experian&rsquo;s Q1&nbsp;2026 State of the
-Automotive Finance Market, and live dealer inventory on cars.com and CarGurus. Used asking prices are
-observed listings, not transaction prices.</p>
-<p><b>Softest inputs, in order:</b> 10-year resale values, the GM employee price, and maintenance estimates.
-Resale drives the ranking more than any other single assumption &mdash; a $2,000 swing reorders the middle of
-both tables. Sources marked <span class="tag">est.</span> could not be verified against a primary source.</p>
-<p>Negotiation targets are drawn from published invoice data, KBB trim-level used values surfaced via search,
-and dealer inventory aggregates. Edmunds serves a bot-detection wall to automated access, so no Edmunds
-True&nbsp;Market&nbsp;Value figure was retrieved directly &mdash; where an Edmunds number appears it came from
-a search snippet or a secondary article.</p>
-<p>Model and calculations in <code>tco.py</code> and <code>cash-vs-finance.py</code>. Not financial advice.</p>
+  <p><b>Sources.</b> MSRP, incentives and APR ladders read from manufacturer regional offer pages
+  (toyota.com, mazdausa.com, chevrolet.com) and dealer inventory feeds on 29 July 2026. Yields from the
+  US Treasury daily curve and Federal Reserve H.15 for 28 July 2026. Invoice figures are third-party.
+  Resale values are the softest input &mdash; treat &plusmn;$2,000 as noise.</p>
+  <p><b>Edmunds and KBB both serve bot-detection walls to automated access</b>, so no figure here was read
+  from either directly. Where their methodology is described, it comes from their own published
+  documentation reached via search.</p>
+  <p>Model in <code>model.py</code>. Not financial advice.</p>
 </footer>
-
 </div>
 
 <script>
 (function(){
-  var tabs=document.querySelectorAll('.tab'), panels=document.querySelectorAll('[data-panel]');
-  var togs=document.querySelectorAll('.toggle button'), views=document.querySelectorAll('[data-view-panel]');
-  function setTab(k){
-    tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.tab===k)});
-    panels.forEach(function(p){p.hidden=p.dataset.panel!==k});
+"use strict";
+
+/* ============================ DATA ============================ */
+var YIELD={a:3.28,b:3.38};
+var CFG={
+ a:{tax:.0775,fee:705,miles:100000,gas:5.25,hybfee:0,trade:0,tradeTax:false,
+    label:"California",yieldNote:"3-yr Treasury at 4.31%, exempt from California tax"},
+ b:{tax:.07,fee:1045,miles:100000,gas:3.50,hybfee:1000,trade:20000,tradeTax:true,
+    label:"Tennessee",yieldNote:"5-yr CD at 4.45%, no Tennessee income tax"}
+};
+
+var COLORS={
+ rav4:[["Blueprint","#1E2548","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/8x8/1.png?bg=fff&fmt=jpeg&qlt=90&wid=1200"],
+       ["Storm Cloud","#3D4A59","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/1l6/1.png?bg=fff&fmt=jpeg&qlt=90&wid=1200"],
+       ["Ice Cap","#FFFFFF","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/040/1.png?bg=fff&fmt=jpeg&qlt=90&wid=1200"],
+       ["Meteor Shower","#A1A1A1","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/4v8/1.png?bg=fff&fmt=jpeg&qlt=90&wid=1200"],
+       ["Ruby Flare Pearl","#740000","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/3t3/1.png?bg=fff&fmt=jpeg&qlt=90&wid=1200"],
+       ["Midnight Black","#00031E","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/218/1.png?bg=fff&fmt=jpeg&qlt=90&wid=1200"]],
+ cx50:[["Soul Red Crystal","#971B2D","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/soul-red-46v/e360-my25-cx50-hybrid-premium-soulred-000.jpg"],
+       ["Machine Gray","#757678","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/machine-gray-46g/e360-my25-cx50-hybrid-premium-machinegray-000.jpg"],
+       ["Polymetal Gray","#878D9A","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/polymetal-gray-47c/e360-my25-cx50-hybrid-premium-polymetalgray-000.jpg"],
+       ["Ingot Blue","#516B84","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/ingot-blue-48b/e360-my25-cx50-hybrid-premium-ingotblue-000.jpg"],
+       ["Wind Chill Pearl","#E0E0E0","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/wind-chill-48k/e360-my25-cx50-hybrid-premium-windchill-000.jpg"],
+       ["Jet Black Mica","#3B3B3B","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium/jet-black-41w/e360-my25-cx50-hybrid-premium-jetblack-000.jpg"]],
+ crv :[["Canyon River Blue","#00132A","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/B-640M_Canyon_River_Blue_Metallic/Large/Honda_2026_CRV_360_Exterior_Canyon_River_Blue_Metallic_0001.png"],
+       ["Meteorite Gray","#37424C","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-904M_Meteorite_Gray_Metallic/Large/Honda_2026_CRV_360_Exterior_Meteorite_Gray_Metallic_0001.png"],
+       ["Platinum White Pearl","#E5E5E5","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-883P_Platinum_White_Pearl/Large/Honda_2026_CRV_360_Exterior_Platinum_White_Pearl_0001.png"],
+       ["Solar Silver","#CCD0D3","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-932M_Solar_Silver_Metallic/Large/Honda_2026_CRV_360_Exterior_Solar_Silver_Metallic_0001.png"],
+       ["Radiant Red","#910D17","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/R-569M_Radiant_Red_Metallic/Large/Honda_2026_CRV_360_Exterior_Radiant_Red_Metallic_0001.png"],
+       ["Crystal Black Pearl","#000000","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-731P_Crystal_Black_Pearl/Large/Honda_2026_CRV_360_Exterior_Crystal_Black_Pearl_0001.png"]],
+ eqx :[["Reef Blue","#275AB8","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gal/my26-equinox-activ-gal-ext.008.png"],
+       ["Sterling Gray","#8D9192","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gxd/my26-equinox-activ-gxd-ext.008.png"],
+       ["Cacti Green","#A1B8A2","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gvr/my26-equinox-activ-gvr-ext.008.png"],
+       ["Radiant Red Tintcoat","#A81D20","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gnt/my26-equinox-activ-gnt-ext.008.png"],
+       ["Polar White","#ECEDF1","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/g4j/my26-equinox-activ-g4j-ext.008.png"],
+       ["Mosaic Black","#1A1A1C","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/colorizer/trims/xdb/exterior/flipbook-models-v2/gb8/my26-equinox-activ-gb8-ext.008.png"]]
+};
+var INTERIORS={
+ rav4:[["Black SofTex","#1f2023","#34363b","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/vehicles/2026/rav4/galleries/RHV_MY26_0015_V001.png:tcom_gallery_16x9?fmt=jpg&wid=1600"],
+       ["Front seats","#26282c","#3d4046","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/vehicles/2026/rav4/galleries/RHV_MY26_0010_V001.png:tcom_gallery_16x9?fmt=jpg&wid=1600"]],
+ cx50:[["Black Leather","#1b1c1f","#303237","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/003_interior/interior-statics/02_hybrid-premium/001_black-leather/i360-my26-cx50-hybrid-premium-ingotblue-blackleather.jpg"],
+       ["Red Leather","#7d2b28","#9d3a34","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/003_interior/interior-statics/02_hybrid-premium/002_red-leather/i360-my26-cx50-hybrid-premium-jetblack-redleather.jpg"]],
+ crv :[["Black Leather","#1c1d20","#313338","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/Feature-Blades/Interior/Cabin/Interior_02_L.jpg"],
+       ["Cabin overview","#24262a","#3a3d43","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/Feature-Blades/Interior/Overview/Interior_01_L.jpg"]],
+ eqx :[["Jet Black Cloth","#1e1f22","#333539","https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2026/suvs/equinox/gallery/01-images/2026-equinox-gallerypreview-01.jpg"]]
+};
+var MEDIA={rav4:{video:"qZzqdygb-5I"},crv:{video:"txVL9-Fxbv0"},cx50:{},eqx:{}};
+var IMGNOTE={eqx:"Chevrolet publishes no per-colour imagery for the LT — these are ACTIV bodies in the same paint.",
+             crv:"Honda's interior shots are generic CR-V, not Sport-L specifically."};
+
+var CARS={
+ a:[
+  {k:"rav4",n:"Toyota RAV4 XLE Premium",dr:"FWD",msrp:37695,fair:37695,cash:0,
+   hp:226,mpg:43,range:624,svc:10,seats:"SofTex, heated + ventilated",maint:6004,resid:.32,hyb:0,
+   apr:[[4.99,48],[5.99,60],[6.99,72]],
+   why:"Cheapest of the three, best economy, strongest resale. No rebate and no subsidised rate exist on the redesign, so the entire fight is getting <b>to</b> MSRP rather than below it.",
+   flag:["Toyota is the only one of these four offering <b>nothing at all</b> — no customer cash, no conquest, no loyalty. The $500 college and military rebates are the sole exceptions, and the RAV4 is on their eligible list."]},
+  {k:"cx50",n:"Mazda CX-50 Hybrid Premium",dr:"AWD",msrp:39645,fair:38600,cash:1500,
+   hp:219,mpg:38,range:551,svc:7,seats:"Real leather, heated + ventilated",maint:7906,resid:.26,hyb:0,
+   apr:[[0,36],[2.9,60],[3.9,72]],
+   why:"The only car here with genuine leather <i>and</i> ventilated seats, and the only one with real factory money on the hood. Toyota's own hybrid powertrain underneath.",
+   flag:["Invoice is $38,691 delivered &mdash; just $954 under MSRP &mdash; so dealer room is thin. The $1,500 factory cash is where the value is, not the negotiation."]},
+  {k:"crv",n:"Honda CR-V Hybrid Sport-L",dr:"FWD",msrp:40175,fair:38800,cash:0,
+   hp:204,mpg:40,range:560,svc:9,seats:"Real leather, heated only",maint:7636,resid:.29,hyb:0,
+   apr:[[3.49,36],[4.49,60],[5.49,72]],
+   why:"Roomiest cabin and real leather, but the least powerful and the most expensive to buy. No ventilated seats at this trim.",
+   flag:["Honda sets its rate ladder by zone. California's is <b>3.49% to 36 months, 4.49% to 60, 5.49% to 72</b> &mdash; the CR-V never reaches a subsidised low rate the way the Mazda does.",
+         "The CR-V carries <b>no loyalty or conquest cash</b> this period, and the widely-quoted $750 is <i>lease</i> cash, not purchase cash."]}
+ ],
+ b:[
+  {k:"rav4",n:"Toyota RAV4 XLE Premium",dr:"AWD",msrp:39095,fair:39095,cash:0,grad:500,
+   hp:236,mpg:41,range:595,svc:7,seats:"SofTex, heated + ventilated",maint:6004,resid:.32,hyb:1,
+   apr:[[4.99,48],[5.99,60],[6.99,72]],
+   why:"Best economy and resale, which is what decides a ten-year hold. Highest sticker of the realistic options and still the cheapest to own by a clear margin.",
+   flag:["Toyota offers <b>no cash, no conquest and no loyalty</b> on the redesign. The one thing available is the <b>$500 college graduate rebate</b>, which the RAV4 is eligible for and which stacks with the subsidised APR."]},
+  {k:"cx50",n:"Mazda CX-50 Hybrid Premium",dr:"AWD",msrp:39645,fair:38600,cash:1500,
+   hp:219,mpg:38,range:551,svc:3,seats:"Real leather, heated + ventilated",maint:7906,resid:.26,hyb:1,
+   apr:[[0,36],[2.9,60],[3.9,72]],
+   why:"AWD standard, real leather, ventilated seats, and 17-inch wheels that work better in Michigan snow than the 19s on the trim above.",
+   flag:["With a $20,000 Accord applied the loan shrinks so far that <b>the 0% no longer pays for itself</b> &mdash; the forfeited $1,500 outweighs the interest saved."]},
+  {k:"crv",n:"Honda CR-V Hybrid Sport-L",dr:"AWD",msrp:41675,fair:40251,cash:0,grad:500,
+   hp:204,mpg:37,range:518,svc:6,seats:"Real leather, heated only",maint:7636,resid:.29,hyb:1,
+   apr:[[2.49,36],[3.49,60],[4.49,72]],
+   why:"Priciest and least powerful, but Tennessee's Honda rate ladder is the best in this entire comparison &mdash; 2.49% at 36 months.",
+   flag:["The CR-V carries <b>no loyalty or conquest cash</b> this period. Honda runs one combined programme that an Accord owner would qualify for, but the CR-V is not on its eligible model list."]},
+  {k:"eqx",n:"Chevrolet Equinox LT + Conv II",dr:"AWD",msrp:34845,fair:33200,emp:32250,cash:0,
+   hp:175,mpg:26,range:406,svc:10,seats:"Cloth, heated only",maint:9197,resid:.18,hyb:0,
+   apr:[[0,36],[2.9,48],[3.9,60]],
+   why:"By far the cheapest to buy, with employee pricing and genuinely free 0% financing. Sixty horsepower down and fifteen mpg down on the field, which is what undoes it over 100,000 miles.",
+   flag:["Employee price is <b>invoice minus 4%</b> &mdash; a fixed figure printed on the invoice, roughly $32,250. It <b>does</b> stack with the 0% APR.",
+         "Convenience Package II ($2,050) is <b>mandatory</b> &mdash; without it the driver's seat is a 6-way manual, which fails a hard requirement.",
+         "The 2027 replaces the CVT with an 8-speed automatic for $200 more. That is a real argument against a leftover 2026."]}
+ ]
+};
+
+
+var DEALS={
+ a:[
+  ["Toyota","4.99% APR, 48 months","Aug 3, 2026","ok"],
+  ["Toyota","5.99% APR, 60 months","Aug 3, 2026","ok"],
+  ["Toyota","6.99% APR, 72 months","Aug 3, 2026","ok"],
+  ["Toyota","Lease $289/mo, 36 mo, $3,999 due","Aug 3, 2026","ok"],
+  ["Toyota","Customer cash / conquest / loyalty","&mdash;","none|None exists on the 2026 RAV4 in any amount."],
+  ["Toyota","$500 college graduate rebate","Aug 3, 2026","no|Requires graduating within two years. A 2021 graduate is outside the window."],
+  ["Toyota","$500 military rebate","Aug 3, 2026","no|Not combinable with the college rebate in any case."],
+  ["Mazda","$1,500 customer cash, CX-50 Hybrid Premium","Aug 31, 2026","ok|The single largest incentive available to either buyer."],
+  ["Mazda","0% APR, 24 and 36 months","Jul 31, 2026","ok|Strictly in lieu of the $1,500 &mdash; never both. No August programme published yet."],
+  ["Mazda","2.9% APR, 48 / 60 / 63 months","Jul 31, 2026","ok"],
+  ["Mazda","3.9% APR, 72 months","Jul 31, 2026","ok"],
+  ["Mazda","$750 loyalty reward","&mdash;","no|Requires a current Mazda registration or finance contract. An Accord cannot satisfy it."],
+  ["Mazda","$2,000 conquest cash","&mdash;","no|Honda is an eligible brand, but the offer covers CX-70 and CX-90 only."],
+  ["Mazda","$500 military appreciation","&mdash;","no|Stacks with either the cash or the APR if it applied."],
+  ["Honda","3.49% APR, 24&ndash;36 months","Sep 8, 2026","ok"],
+  ["Honda","4.49% APR, 37&ndash;60 months","Sep 8, 2026","ok"],
+  ["Honda","5.49% APR, 61&ndash;72 months","Sep 8, 2026","ok"],
+  ["Honda","Loyalty / conquest cash","&mdash;","none|Honda runs one combined programme covering Honda and 14 rival brands, but the CR-V Hybrid is not on the eligible model list. Prologue $2,000, Ridgeline $750, HR-V $500."],
+  ["Honda","$750 financing bonus","Sep 8, 2026","ask|Reported by a third party, not confirmed on Honda's own offer sheet for Sport-L. Worth asking &mdash; it is larger than any other Honda money here."],
+  ["Honda","$500 college graduate","Mar 31, 2027","no|Outside the two-year window for a 2021 graduate."]
+ ],
+ b:[
+  ["Toyota","4.99% APR, 48 months","Aug 3, 2026","ok"],
+  ["Toyota","5.99% APR, 60 months","Aug 3, 2026","ok"],
+  ["Toyota","6.99% APR, 72 months","Aug 3, 2026","ok"],
+  ["Toyota","$500 college graduate rebate","Aug 3, 2026","win|A 2026 graduate qualifies. The RAV4 is on Toyota's eligible list, and college money is <b>not</b> on the APR programme's exclusion list &mdash; so it stacks with the subsidised rate."],
+  ["Toyota","Lease $329/mo, 36 mo, $3,999 due","Aug 3, 2026","ok"],
+  ["Toyota","Customer cash / conquest / loyalty","&mdash;","none|None exists on the 2026 RAV4."],
+  ["Toyota","$500 military rebate","Aug 3, 2026","no|Not combinable with the college rebate &mdash; one or the other."],
+  ["Mazda","$1,500 customer cash, CX-50 Hybrid Premium","Aug 31, 2026","ok"],
+  ["Mazda","0% APR, 24 and 36 months","Jul 31, 2026","ok|Strictly in lieu of the $1,500. No August programme published yet."],
+  ["Mazda","2.9% APR, 48 / 60 / 63 months","Jul 31, 2026","ok"],
+  ["Mazda","3.9% APR, 72 months","Jul 31, 2026","ok"],
+  ["Mazda","$750 loyalty reward","&mdash;","no|Requires owning a Mazda."],
+  ["Mazda","$500 college graduate","&mdash;","ask|Mazda USA runs a graduate programme, but no CX-50 Hybrid offer sheet listed a cash amount. Ask &mdash; do not assume."],
+  ["Honda","2.49% APR, 24&ndash;36 months","Sep 8, 2026","win|The lowest real interest rate available to either buyer on any car here."],
+  ["Honda","3.49% APR, 37&ndash;60 months","Sep 8, 2026","ok"],
+  ["Honda","4.49% APR, 61&ndash;72 months","Sep 8, 2026","ok"],
+  ["Honda","$500 college graduate","Mar 31, 2027","win|A 2026 graduate qualifies. Honda words these as down-payment assistance, so it stacks with the subsidised APR rather than replacing it."],
+  ["Honda","Loyalty / conquest cash","&mdash;","none|The CR-V Hybrid is not on the eligible model list this period."],
+  ["Chevrolet","0% APR, 36 months","Aug 3, 2026","win|Genuinely free money &mdash; there is no cash allowance to give up, and it stacks with employee pricing."],
+  ["Chevrolet","2.9% APR, 48 months","Aug 3, 2026","ok"],
+  ["Chevrolet","3.9% APR, 60 months","Aug 3, 2026","ok"],
+  ["Chevrolet","Customer cash allowance","&mdash;","none|GM is running no cash on the 2026 gas Equinox."],
+  ["Chevrolet","GM Family First employee price","&mdash;","win|Roughly invoice minus 4%. Stacks with the 0% APR. Only gmfamilyfirst.com can produce the exact VIN-specific figure."],
+  ["Chevrolet","$1,000 lease conquest / lease loyalty","Aug 3, 2026","no|Requires <b>currently leasing</b> a 2021-or-newer vehicle and leasing the new one. Owning an Accord fails both tests."],
+  ["Chevrolet","$500 college / military / first responder / educator","Jan 4, 2027","no|A 2026 graduate qualifies on paper, but these do <b>not</b> stack with GM employee pricing, and employee pricing is worth far more."]
+ ]
+};
+
+var CHK=[
+ ["hot","3 days","<b>Chevrolet's 0% APR requires delivery by August 3, 2026.</b> It is the only incentive Buyer U actually qualifies for. Miss it and the ladder starts at 2.9%/48."],
+ ["hot","3 days","<b>Toyota's entire RAV4 APR ladder expires August 3, 2026</b> in both regions. There is no cash back and no 36-month tier at all."],
+ ["","timing","<b>Mazda's $1,500 runs to August 31; the 0%/36 was dated July 31.</b> No August program has been published yet. Re-check on August 1 before planning around either rate — but the cash is the more durable figure."],
+ ["hot","assumption","<b>The Accord earns nothing on three of the four cars.</b> Loyalty needs the same brand; conquest needs a rival brand <i>and</i> an active offer. Mazda's loyalty requires owning a Mazda, Toyota runs neither, and GM's conquest is lease-only and needs a current lease. Only Honda's program would include a Honda owner — and the CR-V is not on its eligible list."],
+ ["","confirm","<b>Get the RAV4 addendum itemised.</b> Port accessories negotiate; a flat “market adjustment” does not. In Memphis the fight is the $499–$1,978 accessory pack, not a markup."],
+ ["","confirm","Ask whether the anti-theft/alarm is removable at no cost. Dalton National City states in writing that it is; most San Diego stores do not price it at all."],
+ ["","confirm","Only gmfamilyfirst.com can produce Buyer U's actual VIN-specific authorisation price. Invoice-minus-4% is a cross-checked estimate, not his number."],
+ ["","note","California caps dealer doc fees at <b>$85</b> by statute. Tennessee caps nothing — Memphis stores charge $799–$958 and <b>TN taxes the doc fee</b>."],
+ ["","note","Tennessee charges <b>$100/yr on hybrids</b>, about $1,000 over the hold. It hits the RAV4, CX-50 and CR-V but not the Equinox."],
+ ["","note","Buy GAP from an insurer or credit union, never the finance office. Sit in the car 20+ minutes — Consumer Reports flagged the CR-V's front seats as firm."]
+];
+
+/* ============================ MATH ============================ */
+function pmt(P,apr,n){ if(P<=0)return 0; if(!apr)return P/n;
+  var r=apr/1200; return P*r/(1-Math.pow(1+r,-n)); }
+function grow(P0,pay,n,y){ var r=y/1200,b=P0,i; for(i=0;i<n;i++) b=b*(1+r)-pay; return b; }
+function money(v){ var s=Math.round(Math.abs(v)).toLocaleString(); return (v<0?"−$":"$")+s; }
+
+function calc(car,key){
+  var c=CFG[key], y=YIELD[key], base=car.emp||car.fair;
+  var tax=base*c.tax, credit=c.tradeTax?c.trade*c.tax:0;
+  var grad=car.grad||0;
+  var dueCash=(base-car.cash-grad)+tax+c.fee-c.trade-credit;
+  var dueFin = (base-grad)        +tax+c.fee-c.trade-credit;
+  var opts=car.apr.map(function(o){
+    var apr=o[0],n=o[1],p=pmt(dueFin,apr,n),paid=p*n-dueFin,g=grow(dueCash,p,n,y);
+    return {apr:apr,n:n,pay:p,paid:paid,earned:paid+g,net:g,fin:dueFin};
+  });
+  var loApr=opts.slice().sort(function(x,z){return x.apr-z.apr})[0];
+  var loPay=opts.slice().sort(function(x,z){return x.pay-z.pay})[0];
+  var best=opts.slice().sort(function(x,z){return z.net-x.net})[0];
+  var gain=Math.max(0,best.net);
+  var fuel=c.miles/car.mpg*c.gas, resale=car.msrp*car.resid, up=car.maint+car.hyb*c.hybfee;
+  return {base:base,dueCash:dueCash,dueFin:dueFin,opts:opts,loApr:loApr,loPay:loPay,
+          best:best,gain:gain,fuel:fuel,resale:resale,up:up,
+          net10:dueCash+fuel+up-resale-gain};
+}
+
+/* ============================ RENDER ============================ */
+var state={tab:"a",view:"car",mode:"loApr",color:{},icolor:{},shot:{}};
+
+function svgCar(hex,dark){
+  return '<svg class="art" viewBox="0 0 400 190" preserveAspectRatio="xMidYMid meet" role="img">'
+   +'<defs><linearGradient id="g'+dark.slice(1)+'" x1="0" y1="0" x2="0" y2="1">'
+   +'<stop offset="0" stop-color="#fff" stop-opacity=".34"/>'
+   +'<stop offset=".42" stop-color="#fff" stop-opacity=".04"/>'
+   +'<stop offset="1" stop-color="#000" stop-opacity=".26"/></linearGradient></defs>'
+   +'<ellipse cx="200" cy="166" rx="150" ry="9" fill="#000" opacity=".18"/>'
+   +'<path d="M28 138v-22q2-19 24-24l46-4 32-34q11-12 29-13h92q20 2 31 15l25 32 52 8q22 4 24 20v22z" fill="'+hex+'"/>'
+   +'<path d="M28 138v-22q2-19 24-24l46-4 32-34q11-12 29-13h92q20 2 31 15l25 32 52 8q22 4 24 20v22z" fill="url(#g'+dark.slice(1)+')"/>'
+   +'<path d="M132 86l30-32q5-5 12-5h26v37zm76 0V49h44q9 1 14 7l22 30z" fill="#c9d6e2" opacity=".9"/>'
+   +'<path d="M28 128h344v10H28z" fill="#000" opacity=".16"/>'
+   +'<g fill="#15171b"><circle cx="104" cy="138" r="27"/><circle cx="300" cy="138" r="27"/></g>'
+   +'<g fill="#8d949c"><circle cx="104" cy="138" r="13"/><circle cx="300" cy="138" r="13"/></g>'
+   +'<rect x="356" y="104" width="16" height="9" rx="3" fill="#ffd9a0" opacity=".95"/>'
+   +'<rect x="28" y="106" width="13" height="8" rx="3" fill="#ff8a8a" opacity=".9"/></svg>';
+}
+function svgInt(hex,lit){
+  return '<svg class="art" viewBox="0 0 400 190" preserveAspectRatio="xMidYMid meet" role="img">'
+   +'<rect x="0" y="0" width="400" height="190" fill="'+hex+'" opacity=".22"/>'
+   +'<path d="M22 84h356q14 0 14 13v18H8V97q0-13 14-13z" fill="'+hex+'"/>'
+   +'<rect x="8" y="115" width="384" height="7" fill="#000" opacity=".22"/>'
+   +'<rect x="150" y="92" width="100" height="26" rx="5" fill="'+lit+'" opacity=".75"/>'
+   +'<circle cx="86" cy="106" r="25" fill="none" stroke="'+lit+'" stroke-width="8"/>'
+   +'<circle cx="86" cy="106" r="7" fill="'+lit+'"/>'
+   +'<g fill="'+hex+'">'
+   +'<path d="M78 190v-38q0-13 13-13h56q13 0 13 13v38z"/>'
+   +'<path d="M244 190v-38q0-13 13-13h56q13 0 13 13v38z"/></g>'
+   +'<g fill="'+lit+'" opacity=".55">'
+   +'<rect x="96" y="146" width="46" height="4" rx="2"/><rect x="96" y="158" width="46" height="4" rx="2"/>'
+   +'<rect x="262" y="146" width="46" height="4" rx="2"/><rect x="262" y="158" width="46" height="4" rx="2"/></g>'
+   +'</svg>';
+}
+function palette(car){
+  return (state.shot[car.k]||"ext")==="int" ? INTERIORS[car.k] : COLORS[car.k];
+}
+function idx(car){
+  var s=(state.shot[car.k]||"ext");
+  var i=(s==="int"?state.icolor:state.color)[car.k]||0;
+  return Math.min(i,palette(car).length-1);
+}
+function stage(car){
+  var k=car.k, shot=state.shot[k]||"ext", pal=palette(car), ci=idx(car), col=pal[ci];
+  var url=col[3]||col[2], art=shot==="int"?svgInt(col[1],col[2]):svgCar(col[1],col[1]);
+  var isUrl=typeof url==="string"&&url.indexOf("http")===0;
+  var inner='<div class="ph">'+art+'</div>'
+    +(isUrl?'<img src="'+url+'" alt="'+car.n+' '+col[0]+'" loading="lazy" '
+      +'onerror="this.remove()">':'');
+  return '<div class="stage">'+inner+'<span class="cname">'+col[0]+'</span></div>';
+}
+
+function vehCard(car,key,i){
+  var r=calc(car,key), pal=palette(car), ci=idx(car), shot=state.shot[car.k]||"ext";
+  var vid=MEDIA[car.k]&&MEDIA[car.k].video;
+  return '<article class="veh wide'+(i===0?" hl":"")+'">'
+   +'<div class="media" style="position:relative">'+(i===0?'<div class="rank">'+(i+1)+'</div>':'')+stage(car)+'</div>'
+   +'<div class="vbody">'
+     +'<div class="vhead"><div><div class="vname">'+car.n+'</div>'
+       +'<div class="vsub">'+car.dr+' &middot; '+car.seats+'</div></div>'
+       +'<div class="vprice"><b>'+money(car.msrp)+'</b><span>MSRP</span></div></div>'
+     +'<div class="vtabs">'
+       +'<button data-shot="'+car.k+':ext" aria-pressed="'+(shot==="ext")+'">Exterior</button>'
+       +'<button data-shot="'+car.k+':int" aria-pressed="'+(shot==="int")+'">Interior</button></div>'
+     +'<div class="swatches">'+pal.map(function(x,j){
+         return '<button class="sw" style="background:'+x[1]+'" data-col="'+car.k+':'+j+'" '
+           +'aria-pressed="'+(j===ci)+'" title="'+x[0]+'" aria-label="'+x[0]+'"></button>';}).join("")
+     +'</div><div class="swname">'+pal[ci][0]+'</div>'
+     +'<div class="specs">'
+       +'<div class="spec"><b>'+car.hp+'</b><span>hp</span></div>'
+       +'<div class="spec"><b>'+car.mpg+'</b><span>mpg</span></div>'
+       +'<div class="spec"><b>'+car.range+'</b><span>mi / tank</span></div>'
+       +'<div class="spec"><b>'+money(r.net10)+'</b><span>10-yr net</span></div>'
+       +'<div class="spec"><b>'+car.svc+'<small style="font-size:.62em;opacity:.55">/10</small></b><span>serviceable</span></div></div>'
+     +(IMGNOTE[car.k]?'<p style="font-size:.73rem;color:var(--faint);margin-top:9px">'+IMGNOTE[car.k]+'</p>':'')
+     +'<p style="margin-top:14px;font-size:.91rem;color:var(--dim)">'+car.why+'</p>'
+     +car.flag.map(function(f){return '<div class="note w" style="font-size:.87rem">'+f+'</div>';}).join("")
+     +(vid?'<div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/'+vid
+        +'" title="'+car.n+'" loading="lazy" allowfullscreen '
+        +'referrerpolicy="strict-origin-when-cross-origin"></iframe></div>':'')
+   +'</div></article>';
+}
+
+function dealView(key){
+  var cars=CARS[key], c=CFG[key];
+  var h='<h3>What each car actually costs</h3>'
+   +'<div class="note"><p><b>Fair value is a pre-rebate number.</b> Edmunds and KBB both publish an '
+   +'estimate of the <i>negotiated selling price</i> and explicitly exclude manufacturer rebates. So factory '
+   +'cash comes off <b>after</b> you finish negotiating, not instead of negotiating. A dealer who quotes the '
+   +'fair price and calls the rebate “already included” is pocketing it.</p>'
+   +'<p>TrueCar and Consumer Reports Build &amp; Buy work the opposite way — their headline number is '
+   +'usually already net of incentives. Ask which one you are holding before you anchor on it.</p></div>';
+  cars.forEach(function(car){
+    var r=calc(car,key), lines=[];
+    lines.push(['MSRP as configured','',car.msrp,'']);
+    if(car.fair<car.msrp) lines.push(['Fair value','what the car actually transacts at',car.fair-car.msrp,'sub']);
+    if(car.emp) lines.push(['GM employee price','invoice minus 4%, printed on the invoice',car.emp-car.fair,'sub']);
+    if(car.cash) lines.push(['Manufacturer customer cash','forfeited if you take the subsidised APR',-car.cash,'sub']);
+    if(car.grad) lines.push(['College graduate rebate','2026 graduate, within the two-year window — stacks with the subsidised APR',-car.grad,'sub']);
+    lines.push(['Loyalty / conquest','the Accord earns nothing here',0,'']);
+    var net=(car.emp||car.fair)-car.cash-(car.grad||0);
+    h+='<div class="card"><div class="vname" style="margin-bottom:4px">'+car.n+'</div>'
+      +'<div class="vsub" style="margin-bottom:10px">'+car.dr+'</div><div class="fall">'
+      +lines.map(function(l){
+        return '<div class="row '+l[3]+'"><div class="lbl">'+l[0]+(l[1]?'<small>'+l[1]+'</small>':'')
+          +'</div><div class="amt">'+(l[2]===0?'—':(l[3]==='sub'?money(l[2]):money(l[2])))+'</div></div>';}).join("")
+      +'<div class="row tot"><div class="lbl">Target price, before tax and fees</div>'
+      +'<div class="amt">'+money(net)+'</div></div></div>'
+      +'<div class="kv" style="margin-top:12px">'
+        +'<div><span>+ tax &amp; fees</span><b>'+money(r.dueCash-net+c.trade+(c.tradeTax?c.trade*c.tax:0))+'</b></div>'
+        +(c.trade?'<div><span>− Accord</span><b>'+money(c.trade)+'</b></div>':'')
+        +'<div><span>out the door</span><b>'+money(r.dueCash)+'</b></div></div></div>';
+  });
+  return h;
+}
+
+
+function dealsView(key){
+  var badge={ok:["",""],win:["pill","take it"],no:["pill w","not eligible"],
+              none:["pill w","none offered"],ask:["pill w","ask"]};
+  var h='<h3>Every offer found &middot; '+(key==="a"?"California":"Tennessee")+'</h3>'
+   +'<p class="h2note">Manufacturer programmes only, read 29 July 2026. &ldquo;Not eligible&rdquo; means '
+   +'this buyer fails the stated qualification &mdash; the offer itself exists.</p><div class="dl">';
+  var brand="";
+  DEALS[key].forEach(function(d){
+    if(d[0]!==brand){ brand=d[0]; h+='<h4 style="margin:16px 0 2px;font-size:.8rem;letter-spacing:.12em;'
+      +'text-transform:uppercase;color:var(--acc)">'+brand+'</h4>'; }
+    var parts=d[3].split("|"), kind=parts[0], why=parts[1]||"";
+    var b=badge[kind]||badge.ok;
+    h+='<div class="it"><h4 style="margin:0">'+d[1]
+      +(b[1]?' <em><span class="'+b[0]+'">'+b[1]+'</span></em>':'')+'</h4>'
+      +(why?'<p style="font-size:.85rem;color:var(--dim);margin-top:6px">'+why+'</p>':'')
+      +'<div style="font-size:.74rem;color:var(--faint);margin-top:7px;text-transform:uppercase;'
+      +'letter-spacing:.06em">'+(d[2]==="&mdash;"?"no expiry stated":"expires "+d[2])+'</div></div>';
+  });
+  return h+'</div>';
+}
+
+
+function svcView(key){
+  var d = key==="a"
+   ? {place:"San Diego",rows:[
+      ["Toyota",10,"~7&ndash;8 dealers within 30 miles, three inside 6.4. Densest independent and hybrid-specialist network of any brand, cheapest parts, best availability. Consumer Reports&rsquo; #1 brand, zero recalls on the 2026 RAV4, and the lowest 10-year maintenance bill in the set at <b>$6,004</b>."],
+      ["Honda",9,"About six dealers within 30 miles and strong independent support. RepairPal rates the CR-V best in class at 4.5/5. Marked down only for a J.D. Power dependability score below the industry average."],
+      ["Chevrolet",8,"Seven dealers within 30 miles and ubiquitous parts. Best J.D. Power dependability of the four. Marked down for CR #16, RepairPal #23 of 26 compact SUVs, and the highest 10-year maintenance cost at <b>$9,197</b>."],
+      ["Mazda",7,"Three dealers within 30 miles is genuinely adequate, and San Diego&rsquo;s import trade means independent options exist. The powertrain-orphan problem is an inconvenience here rather than a risk."]]}
+   : {place:"Grand Blanc / Flint",rows:[
+      ["Chevrolet",10,"<b>Nineteen dealers within 30 miles, six inside twelve</b>, one 1.3 miles from Grand Blanc. The Equinox is the best-selling vehicle in Michigan. Every independent shop and parts counter in Genesee County knows GM. Its mediocre reliability scores barely matter when anything that breaks gets fixed the same week, nearby and cheap."],
+      ["Toyota",7,"A Toyota store sits <b>1.9 miles</b> away, which covers the everyday case well. But it is a two-dealer market inside 30 miles &mdash; if that one store is booked or you have a dispute, the next is 23 miles out. Offset by the best reliability and cheapest upkeep in the set."],
+      ["Honda",6,"<b>One dealer</b>, with the next roughly 35 miles away. The CR-V is Michigan&rsquo;s #12 seller so parts move and it is not exotic, but it is a single point of failure."],
+      ["Mazda",3,"<b>Zero Mazda dealers in Genesee County.</b> The nearest is about 30&ndash;33 miles each way &mdash; a 65-mile round trip for every warranty visit, recall and software update, for ten years. Mazda is not in Michigan&rsquo;s top 25 sellers, so local independent expertise is negligible."]]};
+  var h='<h3>How easy is this car to live with in '+d.place+'?</h3>'
+   +'<p class="h2note">Scored 0&ndash;10 on the odds that at any point over ten years you can get the car '
+   +'diagnosed and repaired competently, quickly and affordably without a long drive.</p><div class="dl">';
+  d.rows.forEach(function(r){
+    var w=r[1]*10, col=r[1]>=9?"var(--good)":r[1]>=6?"var(--warm)":"var(--bad)";
+    h+='<div class="it"><h4 style="margin-bottom:6px">'+r[0]+' <em style="color:'+col+'">'+r[1]+'<span style="font-size:.7em;opacity:.6">/10</span></em></h4>'
+      +'<div style="height:6px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:9px">'
+      +'<div style="height:100%;width:'+w+'%;background:'+col+'"></div></div>'
+      +'<p style="font-size:.86rem;color:var(--dim)">'+r[2]+'</p></div>';
+  });
+  h+='</div>';
+  if(key==="b") h+='<div class="note b"><p><b>This is the single biggest risk in Buyer U&rsquo;s comparison.</b> '
+    +'The CX-50 Hybrid runs a Toyota powertrain in a Mazda body &mdash; but no Toyota dealer will service it, '
+    +'and the parts, warranty and software channels are all Mazda. Owners already report CX-50 parts on '
+    +'backorder with no ETA. In a market with no local Mazda dealer and no local Mazda-hybrid independent, '
+    +'a routine problem can become a multi-week ordeal.</p>'
+    +'<p>The 2025 CX-50 also drew four recalls, two safety-critical and both touching the Hybrid. The 2026 '
+    +'cars are clean so far &mdash; all four have zero meaningful recalls this model year.</p></div>';
+  else h+='<div class="note"><p><b>Serviceability is not a property of the brand &mdash; it is a property of '
+    +'the brand <i>and</i> the place.</b> The same four cars score very differently in Michigan, where '
+    +'Chevrolet rises to 10 and Mazda falls to 3.</p></div>';
+  return h;
+}
+
+function moneyView(key){
+  var cars=CARS[key], c=CFG[key], y=YIELD[key], mode=state.mode;
+  var h='<h3>Pay cash, or finance and invest the difference?</h3>'
+   +'<div class="note"><p><b>The rule:</b> finance only when the loan’s rate is below what the cash would '
+   +'earn after tax. Best available to '+c.label+' right now is <b>'+y.toFixed(2)+'% after tax</b> — '
+   +c.yieldNote+'.</p>'
+   +'<p><b>Rates are not about to fall.</b> The Fed has held at 3.50–3.75% all year and markets are '
+   +'pricing roughly a 25–50bp <i>hike</i> over the next twelve months, with September odds near 80%. '
+   +'Locking a term today is cheap insurance, and there is almost no term premium — five-year money pays '
+   +'within 5bp of one-year.</p></div>'
+   +'<div class="seg" style="margin-bottom:16px">'
+   +'<button data-mode="loApr" aria-pressed="'+(mode==="loApr")+'">Lowest APR</button>'
+   +'<button data-mode="loPay" aria-pressed="'+(mode==="loPay")+'">Lowest payment</button></div>'
+   +'<div class="dl">';
+  cars.slice().sort(function(x,z){return calc(x,key).net10-calc(z,key).net10;}).forEach(function(car){
+    var r=calc(car,key), o=r[mode], win=o.net>0;
+    h+='<div class="it"><h4>'+car.n+' <em>'+(win?'<span class="pill">finance</span>':'<span class="pill w">pay cash</span>')+'</em></h4>'
+      +'<div class="kv">'
+      +'<div><span>option</span><b>'+(o.apr?o.apr+'%':'0%')+' / '+o.n+' mo</b></div>'
+      +'<div><span>financed</span><b>'+money(o.fin)+'</b></div>'
+      +'<div><span>payment</span><b>'+money(o.pay)+'/mo</b></div>'
+      +'<div><span>interest paid</span><b class="neg">'+money(o.paid)+'</b></div>'
+      +'<div><span>interest earned</span><b class="pos">'+money(o.earned)+'</b></div>'
+      +'<div><span>net</span><b class="'+(win?'pos':'neg')+'">'+(o.net>0?'+':'')+money(o.net)+'</b></div>'
+      +'</div></div>';
+  });
+  h+='</div>';
+  var cx=cars.filter(function(v){return v.k==="cx50";})[0];
+  if(cx){ var rc=calc(cx,key), z=rc.opts[0];
+    h+='<div class="note '+(z.net>0?'':'w')+'"><p><b>Mazda’s 0% is not free — it costs the $1,500.</b> '
+      +'The two are strictly either/or, so taking the rate means paying '+money(cx.cash)+' more for the car. '
+      +'That prices the “0%” at an effective <b>2.33% APR</b>, and against a '+y.toFixed(2)+'% yield it '
+      +(z.net>0?'still wins — but by only '+money(z.net)+' over three years.'
+               :'now <b>loses '+money(-z.net)+'</b>. Take the cash instead.')+'</p></div>';
   }
-  function setView(v){
-    togs.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.view===v)});
-    views.forEach(function(p){p.hidden=p.dataset.viewPanel!==v});
+  if(key==="b"){
+    h+='<div class="note"><p><b>The Equinox’s 0% is the only genuinely free money here.</b> GM runs no cash '
+      +'allowance on the 2026 Equinox, so unlike Mazda there is nothing to give up — and it stacks with '
+      +'employee pricing. Take both.</p></div>';
   }
-  tabs.forEach(function(t){t.addEventListener('click',function(){setTab(t.dataset.tab)})});
-  togs.forEach(function(b){b.addEventListener('click',function(){setView(b.dataset.view)})});
+  return h;
+}
 
-  // ---- Buyer 2 cost model, driven by the Accord slider ----
-  var TAX=0.07, FEE=88, MILES=120000, GAS=3.50, YIELD=3.04;
-  var HYBFEE=1000; // TN charges $100/yr on hybrids — $1,000 over the 10-year hold
-  var CARS=[
-   {n:'2025 CX-50 Hyb Premium, ~20k mi',tag:'used',price:29000,mpg:38,maint:8500,msrp:39645,resid:.22,apr:5.29,term:60,hyb:1},
-   {n:'RAV4 XLE Premium AWD',tag:'new',price:38950,mpg:41,maint:7000,msrp:38950,resid:.30,apr:4.99,term:48,hyb:1},
-   {n:'2025 Equinox LT AWD, ~30k mi',tag:'used',price:25200,mpg:26,maint:9000,msrp:32495,resid:.16,apr:5.29,term:60},
-   {n:'Equinox LT AWD, employee price',tag:'new',price:32250,mpg:26,maint:8500,msrp:34845,resid:.20,apr:0,term:36},
-   {n:'CR-V Sport-L AWD',tag:'new',price:40251,mpg:37,maint:7500,msrp:41675,resid:.27,apr:3.49,term:60,bonus:500,hyb:1},
-   {n:'CX-50 Hybrid Premium',tag:'new',price:39645,mpg:38,maint:8000,msrp:39645,resid:.24,apr:0,term:36,rebate:1500,hyb:1},
-   {n:'Equinox LT AWD + Conv. Pkg II',tag:'new',price:33900,mpg:26,maint:8500,msrp:34845,resid:.20,apr:0,term:36}
-  ];
-  var $=function(s){return document.querySelector(s)};
-  var money=function(v){return (v<0?'−$':'$')+Math.round(Math.abs(v)).toLocaleString()};
-  function pmt(P,apr,n){if(P<=0)return 0;if(!apr)return P/n;var r=apr/1200;return P*r/(1-Math.pow(1+r,-n));}
+function render(){
+  ["a","b"].forEach(function(key){
+    var el=document.querySelector('[data-panel="'+key+'"]');
+    el.hidden = key!==state.tab;
+    if(el.hidden) return;
+    var h="";
+    if(state.view==="car"){
+      var sorted=CARS[key].slice().sort(function(x,z){return calc(x,key).net10-calc(z,key).net10;});
+      h='<h2>'+(key==="a"?"Buyer K &mdash; San Diego":"Buyer U &mdash; Memphis to Michigan")+'</h2>'
+       +'<p class="h2note">'+(key==="a"
+          ?"Hybrid required &middot; heated + power seats &middot; CarPlay &middot; Premium/XLE Premium floor &middot; 100,000 miles over 10 years"
+          :"AWD required &middot; heated + power seats &middot; Android Auto &middot; gas acceptable &middot; 100,000 miles over 10 years")+'</p>'
+       +sorted.map(function(v,i){return vehCard(v,key,i);}).join("");
+    } else if(state.view==="deal"){ h=dealView(key); }
+    else if(state.view==="svc"){ h=svcView(key); }
+    else if(state.view==="deals"){ h=dealsView(key); }
+    else { h=moneyView(key); }
+    el.innerHTML=h;
+  });
+}
 
-  function render(){
-    var trade=+$('#tradeAmt').value;
-    var isTrade=document.querySelector('input[name=tradeMode]:checked').value==='trade';
-    $('#tradeOut').textContent='$'+trade.toLocaleString();
-    var credit=isTrade?trade*TAX:0;
-    $('#tradeNote').innerHTML=isTrade
-      ? 'Tennessee taxes only the difference after a trade, so this is worth <b>'+money(credit)+'</b> in avoided sales tax.'
-      : 'Insurance cash is not a trade-in, so there is <b>no tax credit</b> — you lose <b>'+money(trade*TAX)+'</b> versus trading the same car in. If the Accord is totalled, that credit is gone.';
+/* ============================ EVENTS ============================ */
+document.addEventListener("click",function(e){
+  var t=e.target.closest("button"); if(!t) return;
+  if(t.dataset.tab){ state.tab=t.dataset.tab;
+    document.querySelectorAll(".tabs button").forEach(function(b){
+      b.setAttribute("aria-selected",b.dataset.tab===state.tab);}); render(); }
+  else if(t.dataset.view){ state.view=t.dataset.view;
+    document.querySelectorAll(".seg button[data-view]").forEach(function(b){
+      b.setAttribute("aria-pressed",b.dataset.view===state.view);}); render(); }
+  else if(t.dataset.mode){ state.mode=t.dataset.mode; render(); }
+  else if(t.dataset.col){ var p=t.dataset.col.split(":");
+    ((state.shot[p[0]]||"ext")==="int"?state.icolor:state.color)[p[0]]=+p[1]; render(); }
+  else if(t.dataset.shot){ var q=t.dataset.shot.split(":"); state.shot[q[0]]=q[1]; render(); }
+});
 
-    var rows=CARS.map(function(c){
-      var tax=c.price*TAX+FEE;
-      var dueCash=(c.price-(c.rebate||0))+tax-credit-trade;      // pay cash, keep any rebate
-      var dueFin =(c.price-(c.bonus ||0))+tax-credit-trade;      // finance, rebate forfeited
-      var gain=0;
-      if(dueCash>0&&dueFin>0){
-        var p=pmt(dueFin,c.apr,c.term), r=YIELD/1200, bal=dueCash;
-        for(var i=0;i<c.term;i++) bal=bal*(1+r)-p;
-        gain=bal;
-      }
-      var fin=gain>0;
-      var fuel=MILES/c.mpg*GAS, resale=c.msrp*c.resid, upkeep=c.maint+(c.hyb?HYBFEE:0);
-      return {c:c,due:dueCash,fuel:fuel,resale:resale,upkeep:upkeep,gain:fin?gain:0,fin:fin,
-              net:dueCash+fuel+upkeep-resale-(fin?gain:0)};
-    }).sort(function(a,b){return a.net-b.net});
+document.getElementById("chk").innerHTML=CHK.map(function(x){
+  return '<li class="'+x[0]+'"><span class="pill '+(x[0]==="hot"?"b":"")+'">'+x[1]+'</span> '+x[2]+'</li>';
+}).join("");
 
-    $('#b2rows').innerHTML=rows.map(function(r,i){
-      var c=r.c, t=c.tag==='new'?'<span class="tag g">new</span>':'<span class="tag">'+c.tag+'</span>';
-      var strat=r.due<=0?'Covered by Accord'
-              :r.fin?('Finance '+(c.apr?c.apr+'%':'0%')+'/'+c.term):'Cash';
-      return '<tr'+(i===0?' class="best"':'')+'><td>'+c.n+' '+t+'</td>'
-        +'<td class="n">'+money(r.due)+'</td><td class="n">'+money(r.fuel)+'</td>'
-        +'<td class="n">'+money(r.upkeep)+(c.hyb?'<span class="tag">+TN</span>':'')+'</td><td class="n">'+money(r.resale)+'</td>'
-        +'<td class="n">'+(r.gain>0?money(r.gain):'&mdash;')+'</td>'
-        +'<td class="n"><b>'+money(r.net)+'</b></td><td>'+strat+'</td></tr>';
-    }).join('');
-  }
-  $('#tradeAmt').addEventListener('input',render);
-  document.querySelectorAll('input[name=tradeMode]').forEach(function(el){el.addEventListener('change',render)});
-  render();
+render();
 })();
 </script>
 </body>
