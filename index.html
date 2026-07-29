@@ -133,6 +133,8 @@ header{padding:34px 0 20px;border-bottom:1px solid var(--line);margin-bottom:22p
   background:radial-gradient(ellipse at center,rgba(0,0,0,.66),transparent 72%);filter:blur(4px)}
 .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;z-index:3}
 .stage img.fill{object-fit:cover}
+.stage img.pano,.tile .tstage img.pano{object-position:70% 55%;
+  transform:scale(2)!important;filter:brightness(1.5) saturate(1.12)}
 .stage[data-k="rav4"] img:not(.fill){transform:scale(1.00)}
 .stage[data-k="crv"]  img:not(.fill){transform:scale(1.55)}
 .stage[data-k="eqx"]  img:not(.fill){transform:scale(.92)}
@@ -407,7 +409,7 @@ var MEDIA={
 var IMGNOTE={
  eqx:"Exteriors are ACTIV bodies &mdash; Chevrolet publishes no per-colour LT imagery. Interiors are genuine LT. Only Black Cloth is cloth.",
  crv:"Interior shots are generic CR-V. Sport-L is <b>black leather only</b> — gray is Sport Touring, +$3,825.",
- cx50:"The cabin view is Mazda's 360&deg; panorama, so it reads wide-angle."};
+ cx50:"Mazda only publishes colour-specific interiors as 360&deg; panoramas, so the cabin view is a crop from one."};
 
 var CARS={
  a:[
@@ -622,9 +624,10 @@ function stage(car){
   // Mazda publishes no cutout beyond one hero colour, so its exteriors and every
   // interior are photographs that fill the frame; the rest are cutouts on the scene.
   var fill = shot==="int" || k==="cx50";
+  var pano = isUrl && url.indexOf("i360-")>-1;   // Mazda 360 interior panorama
   return '<div class="stage" data-k="'+k+'">'
     +'<div class="ph">'+art+'</div><div class="haze"></div><div class="shadow"></div>'
-    +(isUrl?'<img class="'+(fill?"fill":"")+'" src="'+url+'" alt="'+car.n+' '+col[0]+'" '
+    +(isUrl?'<img class="'+(fill?"fill":"")+(pano?" pano":"")+'" src="'+url+'" alt="'+car.n+' '+col[0]+'" '
       +'loading="lazy" onerror="this.remove()" '
       +'onload="var p=this.parentNode.querySelector(\'.ph\');if(p)p.style.display=\'none\'">':'')
     +'<span class="cname">'+col[0]+'</span></div>';
