@@ -167,6 +167,16 @@ header{padding:34px 0 20px;border-bottom:1px solid var(--line);margin-bottom:22p
 .kv b{font-size:.9rem;font-weight:700;font-variant-numeric:tabular-nums;overflow-wrap:break-word}
 .pos{color:var(--good)} .neg{color:var(--bad)}
 
+ul.tight{list-style:none;display:grid;gap:5px;margin:10px 0 0}
+ul.tight li{padding-left:15px;position:relative;font-size:.88rem;color:var(--dim);line-height:1.45}
+ul.tight li::before{content:"";position:absolute;left:2px;top:.6em;width:5px;height:5px;
+  border-radius:50%;background:var(--acc);opacity:.75}
+ul.tight li b{color:var(--tx)}
+.note ul.tight li{font-size:.87rem}
+.note ul.tight li::before{background:var(--acc2)}
+.note.w ul.tight li::before{background:var(--warm)}
+.note.b ul.tight li::before{background:var(--bad)}
+.notehead{font-weight:750;font-size:.9rem;color:var(--tx);display:block}
 ul.chk{list-style:none;display:grid;gap:9px;margin-top:10px}
 ul.chk li{background:var(--card);border:1px solid var(--line);border-radius:12px;
   padding:12px 14px;font-size:.9rem}
@@ -280,14 +290,13 @@ footer p+p{margin-top:7px}
 <ul class="chk" id="chk"></ul>
 
 <footer>
-  <p><b>Sources.</b> MSRP, incentives and APR ladders read from manufacturer regional offer pages
-  (toyota.com, mazdausa.com, chevrolet.com) and dealer inventory feeds on 29 July 2026. Yields from the
-  US Treasury daily curve and Federal Reserve H.15 for 28 July 2026. Invoice figures are third-party.
-  Resale values are the softest input &mdash; treat &plusmn;$2,000 as noise.</p>
-  <p><b>Edmunds and KBB both serve bot-detection walls to automated access</b>, so no figure here was read
-  from either directly. Where their methodology is described, it comes from their own published
-  documentation reached via search.</p>
-  <p>Model in <code>model.py</code>. Not financial advice.</p>
+  <ul class="tight" style="margin:0">
+    <li>MSRP, incentives and APR ladders read from manufacturer offer pages and dealer feeds, 29 Jul 2026</li>
+    <li>Yields from the US Treasury curve and Fed H.15, 28 Jul 2026</li>
+    <li>Edmunds and KBB block automated access &mdash; nothing here was read from either directly</li>
+    <li>Resale is the softest input; treat &plusmn;$2,000 as noise</li>
+    <li>Model in <code>model.py</code>. Not financial advice.</li>
+  </ul>
 </footer>
 </div>
 
@@ -358,8 +367,8 @@ var MEDIA={
  eqx :{video:"THVk6p-piHc",vcap:"Chevrolet &middot; 0:34 &middot; official marketing spot"}
 };
 var IMGNOTE={
- eqx:"Chevrolet publishes no per-colour <i>exterior</i> imagery for the LT, so those are ACTIV bodies in the same paint. The interiors are genuine LT renders. Only Black Cloth is cloth &mdash; the other two are Evotex.",
- crv:"Honda's interior photography is generic 2026 CR-V rather than Sport-L specifically. Sport-L offers <b>black leather only</b> — gray leather exists on the CR-V but is exclusive to Sport Touring Hybrid, a $3,825 step up.",
+ eqx:"Exteriors are ACTIV bodies &mdash; Chevrolet publishes no per-colour LT imagery. Interiors are genuine LT. Only Black Cloth is cloth.",
+ crv:"Interior shots are generic CR-V. Sport-L is <b>black leather only</b> — gray is Sport Touring, +$3,825.",
  cx50:"The cabin view is Mazda's 360&deg; panorama, so it reads wide-angle."};
 
 var CARS={
@@ -367,48 +376,54 @@ var CARS={
   {k:"rav4",n:"Toyota RAV4 XLE Premium",dr:"FWD",msrp:37695,fair:37695,cash:0,
    hp:226,mpg:43,range:624,svc:10,seats:"SofTex, heated + ventilated",maint:6004,resid:.32,hyb:0,
    apr:[[4.99,48],[5.99,60],[6.99,72]],
-   why:"Cheapest of the three, best economy, strongest resale. No rebate and no subsidised rate exist on the redesign, so the entire fight is getting <b>to</b> MSRP rather than below it.",
-   flag:["Toyota is the only one of these three offering <b>nothing at all</b> — no customer cash, no conquest, no loyalty. The $500 college and military rebates are the sole exceptions, and the RAV4 is on their eligible list."]},
+   why:["Cheapest to buy, cheapest to run, best resale","Lowest maintenance in the set at $6,004 over ten years",
+        "No rebate and no subsidised rate exist &mdash; the fight is getting <b>to</b> MSRP, not below it"],
+   flag:["Toyota offers <b>nothing</b>: no customer cash, no conquest, no loyalty"]},
   {k:"cx50",n:"Mazda CX-50 Hybrid Premium",dr:"AWD",msrp:39645,fair:37000,cash:1500,
    hp:219,mpg:38,range:551,svc:7,seats:"Real leather, heated + ventilated",maint:7906,resid:.26,hyb:0,
    apr:[[0,36],[2.9,60],[3.9,72]],
-   why:"The only car here with genuine leather <i>and</i> ventilated seats, and the only one with real factory money on the hood. Toyota's own hybrid powertrain underneath.",
-   flag:["<b>Pricing note.</b> Fair value here is $37,000, taken from the Edmunds median rather than my own estimate. But be careful which number that is: if Edmunds is quoting a <i>pre-rebate</i> selling price, the $1,500 still comes off on top and the real target is ~$35,500. If it already nets the rebate out, ~$37,000 <b>is</b> the final number and there is no second bite. <b>Make the dealer write selling price and customer cash as two separate lines</b> — that forces the answer either way.",
-         "Invoice is $38,691 delivered &mdash; just $954 under MSRP &mdash; so a $37,000 selling price is <b>below invoice</b>. That is achievable on holdback, but it means the negotiation is already near its floor and the $1,500 factory cash is where the remaining value sits."]},
+   why:["Only car here with real leather <b>and</b> ventilated seats","Toyota hybrid powertrain underneath",
+        "Only one with real factory cash on the hood"],
+   flag:["$37,000 sits <b>below</b> the $38,691 invoice &mdash; so ask whether the $1,500 is already in that number",
+         "Make the dealer write selling price and customer cash as <b>separate lines</b>"]},
   {k:"crv",n:"Honda CR-V Hybrid Sport-L",dr:"FWD",msrp:40175,fair:38800,cash:0,
    hp:204,mpg:40,range:560,svc:9,seats:"Real leather, heated only",maint:7636,resid:.29,hyb:0,
    apr:[[3.49,36],[4.49,60],[5.49,72]],
-   why:"Roomiest cabin and real leather, but the least powerful and the most expensive to buy. No ventilated seats at this trim.",
-   flag:["Honda sets its rate ladder by zone. California's is <b>3.49% to 36 months, 4.49% to 60, 5.49% to 72</b> &mdash; the CR-V never reaches a subsidised low rate the way the Mazda does.",
-         "The CR-V carries <b>no loyalty or conquest cash</b> this period, and the widely-quoted $750 is <i>lease</i> cash, not purchase cash."]}
+   why:["Roomiest cabin, real leather","Least powerful and priciest to buy","No ventilated seats at this trim"],
+   flag:["California rates: 3.49% to 36mo, 4.49% to 60, 5.49% to 72",
+         "No loyalty or conquest &mdash; the widely-quoted $750 is <b>lease</b> cash",
+         "Black leather only; gray is Sport Touring, a $3,825 step up"]}
  ],
  b:[
   {k:"rav4",n:"Toyota RAV4 XLE Premium",dr:"AWD",msrp:39095,fair:39095,cash:0,grad:500,
    hp:236,mpg:41,range:595,svc:7,seats:"SofTex, heated + ventilated",maint:6004,resid:.32,hyb:1,
    apr:[[4.99,48],[5.99,60],[6.99,72]],
-   why:"Best economy and resale, which is what decides a ten-year hold. Highest sticker of the realistic options and still the cheapest to own by a clear margin.",
-   flag:["Toyota offers <b>no cash, no conquest and no loyalty</b> on the redesign. The one thing available is the <b>$500 college graduate rebate</b>, which the RAV4 is eligible for and which stacks with the subsidised APR."]},
+   why:["Best economy and resale over 100,000 miles","Highest sticker, still cheapest to own",
+        "$500 college rebate applies <b>and</b> stacks with the subsidised APR"],
+   flag:["Toyota offers no cash, no conquest, no loyalty &mdash; the college rebate is the only money"]},
   {k:"cx50",n:"Mazda CX-50 Hybrid Premium",dr:"AWD",msrp:39645,fair:37000,cash:1500,
    hp:219,mpg:38,range:551,svc:3,seats:"Real leather, heated + ventilated",maint:7906,resid:.26,hyb:1,
    apr:[[0,36],[2.9,60],[3.9,72]],
-   why:"AWD standard, real leather, ventilated seats, and 17-inch wheels that work better in Michigan snow than the 19s on the trim above.",
-   flag:["<b>Pricing note.</b> Fair value here is $37,000, taken from the Edmunds median rather than my own estimate. But be careful which number that is: if Edmunds is quoting a <i>pre-rebate</i> selling price, the $1,500 still comes off on top and the real target is ~$35,500. If it already nets the rebate out, ~$37,000 <b>is</b> the final number and there is no second bite. <b>Make the dealer write selling price and customer cash as two separate lines</b> — that forces the answer either way.",
-         "With a $20,000 Accord applied the loan shrinks so far that <b>the 0% no longer pays for itself</b> &mdash; the forfeited $1,500 outweighs the interest saved."]},
+   why:["AWD standard, real leather, ventilated seats","17-inch wheels beat the 19s in snow"],
+   flag:["<b>Serviceability 3/10 here</b> &mdash; no Mazda dealer in Genesee County",
+         "With a $20k Accord the 0% stops paying: the $1,500 forfeit outweighs the interest saved",
+         "Ask whether the $1,500 is already inside the $37,000"]},
   {k:"crv",n:"Honda CR-V Hybrid Sport-L",dr:"AWD",msrp:41675,fair:40251,cash:0,grad:500,
    hp:204,mpg:37,range:518,svc:6,seats:"Real leather, heated only",maint:7636,resid:.29,hyb:1,
    apr:[[2.49,36],[3.49,60],[4.49,72]],
-   why:"Priciest and least powerful, but Tennessee's Honda rate ladder is the best in this entire comparison &mdash; 2.49% at 36 months.",
-   flag:["The CR-V carries <b>no loyalty or conquest cash</b> this period. Honda runs one combined programme that an Accord owner would qualify for, but the CR-V is not on its eligible model list."]},
+   why:["<b>Best rate ladder here</b> &mdash; 2.49% at 36 months","$500 college rebate stacks with it",
+        "Priciest and least powerful"],
+   flag:["No loyalty or conquest on the CR-V this period","Black leather only; gray is Sport Touring, +$3,825"]},
   {k:"eqx",n:"Chevrolet Equinox LT + Conv II",dr:"AWD",msrp:34845,fair:33200,emp:32250,cash:0,
    hp:175,mpg:26,range:406,svc:10,seats:"Cloth, heated only",maint:9197,resid:.18,hyb:0,
    apr:[[0,36],[2.9,48],[3.9,60]],
-   why:"By far the cheapest to buy, with employee pricing and genuinely free 0% financing. Sixty horsepower down and fifteen mpg down on the field, which is what undoes it over 100,000 miles.",
-   flag:["Employee price is <b>invoice minus 4%</b> &mdash; a fixed figure printed on the invoice, roughly $32,250. It <b>does</b> stack with the 0% APR.",
-         "Convenience Package II ($2,050) is <b>mandatory</b> &mdash; without it the driver's seat is a 6-way manual, which fails a hard requirement.",
-         "The 2027 replaces the CVT with an 8-speed automatic for $200 more. That is a real argument against a leftover 2026."]}
+   why:["Cheapest to buy by a wide margin","Employee price <b>and</b> genuinely free 0% financing",
+        "60 hp and 15 mpg down &mdash; that is what undoes it over 100,000 miles"],
+   flag:["Employee price &asymp; invoice &minus;4% &asymp; $32,250, and it stacks with the 0%",
+         "Convenience Package II ($2,050) is <b>mandatory</b> for a power driver seat",
+         "2027 swaps the CVT for an 8-speed at only +$200"]}
  ]
 };
-
 
 var DEALS={
  a:[
@@ -417,62 +432,64 @@ var DEALS={
   ["Toyota","6.99% APR, 72 months","Aug 3, 2026","ok"],
   ["Toyota","Lease $289/mo, 36 mo, $3,999 due","Aug 3, 2026","ok"],
   ["Toyota","Customer cash / conquest / loyalty","&mdash;","none|None exists on the 2026 RAV4 in any amount."],
-  ["Toyota","$500 college graduate rebate","Aug 3, 2026","no|Requires graduating within two years. A 2021 graduate is outside the window."],
+  ["Toyota","$500 college graduate rebate","Aug 3, 2026","no|Must have graduated within two years. 2021 is outside it."],
   ["Toyota","$500 military rebate","Aug 3, 2026","no|Not combinable with the college rebate in any case."],
   ["Mazda","$1,500 customer cash, CX-50 Hybrid Premium","Aug 31, 2026","ok|The single largest incentive available to either buyer."],
-  ["Mazda","0% APR, 24 and 36 months","Jul 31, 2026","ok|Strictly in lieu of the $1,500 &mdash; never both. No August programme published yet."],
+  ["Mazda","0% APR, 24 and 36 months","Jul 31, 2026","ok|Strictly in lieu of the $1,500. No August programme yet."],
   ["Mazda","2.9% APR, 48 / 60 / 63 months","Jul 31, 2026","ok"],
   ["Mazda","3.9% APR, 72 months","Jul 31, 2026","ok"],
-  ["Mazda","$750 loyalty reward","&mdash;","no|Requires a current Mazda registration or finance contract. An Accord cannot satisfy it."],
-  ["Mazda","$2,000 conquest cash","&mdash;","no|Honda is an eligible brand, but the offer covers CX-70 and CX-90 only."],
+  ["Mazda","$750 loyalty reward","&mdash;","no|Needs a current Mazda registration. An Accord cannot satisfy it."],
+  ["Mazda","$2,000 conquest cash","&mdash;","no|Honda qualifies as a brand, but the offer is CX-70/CX-90 only."],
   ["Mazda","$500 military appreciation","&mdash;","no|Stacks with either the cash or the APR if it applied."],
   ["Honda","3.49% APR, 24&ndash;36 months","Sep 8, 2026","ok"],
   ["Honda","4.49% APR, 37&ndash;60 months","Sep 8, 2026","ok"],
   ["Honda","5.49% APR, 61&ndash;72 months","Sep 8, 2026","ok"],
-  ["Honda","Loyalty / conquest cash","&mdash;","none|Honda runs one combined programme covering Honda and 14 rival brands, but the CR-V Hybrid is not on the eligible model list. Prologue $2,000, Ridgeline $750, HR-V $500."],
-  ["Honda","$750 financing bonus","Sep 8, 2026","ask|Reported by a third party, not confirmed on Honda's own offer sheet for Sport-L. Worth asking &mdash; it is larger than any other Honda money here."],
+  ["Honda","Loyalty / conquest cash","&mdash;","none|Honda's programme covers 15 brands, but the CR-V is not an eligible model. Prologue $2,000, Ridgeline $750, HR-V $500."],
+  ["Honda","$750 financing bonus","Sep 8, 2026","ask|Third-party reported, not on Honda's offer sheet. Worth asking &mdash; it beats any other Honda money here."],
   ["Honda","$500 college graduate","Mar 31, 2027","no|Outside the two-year window for a 2021 graduate."]
  ],
  b:[
   ["Toyota","4.99% APR, 48 months","Aug 3, 2026","ok"],
   ["Toyota","5.99% APR, 60 months","Aug 3, 2026","ok"],
   ["Toyota","6.99% APR, 72 months","Aug 3, 2026","ok"],
-  ["Toyota","$500 college graduate rebate","Aug 3, 2026","win|A 2026 graduate qualifies. The RAV4 is on Toyota's eligible list, and college money is <b>not</b> on the APR programme's exclusion list &mdash; so it stacks with the subsidised rate."],
+  ["Toyota","$500 college graduate rebate","Aug 3, 2026","win|A 2026 graduate qualifies, the RAV4 is eligible, and it <b>stacks</b> with the subsidised APR."],
   ["Toyota","Lease $329/mo, 36 mo, $3,999 due","Aug 3, 2026","ok"],
   ["Toyota","Customer cash / conquest / loyalty","&mdash;","none|None exists on the 2026 RAV4."],
   ["Toyota","$500 military rebate","Aug 3, 2026","no|Not combinable with the college rebate &mdash; one or the other."],
   ["Mazda","$1,500 customer cash, CX-50 Hybrid Premium","Aug 31, 2026","ok"],
-  ["Mazda","0% APR, 24 and 36 months","Jul 31, 2026","ok|Strictly in lieu of the $1,500. No August programme published yet."],
+  ["Mazda","0% APR, 24 and 36 months","Jul 31, 2026","ok|Strictly in lieu of the $1,500. No August programme yet."],
   ["Mazda","2.9% APR, 48 / 60 / 63 months","Jul 31, 2026","ok"],
   ["Mazda","3.9% APR, 72 months","Jul 31, 2026","ok"],
   ["Mazda","$750 loyalty reward","&mdash;","no|Requires owning a Mazda."],
-  ["Mazda","$500 college graduate","&mdash;","ask|Mazda USA runs a graduate programme, but no CX-50 Hybrid offer sheet listed a cash amount. Ask &mdash; do not assume."],
-  ["Honda","2.49% APR, 24&ndash;36 months","Sep 8, 2026","win|The lowest real interest rate available to either buyer on any car here."],
+  ["Mazda","$500 college graduate","&mdash;","ask|Programme exists but no CX-50 offer sheet lists an amount. Ask, don't assume."],
+  ["Honda","2.49% APR, 24&ndash;36 months","Sep 8, 2026","win|Lowest real rate available on any car here."],
   ["Honda","3.49% APR, 37&ndash;60 months","Sep 8, 2026","ok"],
   ["Honda","4.49% APR, 61&ndash;72 months","Sep 8, 2026","ok"],
-  ["Honda","$500 college graduate","Mar 31, 2027","win|A 2026 graduate qualifies. Honda words these as down-payment assistance, so it stacks with the subsidised APR rather than replacing it."],
+  ["Honda","$500 college graduate","Mar 31, 2027","win|A 2026 graduate qualifies. Worded as down-payment assistance, so it <b>stacks</b> with the APR."],
   ["Honda","Loyalty / conquest cash","&mdash;","none|The CR-V Hybrid is not on the eligible model list this period."],
-  ["Chevrolet","0% APR, 36 months","Aug 3, 2026","win|Genuinely free money &mdash; there is no cash allowance to give up, and it stacks with employee pricing."],
+  ["Chevrolet","0% APR, 36 months","Aug 3, 2026","win|Genuinely free &mdash; nothing to give up, and it stacks with employee pricing."],
   ["Chevrolet","2.9% APR, 48 months","Aug 3, 2026","ok"],
   ["Chevrolet","3.9% APR, 60 months","Aug 3, 2026","ok"],
   ["Chevrolet","Customer cash allowance","&mdash;","none|GM is running no cash on the 2026 gas Equinox."],
-  ["Chevrolet","GM Family First employee price","&mdash;","win|Roughly invoice minus 4%. Stacks with the 0% APR. Only gmfamilyfirst.com can produce the exact VIN-specific figure."],
-  ["Chevrolet","$1,000 lease conquest / lease loyalty","Aug 3, 2026","no|Requires <b>currently leasing</b> a 2021-or-newer vehicle and leasing the new one. Owning an Accord fails both tests."],
-  ["Chevrolet","$500 college / military / first responder / educator","Jan 4, 2027","no|A 2026 graduate qualifies on paper, but these do <b>not</b> stack with GM employee pricing, and employee pricing is worth far more."]
+  ["Chevrolet","GM Family First employee price","&mdash;","win|Roughly invoice &minus;4%, and it stacks with the 0%. Exact figure only from gmfamilyfirst.com."],
+  ["Chevrolet","$1,000 lease conquest / lease loyalty","Aug 3, 2026","no|Needs a <b>current lease</b>, and you must lease the new car. Owning fails both."],
+  ["Chevrolet","$500 college / military / first responder / educator","Jan 4, 2027","no|Qualifies on paper, but does <b>not</b> stack with employee pricing &mdash; which is worth more."]
  ]
 };
 
 var CHK=[
- ["hot","3 days","<b>Chevrolet's 0% APR requires delivery by August 3, 2026.</b> It is the only incentive Buyer U actually qualifies for. Miss it and the ladder starts at 2.9%/48."],
- ["hot","3 days","<b>Toyota's entire RAV4 APR ladder expires August 3, 2026</b> in both regions. There is no cash back and no 36-month tier at all."],
- ["","timing","<b>Mazda's $1,500 runs to August 31; the 0%/36 was dated July 31.</b> No August program has been published yet. Re-check on August 1 before planning around either rate — but the cash is the more durable figure."],
- ["hot","assumption","<b>The Accord earns nothing on any of these cars.</b> Loyalty needs the same brand; conquest needs a rival brand <i>and</i> an active offer. Mazda's loyalty requires owning a Mazda, Toyota runs neither, and GM's conquest is lease-only and needs a current lease. Only Honda's program would include a Honda owner — and the CR-V is not on its eligible list."],
- ["","confirm","<b>Get the RAV4 addendum itemised.</b> Port accessories negotiate; a flat “market adjustment” does not. In Memphis the fight is the $499–$1,978 accessory pack, not a markup."],
- ["","confirm","Ask whether the anti-theft/alarm is removable at no cost. Dalton National City states in writing that it is; most San Diego stores do not price it at all."],
- ["","confirm","Only gmfamilyfirst.com can produce Buyer U's actual VIN-specific authorisation price. Invoice-minus-4% is a cross-checked estimate, not his number."],
- ["","note","California caps dealer doc fees at <b>$85</b> by statute. Tennessee caps nothing — Memphis stores charge $799–$958 and <b>TN taxes the doc fee</b>."],
- ["","note","Tennessee charges <b>$100/yr on hybrids</b>, about $1,000 over the hold. It hits the RAV4, CX-50 and CR-V but not the Equinox."],
- ["","note","Buy GAP from an insurer or credit union, never the finance office. Sit in the car 20+ minutes — Consumer Reports flagged the CR-V's front seats as firm."]
+ ["hot","3 days","<b>Chevrolet 0% APR needs delivery by Aug 3.</b> The only incentive Buyer U qualifies for."],
+ ["hot","3 days","<b>Toyota&rsquo;s whole RAV4 rate ladder expires Aug 3.</b> No cash back, no 36-month tier."],
+ ["","timing","<b>Mazda&rsquo;s $1,500 runs to Aug 31; the 0% was dated Jul 31.</b> No August programme published yet."],
+ ["hot","check","<b>Is the $1,500 already inside the $37,000?</b> Make the dealer write selling price and customer cash as separate lines."],
+ ["hot","assumption","<b>The Accord earns nothing on any of these cars.</b> Loyalty needs the same brand; Mazda&rsquo;s needs a Mazda, Toyota runs none, GM&rsquo;s is lease-only."],
+ ["","confirm","<b>Get the RAV4 addendum itemised.</b> Accessories negotiate; a flat market adjustment does not."],
+ ["","confirm","Ask if the anti-theft/alarm is removable at no cost. Most stores never price it."],
+ ["","confirm","Only gmfamilyfirst.com gives Buyer U&rsquo;s real VIN-specific price. Invoice&minus;4% is an estimate."],
+ ["","note","CA caps doc fees at <b>$85</b>. TN caps nothing &mdash; Memphis charges $799&ndash;958 <b>and taxes it</b>."],
+ ["","note","TN charges <b>$100/yr on hybrids</b> &mdash; ~$1,000 over the hold. Not the Equinox."],
+ ["","note","Buy GAP from an insurer or credit union, never the finance office."],
+ ["","note","Sit in the car 20+ minutes &mdash; CR flagged the CR-V&rsquo;s front seats as firm."]
 ];
 
 /* ============================ MATH ============================ */
@@ -594,8 +611,9 @@ function vehCard(car,key,i){
        +'<div class="spec"><b>'+money(r.net10)+'</b><span>10-yr net</span></div>'
        +'<div class="spec"><b>'+car.svc+'<small style="font-size:.62em;opacity:.55">/10</small></b><span>serviceable</span></div></div>'
      +(IMGNOTE[car.k]?'<p style="font-size:.73rem;color:var(--faint);margin-top:9px">'+IMGNOTE[car.k]+'</p>':'')
-     +'<p style="margin-top:14px;font-size:.91rem;color:var(--dim)">'+car.why+'</p>'
-     +car.flag.map(function(f){return '<div class="note w" style="font-size:.87rem">'+f+'</div>';}).join("")
+     +'<ul class="tight">'+car.why.map(function(w){return '<li>'+w+'</li>';}).join("")+'</ul>'
+     +(car.flag.length?'<div class="note w"><ul class="tight" style="margin:0">'
+        +car.flag.map(function(f){return '<li>'+f+'</li>';}).join("")+'</ul></div>':'')
      +(vid?'<div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/'+vid
         +'" title="'+car.n+'" loading="lazy" allowfullscreen '
         +'referrerpolicy="strict-origin-when-cross-origin"></iframe></div>'
@@ -606,12 +624,12 @@ function vehCard(car,key,i){
 function dealView(key){
   var cars=CARS[key], c=CFG[key];
   var h='<h3>What each car actually costs</h3>'
-   +'<div class="note"><p><b>Fair value is a pre-rebate number.</b> Edmunds and KBB both publish an '
-   +'estimate of the <i>negotiated selling price</i> and explicitly exclude manufacturer rebates. So factory '
-   +'cash comes off <b>after</b> you finish negotiating, not instead of negotiating. A dealer who quotes the '
-   +'fair price and calls the rebate “already included” is pocketing it.</p>'
-   +'<p>TrueCar and Consumer Reports Build &amp; Buy work the opposite way — their headline number is '
-   +'usually already net of incentives. Ask which one you are holding before you anchor on it.</p></div>';
+   +'<div class="note"><span class="notehead">Fair value is a pre-rebate number.</span>'
+   +'<ul class="tight" style="margin-top:7px">'
+   +'<li>Edmunds and KBB quote the <b>negotiated price</b> and exclude rebates</li>'
+   +'<li>TrueCar and CR Build &amp; Buy already <b>net incentives out</b></li>'
+   +'<li>Negotiate first, <b>then</b> apply the rebate</li>'
+   +'<li>A dealer calling the rebate &ldquo;already included&rdquo; is pocketing it</li></ul></div>';
   cars.forEach(function(car){
     var r=calc(car,key), lines=[];
     lines.push(['MSRP as configured','',car.msrp,'']);
@@ -662,48 +680,45 @@ function dealsView(key){
 function svcView(key){
   var d = key==="a"
    ? {place:"San Diego",rows:[
-      ["Toyota",10,"~7&ndash;8 dealers within 30 miles, three inside 6.4. Densest independent and hybrid-specialist network of any brand, cheapest parts, best availability. Consumer Reports&rsquo; #1 brand, zero recalls on the 2026 RAV4, and the lowest 10-year maintenance bill in the set at <b>$6,004</b>."],
-      ["Honda",9,"About six dealers within 30 miles and strong independent support. RepairPal rates the CR-V best in class at 4.5/5. Marked down only for a J.D. Power dependability score below the industry average."],
-      ["Mazda",7,"Three dealers within 30 miles is genuinely adequate, and San Diego&rsquo;s import trade means independent options exist. The powertrain-orphan problem is an inconvenience here rather than a risk."]]}
+      ["Toyota",10,["~7&ndash;8 dealers within 30 miles, three inside 6.4","Densest independent and hybrid-specialist network","Consumer Reports #1 brand, zero 2026 recalls","Lowest upkeep in the set: <b>$6,004</b> over ten years"]],
+      ["Honda",9,["About six dealers within 30 miles","RepairPal rates the CR-V best in class, 4.5/5","Docked only for a below-average J.D. Power score"]],
+      ["Mazda",7,["Three dealers within 30 miles &mdash; adequate","San Diego&rsquo;s import trade means real independent options","Powertrain-orphan risk is an inconvenience here, not a threat"]]]}
    : {place:"Grand Blanc / Flint",rows:[
-      ["Chevrolet",10,"<b>Nineteen dealers within 30 miles, six inside twelve</b>, one 1.3 miles from Grand Blanc. The Equinox is the best-selling vehicle in Michigan. Every independent shop and parts counter in Genesee County knows GM. Its mediocre reliability scores barely matter when anything that breaks gets fixed the same week, nearby and cheap."],
-      ["Toyota",7,"A Toyota store sits <b>1.9 miles</b> away, which covers the everyday case well. But it is a two-dealer market inside 30 miles &mdash; if that one store is booked or you have a dispute, the next is 23 miles out. Offset by the best reliability and cheapest upkeep in the set."],
-      ["Honda",6,"<b>One dealer</b>, with the next roughly 35 miles away. The CR-V is Michigan&rsquo;s #12 seller so parts move and it is not exotic, but it is a single point of failure."],
-      ["Mazda",3,"<b>Zero Mazda dealers in Genesee County.</b> The nearest is about 30&ndash;33 miles each way &mdash; a 65-mile round trip for every warranty visit, recall and software update, for ten years. Mazda is not in Michigan&rsquo;s top 25 sellers, so local independent expertise is negligible."]]};
-  var h='<h3>How easy is this car to live with in '+d.place+'?</h3>'
-   +'<p class="h2note">Scored 0&ndash;10 on the odds that at any point over ten years you can get the car '
-   +'diagnosed and repaired competently, quickly and affordably without a long drive.</p><div class="dl">';
+      ["Chevrolet",10,["<b>19 dealers within 30 miles, six inside twelve</b>","One sits 1.3 miles from Grand Blanc","Equinox is Michigan&rsquo;s best-selling vehicle","Mediocre reliability barely matters when repairs are same-week and local"]],
+      ["Toyota",7,["A dealer <b>1.9 miles</b> away covers the everyday case","But only two inside 30 miles &mdash; next is 23 miles out","Offset by best-in-class reliability and cheapest upkeep"]],
+      ["Honda",6,["<b>One dealer</b>; next is roughly 35 miles","CR-V is Michigan&rsquo;s #12 seller, so parts move","Single point of failure for warranty work"]],
+      ["Mazda",3,["<b>Zero Mazda dealers in Genesee County</b>","Nearest is a 65-mile round trip, for ten years","Not in Michigan&rsquo;s top 25 sellers &mdash; negligible local expertise"]]]};
+  var h='<h3>Living with it in '+d.place+'</h3>'
+   +'<p class="h2note">Odds you can get it diagnosed and repaired competently, quickly and locally &mdash; over ten years.</p><div class="dl">';
   d.rows.forEach(function(r){
     var w=r[1]*10, col=r[1]>=9?"var(--good)":r[1]>=6?"var(--warm)":"var(--bad)";
     h+='<div class="it"><h4 style="margin-bottom:6px">'+r[0]+' <em style="color:'+col+'">'+r[1]+'<span style="font-size:.7em;opacity:.6">/10</span></em></h4>'
-      +'<div style="height:6px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:9px">'
+      +'<div style="height:6px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:4px">'
       +'<div style="height:100%;width:'+w+'%;background:'+col+'"></div></div>'
-      +'<p style="font-size:.86rem;color:var(--dim)">'+r[2]+'</p></div>';
+      +'<ul class="tight">'+r[2].map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div>';
   });
   h+='</div>';
-  if(key==="b") h+='<div class="note b"><p><b>This is the single biggest risk in Buyer U&rsquo;s comparison.</b> '
-    +'The CX-50 Hybrid runs a Toyota powertrain in a Mazda body &mdash; but no Toyota dealer will service it, '
-    +'and the parts, warranty and software channels are all Mazda. Owners already report CX-50 parts on '
-    +'backorder with no ETA. In a market with no local Mazda dealer and no local Mazda-hybrid independent, '
-    +'a routine problem can become a multi-week ordeal.</p>'
-    +'<p>The 2025 CX-50 also drew four recalls, two safety-critical and both touching the Hybrid. The 2026 '
-    +'cars are clean so far &mdash; all four have zero meaningful recalls this model year.</p></div>';
-  else h+='<div class="note"><p><b>Serviceability is not a property of the brand &mdash; it is a property of '
-    +'the brand <i>and</i> the place.</b> The same cars score very differently in Michigan, where '
-    +'Chevrolet rises to 10 and Mazda falls to 3.</p></div>';
+  if(key==="b") h+='<div class="note b"><span class="notehead">Biggest risk in this comparison: the CX-50 here.</span>'
+    +'<ul class="tight" style="margin-top:7px">'
+    +'<li>Toyota powertrain, but <b>no Toyota dealer will service it</b></li>'
+    +'<li>Parts, warranty and software are all Mazda &mdash; and owners report backorders with no ETA</li>'
+    +'<li>No local Mazda dealer and no local Mazda-hybrid independent</li>'
+    +'<li>A routine problem can become a multi-week ordeal</li></ul></div>';
+  else h+='<div class="note"><span class="notehead">Serviceability is about the place, not just the brand.</span>'
+    +'<ul class="tight" style="margin-top:7px">'
+    +'<li>The same cars score very differently in Michigan</li>'
+    +'<li>There, Chevrolet rises to 10 and Mazda falls to 3</li></ul></div>';
   return h;
 }
 
 function moneyView(key){
   var cars=CARS[key], c=CFG[key], y=YIELD[key], mode=state.mode;
-  var h='<h3>Pay cash, or finance and invest the difference?</h3>'
-   +'<div class="note"><p><b>The rule:</b> finance only when the loan’s rate is below what the cash would '
-   +'earn after tax. Best available to '+c.label+' right now is <b>'+y.toFixed(2)+'% after tax</b> — '
-   +c.yieldNote+'.</p>'
-   +'<p><b>Rates are not about to fall.</b> The Fed has held at 3.50–3.75% all year and markets are '
-   +'pricing roughly a 25–50bp <i>hike</i> over the next twelve months, with September odds near 80%. '
-   +'Locking a term today is cheap insurance, and there is almost no term premium — five-year money pays '
-   +'within 5bp of one-year.</p></div>'
+  var h='<h3>Pay cash, or finance and invest?</h3>'
+   +'<div class="note"><span class="notehead">Rule: finance only if the loan rate beats your after-tax yield.</span>'
+   +'<ul class="tight" style="margin-top:7px">'
+   +'<li>Your best rate: <b>'+y.toFixed(2)+'% after tax</b> \u2014 '+c.yieldNote+'</li>'
+   +'<li>Fed has held at 3.50\u20133.75% all year; markets price a <b>hike</b>, not a cut</li>'
+   +'<li>Almost no term premium \u2014 five-year money pays within 5bp of one-year</li></ul></div>'
    +'<div class="seg" style="margin-bottom:16px">'
    +'<button data-mode="loApr" aria-pressed="'+(mode==="loApr")+'">Lowest APR</button>'
    +'<button data-mode="loPay" aria-pressed="'+(mode==="loPay")+'">Lowest payment</button></div>'
@@ -723,16 +738,18 @@ function moneyView(key){
   h+='</div>';
   var cx=cars.filter(function(v){return v.k==="cx50";})[0];
   if(cx){ var rc=calc(cx,key), z=rc.opts[0];
-    h+='<div class="note '+(z.net>0?'':'w')+'"><p><b>Mazda’s 0% is not free — it costs the $1,500.</b> '
-      +'The two are strictly either/or, so taking the rate means paying '+money(cx.cash)+' more for the car. '
-      +'That prices the “0%” at an effective <b>2.33% APR</b>, and against a '+y.toFixed(2)+'% yield it '
-      +(z.net>0?'still wins — but by only '+money(z.net)+' over three years.'
-               :'now <b>loses '+money(-z.net)+'</b>. Take the cash instead.')+'</p></div>';
+    h+='<div class="note '+(z.net>0?'':'w')+'"><span class="notehead">Mazda’s 0% is not free — it costs the $1,500.</span>'
+      +'<ul class="tight" style="margin-top:7px">'
+      +'<li>Cash and the subsidised rate are <b>strictly either/or</b></li>'
+      +'<li>Effective cost of the “0%” is <b>2.33% APR</b></li>'
+      +'<li>'+(z.net>0?'Still wins, but by only <b>'+money(z.net)+'</b> over three years'
+                     :'<b>Loses '+money(-z.net)+'</b> — take the cash instead')+'</li></ul></div>';
   }
   if(key==="b"){
-    h+='<div class="note"><p><b>The Equinox’s 0% is the only genuinely free money here.</b> GM runs no cash '
-      +'allowance on the 2026 Equinox, so unlike Mazda there is nothing to give up — and it stacks with '
-      +'employee pricing. Take both.</p></div>';
+    h+='<div class="note"><span class="notehead">The Equinox’s 0% is the only genuinely free money here.</span>'
+      +'<ul class="tight" style="margin-top:7px">'
+      +'<li>GM runs <b>no cash allowance</b>, so nothing is forfeited</li>'
+      +'<li>It <b>stacks</b> with employee pricing — take both</li></ul></div>';
   }
   return h;
 }
