@@ -20,6 +20,9 @@
     --acc:#0d9488;--acc2:#0284c7;--warm:#b45309;--bad:#be123c;--good:#15803d}
 }
 html{background:var(--bg);-webkit-text-size-adjust:100%}
+.wipbar{position:sticky;top:0;z-index:90;background:var(--warm);color:#1a1000;
+  font-size:.79rem;font-weight:750;text-align:center;padding:8px 14px;line-height:1.35;
+  letter-spacing:.01em}
 html,body{max-width:100%;overflow-x:hidden}
 body{
   font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
@@ -248,6 +251,7 @@ footer p+p{margin-top:7px}
 </style>
 </head>
 <body>
+<div class="wipbar">Work in progress &mdash; figures are estimates and may be wrong. Verify before signing anything.</div>
 <div class="wrap">
 
 <header>
@@ -352,11 +356,12 @@ var CARS={
    apr:[[4.99,48],[5.99,60],[6.99,72]],
    why:"Cheapest of the three, best economy, strongest resale. No rebate and no subsidised rate exist on the redesign, so the entire fight is getting <b>to</b> MSRP rather than below it.",
    flag:["Toyota is the only one of these three offering <b>nothing at all</b> — no customer cash, no conquest, no loyalty. The $500 college and military rebates are the sole exceptions, and the RAV4 is on their eligible list."]},
-  {k:"cx50",n:"Mazda CX-50 Hybrid Premium",dr:"AWD",msrp:39645,fair:38600,cash:1500,
+  {k:"cx50",n:"Mazda CX-50 Hybrid Premium",dr:"AWD",msrp:39645,fair:37000,cash:1500,
    hp:219,mpg:38,range:551,svc:7,seats:"Real leather, heated + ventilated",maint:7906,resid:.26,hyb:0,
    apr:[[0,36],[2.9,60],[3.9,72]],
    why:"The only car here with genuine leather <i>and</i> ventilated seats, and the only one with real factory money on the hood. Toyota's own hybrid powertrain underneath.",
-   flag:["Invoice is $38,691 delivered &mdash; just $954 under MSRP &mdash; so dealer room is thin. The $1,500 factory cash is where the value is, not the negotiation."]},
+   flag:["<b>Pricing note.</b> Fair value here is $37,000, taken from the Edmunds median rather than my own estimate. But be careful which number that is: if Edmunds is quoting a <i>pre-rebate</i> selling price, the $1,500 still comes off on top and the real target is ~$35,500. If it already nets the rebate out, ~$37,000 <b>is</b> the final number and there is no second bite. <b>Make the dealer write selling price and customer cash as two separate lines</b> — that forces the answer either way.",
+         "Invoice is $38,691 delivered &mdash; just $954 under MSRP &mdash; so a $37,000 selling price is <b>below invoice</b>. That is achievable on holdback, but it means the negotiation is already near its floor and the $1,500 factory cash is where the remaining value sits."]},
   {k:"crv",n:"Honda CR-V Hybrid Sport-L",dr:"FWD",msrp:40175,fair:38800,cash:0,
    hp:204,mpg:40,range:560,svc:9,seats:"Real leather, heated only",maint:7636,resid:.29,hyb:0,
    apr:[[3.49,36],[4.49,60],[5.49,72]],
@@ -370,11 +375,12 @@ var CARS={
    apr:[[4.99,48],[5.99,60],[6.99,72]],
    why:"Best economy and resale, which is what decides a ten-year hold. Highest sticker of the realistic options and still the cheapest to own by a clear margin.",
    flag:["Toyota offers <b>no cash, no conquest and no loyalty</b> on the redesign. The one thing available is the <b>$500 college graduate rebate</b>, which the RAV4 is eligible for and which stacks with the subsidised APR."]},
-  {k:"cx50",n:"Mazda CX-50 Hybrid Premium",dr:"AWD",msrp:39645,fair:38600,cash:1500,
+  {k:"cx50",n:"Mazda CX-50 Hybrid Premium",dr:"AWD",msrp:39645,fair:37000,cash:1500,
    hp:219,mpg:38,range:551,svc:3,seats:"Real leather, heated + ventilated",maint:7906,resid:.26,hyb:1,
    apr:[[0,36],[2.9,60],[3.9,72]],
    why:"AWD standard, real leather, ventilated seats, and 17-inch wheels that work better in Michigan snow than the 19s on the trim above.",
-   flag:["With a $20,000 Accord applied the loan shrinks so far that <b>the 0% no longer pays for itself</b> &mdash; the forfeited $1,500 outweighs the interest saved."]},
+   flag:["<b>Pricing note.</b> Fair value here is $37,000, taken from the Edmunds median rather than my own estimate. But be careful which number that is: if Edmunds is quoting a <i>pre-rebate</i> selling price, the $1,500 still comes off on top and the real target is ~$35,500. If it already nets the rebate out, ~$37,000 <b>is</b> the final number and there is no second bite. <b>Make the dealer write selling price and customer cash as two separate lines</b> — that forces the answer either way.",
+         "With a $20,000 Accord applied the loan shrinks so far that <b>the 0% no longer pays for itself</b> &mdash; the forfeited $1,500 outweighs the interest saved."]},
   {k:"crv",n:"Honda CR-V Hybrid Sport-L",dr:"AWD",msrp:41675,fair:40251,cash:0,grad:500,
    hp:204,mpg:37,range:518,svc:6,seats:"Real leather, heated only",maint:7636,resid:.29,hyb:1,
    apr:[[2.49,36],[3.49,60],[4.49,72]],
