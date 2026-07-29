@@ -103,8 +103,14 @@ header{padding:34px 0 20px;border-bottom:1px solid var(--line);margin-bottom:22p
 .tile .tstage{display:block;position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;
   background:linear-gradient(180deg,#14213a 0%,#24405f 30%,#48708c 47%,#7fa0b4 51.2%,
     #5a636d 52%,#3c444e 70%,#232931 100%)}
-.tile .tstage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.tile .tstage img.fill{object-fit:cover}
+/* Each brand ships a different canvas, so the car occupies a different share of
+   the frame. These normalise apparent size and centre it. */
+.tile .tstage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+  transform-origin:center center}
+.tile .tstage img.fill{object-fit:cover;transform:none!important}
+.tile .tstage[data-k="rav4"] img{transform:translate(2.8%,7.5%) scale(1.07)}
+.tile .tstage[data-k="crv"]  img{transform:translate(0,-2.6%) scale(1.78)}
+.tile .tstage[data-k="eqx"]  img{transform:translate(2.3%,-4.6%) scale(1.02)}
 .tile .tb{display:block;padding:10px 12px 12px}
 .tile .tn{display:block;font-size:.9rem;font-weight:750;line-height:1.25}
 .tile .td{display:block;font-size:.72rem;color:var(--faint);margin-top:3px}
@@ -666,7 +672,7 @@ function tile(car,key,sel){
   var pal=COLORS[car.k], col=pal[Math.min(state.color[car.k]||0,pal.length-1)];
   var url=col[2].replace("{V}",VIEWS[car.k][0][1]);
   return '<button class="tile" data-sel="'+key+':'+car.k+'" aria-pressed="'+sel+'">'
-    +'<span class="tstage"><img class="'+(car.k==="cx50"?"fill":"")+'" src="'+url+'" alt="'+car.n+'" loading="lazy"></span>'
+    +'<span class="tstage" data-k="'+car.k+'"><img class="'+(car.k==="cx50"?"fill":"")+'" src="'+url+'" alt="'+car.n+'" loading="lazy"></span>'
     +'<span class="tb"><span class="tn">'+car.n+'</span>'
     +'<span class="td">'+car.dr+' &middot; '+car.hp+' hp &middot; '+car.mpg+' mpg</span>'
     +'<span class="tp">'+money(car.msrp)+'</span></span></button>';
@@ -675,11 +681,7 @@ function tile(car,key,sel){
 function carsView(key){
   var cars=CARS[key], selK=state.sel[key]||cars[0].k;
   var car=cars.filter(function(c){return c.k===selK;})[0]||cars[0];
-  return '<h2>'+(key==="a"?"Buyer K &mdash; San Diego":"Buyer U &mdash; Memphis to Michigan")+'</h2>'
-   +'<p class="h2note">'+(key==="a"
-      ?"Hybrid &middot; heated + power seats &middot; CarPlay &middot; 100,000 miles over 10 years"
-      :"AWD &middot; heated + power seats &middot; Android Auto &middot; 100,000 miles over 10 years")+'</p>'
-   +'<div class="railwrap"><div class="tiles" data-rail="1">'
+  return '<div class="railwrap"><div class="tiles" data-rail="1">'
      +cars.map(function(c){return tile(c,key,c.k===selK);}).join("")+'</div></div>'
    +'<p class="swipehint">Swipe to see all '+cars.length+' &middot; tap to open</p>'
    +vehCard(car,key);
