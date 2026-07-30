@@ -111,6 +111,8 @@ header{padding:34px 0 20px;border-bottom:1px solid var(--line);margin-bottom:22p
 .tile .tstage[data-k="rav4"] img{transform:translate(2.8%,7.5%) scale(1.07)}
 .tile .tstage[data-k="crv"]  img{transform:translate(0,-2.6%) scale(1.78)}
 .tile .tstage[data-k="eqx"]  img{transform:translate(2.3%,-4.6%) scale(1.02)}
+.tile .tstage[data-k="rav4x"] img{transform:translate(2.8%,7.5%) scale(1.07)}
+.tile .tstage[data-k="crvt"]  img{transform:translate(0,-2.6%) scale(1.78)}
 .tile .tb{display:block;padding:10px 12px 12px}
 .tile .tn{display:block;font-size:.9rem;font-weight:750;line-height:1.25}
 .tile .td{display:block;font-size:.72rem;color:var(--faint);margin-top:3px}
@@ -411,10 +413,39 @@ var IMGNOTE={
  crv:"Interior shots are generic CR-V. Sport-L is <b>black leather only</b> — gray is Sport Touring, +$3,825.",
  cx50:"Mazda only publishes colour-specific interiors as 360&deg; panoramas, so the cabin view is a crop from one."};
 
+
+COLORS.rav4x=[["Midnight Black","#00031E","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xse/4530/218/{V}.png?fmt=png-alpha&wid=1400"],
+  ["Storm Cloud / black roof","#3D4A59","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xse/4530/m22/{V}.png?fmt=png-alpha&wid=1400"],
+  ["Meteor Shower / black roof","#A1A1A1","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xse/4530/2sq/{V}.png?fmt=png-alpha&wid=1400"],
+  ["Wind Chill Pearl / black roof","#DFE6E7","https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xse/4530/2vp/{V}.png?fmt=png-alpha&wid=1400"]];
+COLORS.cx50p=[["Soul Red Crystal","#971B2D","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium-plus/soul-red-46v/e360-my25-cx50-hybrid-premiumplus-soulred-{V}.jpg"],
+  ["Machine Gray","#757678","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium-plus/machine-gray-46g/e360-my25-cx50-hybrid-premiumplus-machinegray-{V}.jpg"],
+  ["Polymetal Gray","#878D9A","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium-plus/polimetal-gray-47c/e360-my25-cx50-hybrid-premiumplus-polymetalgray-{V}.jpg"],
+  ["Ingot Blue","#516B84","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium-plus/ingot-blue-48b/e360-my25-cx50-hybrid-premiumplus-ingotblue-{V}.jpg"],
+  ["Wind Chill Pearl","#E0E0E0","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium-plus/wind-chill-48k/e360-my25-cx50-hybrid-premiumplus-windchill-{V}.jpg"],
+  ["Jet Black Mica","#3B3B3B","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/004_exterior/ext.-360s/hybrid-premium-plus/jet-black-mica-41w/e360-my25-cx50-hybrid-premiumplus-jetblack-{V}.jpg"]];
+COLORS.crvt=[["Canyon River Blue","#00132A","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/B-640M_Canyon_River_Blue_Metallic/Large/Honda_2026_CRV_360_Exterior_Canyon_River_Blue_Metallic_{V}.png"],
+  ["Meteorite Gray","#37424C","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-904M_Meteorite_Gray_Metallic/Large/Honda_2026_CRV_360_Exterior_Meteorite_Gray_Metallic_{V}.png"],
+  ["Urban Gray Pearl","#8E9295","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-912P_Urban_Gray_Pearl/Large/Honda_2026_CRV_360_Exterior_Urban_Gray_Pearl_{V}.png"],
+  ["Platinum White Pearl","#E5E5E5","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-883P_Platinum_White_Pearl/Large/Honda_2026_CRV_360_Exterior_Platinum_White_Pearl_{V}.png"],
+  ["Solar Silver","#CCD0D3","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-932M_Solar_Silver_Metallic/Large/Honda_2026_CRV_360_Exterior_Solar_Silver_Metallic_{V}.png"],
+  ["Radiant Red","#910D17","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/R-569M_Radiant_Red_Metallic/Large/Honda_2026_CRV_360_Exterior_Radiant_Red_Metallic_{V}.png"],
+  ["Crystal Black Pearl","#000000","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/OP-360/NH-731P_Crystal_Black_Pearl/Large/Honda_2026_CRV_360_Exterior_Crystal_Black_Pearl_{V}.png"]];
+VIEWS.rav4x=[["Exterior","1"]]; VIEWS.cx50p=[["Exterior","000"]]; VIEWS.crvt=[["Exterior","0032"]];
+INTERIORS.rav4x=[["Black/Blue SofTex","#232323","#3D4E78","https://tmnaassetscs.scene7.com/is/image/tmnaassetscs/vcr/live/vehicle/TOY/2026/rav4/4530/790/64cbcc9ee00ca19fa3f48e01bad156c57f0b01d91274c9c2314d15283916e482.png?wid=1600&fmt=jpeg&qlt=90","https://tmnaassetscs.scene7.com/is/image/tmnaassetscs/vcr/live/vehicle/TOY/2026/rav4/4530/445/f98279055e45ab6b006c7f3dbe7ca3bc88e84739295046caff42d128d1eeee21.png?wid=1600&fmt=jpeg&qlt=90"]];
+INTERIORS.cx50p=[["Black Leather","#222122","#4A484A","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/01_vlp/004_technology/002_gallery/2025-cx50-hybrid-gallery-preview-003.jpg","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/003_interior/interior-statics/03_hybrid-premium-plus/001_black-leather/i360-my26-cx50-hybrid-premium-ingotblue-blackleather.jpg"],
+  ["Red Leather","#5B2E31","#8A5A52","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/01_vlp/003_design/001_2touts/desktop/2026-cx-50-hybrid-two-column-interior.jpg","https://www.mazdausa.com/siteassets/vehicles/2026/cx-50-hybrid/04_btv/003_interior/interior-statics/03_hybrid-premium-plus/002_red-leather/i360-my26-cx50-hybrid-premium-jetblack-redleather.jpg"]];
+INTERIORS.crvt=[["Black Leather","#232323","#4A4A4A","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/Feature-Blades/Interior/Overview/Interior_01_L.jpg","https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/CR-V/Feature-Blades/Interior/Cabin/Interior_02_L.jpg"],
+  ["Gray Leather","#9A9A9A","#C2C2C2","https://automobiles.honda.com/platform/api/v4/images/interior/00?width=1400&config=M%3ARS6H9TKXW%24EC%3ANH-904M%24HC%3Aundefined%24IC%3AGR%24O%3A%24F%3AFIFS%24ECC%3AGD%24ECX%3A","https://automobiles.honda.com/platform/api/v4/images/interior/00?width=1400&config=M%3ARS6H9TKXW%24EC%3ANH-904M%24HC%3Aundefined%24IC%3AGR%24O%3A%24F%3AFIFS%24ECC%3AGD%24ECX%3A"]];
+MEDIA.rav4x=MEDIA.rav4; MEDIA.cx50p=MEDIA.cx50; MEDIA.crvt=MEDIA.crv;
+IMGNOTE.rav4x="XSE has only four exterior colours and three are mandatory two-tones with a black roof.";
+IMGNOTE.cx50p=IMGNOTE.cx50;
+IMGNOTE.crvt="Honda publishes no flat photo of Gray Leather, so that view is a crop of its 360&deg; panorama. Gray is also unavailable with Urban Gray Pearl paint.";
+
 var CARS={
  a:[
   {k:"rav4",n:"Toyota RAV4 XLE Premium",dr:"FWD",msrp:37695,fair:37695,cash:0,
-   hp:226,mpg:43,range:624,svc:10,seats:"SofTex, heated + ventilated",maint:6004,resid:.32,hyb:0,
+   hp:226,mpg:43,range:624,svc:10,seats:"SofTex, heated only",maint:6004,resid:.32,hyb:0,
    apr:[[4.99,48],[5.99,60],[6.99,72]],
    why:["Cheapest to buy, cheapest to run, best resale","Lowest maintenance in the set at $6,004 over ten years",
         "No rebate and no subsidised rate exist &mdash; the fight is getting <b>to</b> MSRP, not below it"],
@@ -426,6 +457,21 @@ var CARS={
         "Only one with real factory cash on the hood"],
    flag:["$37,000 sits <b>below</b> the $38,691 invoice &mdash; so ask whether the $1,500 is already in that number",
          "Make the dealer write selling price and customer cash as <b>separate lines</b>"]},
+  {k:"rav4x",n:"Toyota RAV4 XSE",dr:"AWD",msrp:42895,fair:42895,cash:0,
+   hp:236,mpg:41,range:595,svc:10,seats:"Ultrasuede/SofTex, heated + ventilated",maint:6004,resid:.32,hyb:0,
+   apr:[[4.99,48],[5.99,60],[6.99,72]],
+   why:["The only RAV4 with <b>ventilated seats</b>","12.9-inch screen and panoramic view monitor","AWD is standard, not an upcharge"],
+   flag:["20-inch wheels cost about <b>2 mpg</b> against XLE Premium AWD, and will ride firmer"]},
+  {k:"cx50p",n:"Mazda CX-50 Hybrid Premium Plus",dr:"AWD",msrp:41945,fair:39200,cash:1500,
+   hp:219,mpg:38,range:551,svc:7,seats:"Real leather, heated + ventilated",maint:7906,resid:.25,hyb:0,
+   apr:[[0,36],[2.9,60],[3.9,72]],
+   why:["Head-up display, heated rear seats and heated wheel","19-inch wheels cost <b>no</b> mpg","Ground clearance rises to 8.1 inches"],
+   flag:["<b>Adds no safety hardware</b> over Premium &mdash; it is $2,300 of convenience"]},
+  {k:"crvt",n:"Honda CR-V Hybrid Sport Touring",dr:"AWD",msrp:44000,fair:42500,cash:0,
+   hp:204,mpg:37,range:518,svc:9,seats:"Real leather, heated + ventilated",maint:7636,resid:.28,hyb:0,
+   apr:[[3.49,36],[4.49,60],[5.49,72]],
+   why:["<b>The only CR-V with gray leather</b>","Bose 12-speaker audio and Google built-in","Hands-free tailgate, heated wheel"],
+   flag:["<b>$44,000</b> makes it the most expensive car here","AWD only &mdash; a front-drive buyer loses 3 mpg moving up"]},
   {k:"crv",n:"Honda CR-V Hybrid Sport-L",dr:"FWD",msrp:40175,fair:38800,cash:0,
    hp:204,mpg:40,range:560,svc:9,seats:"Real leather, heated only",maint:7636,resid:.29,hyb:0,
    apr:[[3.49,36],[4.49,60],[5.49,72]],
@@ -436,7 +482,7 @@ var CARS={
  ],
  b:[
   {k:"rav4",n:"Toyota RAV4 XLE Premium",dr:"AWD",msrp:39095,fair:39095,cash:0,grad:500,
-   hp:236,mpg:41,range:595,svc:7,seats:"SofTex, heated + ventilated",maint:6004,resid:.32,hyb:1,
+   hp:236,mpg:41,range:595,svc:7,seats:"SofTex, heated only",maint:6004,resid:.32,hyb:1,
    apr:[[4.99,48],[5.99,60],[6.99,72]],
    why:["Best economy and resale over 100,000 miles","Highest sticker, still cheapest to own",
         "$500 college rebate applies <b>and</b> stacks with the subsidised APR"],
@@ -448,6 +494,21 @@ var CARS={
    flag:["<b>Serviceability 3/10 here</b> &mdash; no Mazda dealer in Genesee County",
          "With a $20k Accord the 0% stops paying: the $1,500 forfeit outweighs the interest saved",
          "Ask whether the $1,500 is already inside the $37,000"]},
+  {k:"rav4x",n:"Toyota RAV4 XSE",dr:"AWD",msrp:42895,fair:42895,cash:0,grad:500,
+   hp:236,mpg:41,range:595,svc:7,seats:"Ultrasuede/SofTex, heated + ventilated",maint:6004,resid:.32,hyb:1,
+   apr:[[4.99,48],[5.99,60],[6.99,72]],
+   why:["The only RAV4 with <b>ventilated seats</b>","12.9-inch screen and panoramic view monitor","AWD is standard, not an upcharge"],
+   flag:["20-inch wheels cost about <b>2 mpg</b> against XLE Premium AWD, and will ride firmer"]},
+  {k:"cx50p",n:"Mazda CX-50 Hybrid Premium Plus",dr:"AWD",msrp:41945,fair:39200,cash:1500,
+   hp:219,mpg:38,range:551,svc:3,seats:"Real leather, heated + ventilated",maint:7906,resid:.25,hyb:1,
+   apr:[[0,36],[2.9,60],[3.9,72]],
+   why:["Head-up display, heated rear seats and heated wheel","19-inch wheels cost <b>no</b> mpg","Ground clearance rises to 8.1 inches"],
+   flag:["<b>Adds no safety hardware</b> over Premium &mdash; it is $2,300 of convenience"]},
+  {k:"crvt",n:"Honda CR-V Hybrid Sport Touring",dr:"AWD",msrp:44000,fair:42500,cash:0,grad:500,
+   hp:204,mpg:37,range:518,svc:6,seats:"Real leather, heated + ventilated",maint:7636,resid:.28,hyb:1,
+   apr:[[2.49,36],[3.49,60],[4.49,72]],
+   why:["<b>The only CR-V with gray leather</b>","Bose 12-speaker audio and Google built-in","Hands-free tailgate, heated wheel"],
+   flag:["<b>$44,000</b> makes it the most expensive car here","AWD only &mdash; a front-drive buyer loses 3 mpg moving up"]},
   {k:"crv",n:"Honda CR-V Hybrid Sport-L",dr:"AWD",msrp:41675,fair:40251,cash:0,grad:500,
    hp:204,mpg:37,range:518,svc:6,seats:"Real leather, heated only",maint:7636,resid:.29,hyb:1,
    apr:[[2.49,36],[3.49,60],[4.49,72]],
@@ -517,7 +578,16 @@ var DEALS={
  ]
 };
 
+var ORDER=["rav4","rav4x","cx50","cx50p","crv","crvt","eqx"];
+["a","b"].forEach(function(k){ CARS[k].sort(function(x,z){return ORDER.indexOf(x.k)-ORDER.indexOf(z.k);}); });
+
 var POLAR={
+ rav4x:{love:["<b>Ventilated seats</b> &mdash; the RAV4 only gets them here","12.9-inch screen, up from 10.5","Panoramic view monitor and hands-free tailgate"],
+        hate:["<b>20-inch wheels cost 2 mpg</b> versus XLE Premium AWD","AWD only &mdash; no cheaper front-drive entry","<b>Four colours, three forced two-tones</b> with a black roof","One interior: black with blue stitching"]},
+ cx50p:{love:["Head-up display, heated rear seats, heated wheel","<b>No mpg penalty</b> for the 19-inch wheels","Ground clearance rises to 8.1 inches"],
+        hate:["<b>Adds no safety hardware</b> over Premium","Sidewall drops from 65-series to 55","$2,300 for convenience features only"]},
+ crvt :{love:["<b>Gray leather &mdash; the only CR-V trim with it</b>","Bose 12-speaker and Google built-in","Hands-free tailgate and heated wheel"],
+        hate:["<b>$44,000 &mdash; the most expensive car here</b>","AWD only, so a front-drive buyer loses 3 mpg moving up","Still 204 hp","Gray leather is blocked with Urban Gray Pearl paint"]},
  rav4:{love:["Best fuel economy and resale in the class","Toyota's reliability record and dealer density","Hybrid is standard on every trim"],
        hate:["<b>No genuine leather at any trim</b> &mdash; SofTex only","Brand-new 6th-gen design, so no long-term record yet","Dealers mark it up; getting MSRP is the whole fight","Styling is a sharp departure and splits opinion"]},
  cx50:{love:["The only one with real leather <b>and</b> ventilated seats","Best-driving car here by common consent","Toyota hybrid hardware in a nicer cabin"],
@@ -623,7 +693,7 @@ function stage(car){
   var isUrl=typeof url==="string"&&url.indexOf("http")===0;
   // Mazda publishes no cutout beyond one hero colour, so its exteriors and every
   // interior are photographs that fill the frame; the rest are cutouts on the scene.
-  var fill = shot==="int" || k==="cx50";
+  var fill = shot==="int" || k.indexOf("cx50")===0;
   var pano = isUrl && url.indexOf("i360-")>-1;   // Mazda 360 interior panorama
   return '<div class="stage" data-k="'+k+'">'
     +'<div class="ph">'+art+'</div><div class="haze"></div><div class="shadow"></div>'
@@ -677,7 +747,7 @@ function tile(car,key,sel){
   var pal=COLORS[car.k], col=pal[Math.min(state.color[car.k]||0,pal.length-1)];
   var url=col[2].replace("{V}",VIEWS[car.k][0][1]);
   return '<button class="tile" data-sel="'+key+':'+car.k+'" aria-pressed="'+sel+'">'
-    +'<span class="tstage" data-k="'+car.k+'"><img class="'+(car.k==="cx50"?"fill":"")+'" src="'+url+'" alt="'+car.n+'" loading="lazy"></span>'
+    +'<span class="tstage" data-k="'+car.k+'"><img class="'+(car.k.indexOf("cx50")===0?"fill":"")+'" src="'+url+'" alt="'+car.n+'" loading="lazy"></span>'
     +'<span class="tb"><span class="tn">'+car.n+'</span>'
     +'<span class="td">'+car.dr+' &middot; '+car.hp+' hp &middot; '+car.mpg+' mpg</span>'
     +'<span class="tp">'+money(car.msrp)+'</span></span></button>';
